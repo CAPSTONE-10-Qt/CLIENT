@@ -1,0 +1,49 @@
+$theme-colors: (
+  grey: #eeeeee,
+  blue: #54a3ff,
+  red: #ff3333,
+  white: #ffffff,
+  black: #31302a,
+);
+@function color($color-name) {
+  $color-value: map-get($theme-colors, $color-name);
+  @return $color-value;
+}
+
+@mixin text-type($type: "p") {
+  @if ($type == "title") {
+    font-size: 30px;
+    font-weight: 600;
+    color: color(blue);
+    line-height: normal;
+    word-break: keep-all;
+  }
+  @if ($type == "p") {
+    font-size: 1rem;
+    font-weight: 400;
+    color: black;
+    line-height: 120%;
+    word-break: break-all;
+  }
+}
+
+@mixin Desktop {
+  @media screen and (max-width: 1920px) {
+    @content;
+  }
+}
+@mixin Laptop {
+  @media screen and (max-width: 1280px) {
+    @content;
+  }
+}
+@mixin LaptopSmall {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin Mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
