@@ -1,0 +1,57 @@
+/* global color variables */
+$common-colors: (
+  black-0: #ffffff,
+  black-10: #f4f2f2,
+  black-50: #9f9999,
+  black-70: #716c6c,
+  black-90: #444444,
+  black-100: #333333,
+  result-all: #43c9b9,
+  result-half: #f1d079,
+  result-none: #f44c55,
+);
+
+/* theme color variables */
+$theme-colors: (
+  pink-light: #fef3f7,
+  pink-main: #f88dad,
+  pink-bright: #ef4482,
+  blue-light: #f1f6fc,
+  blue-main: #79aae3,
+  blue-bright: #196fd2,
+);
+
+:root {
+  @each $name, $color in $common-colors {
+    --color-#{$name}: #{$color};
+  }
+
+  --max-width: 1920px;
+  --border-radius: 12px;
+}
+
+@each $theme-name in (pink, blue) {
+  .theme-#{$theme-name} {
+    @each $type in (light, main, bright) {
+      $color-value: map-get($theme-colors, #{$theme-name}-#{$type});
+      --color-theme-#{$type}: #{$color-value};
+    }
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
