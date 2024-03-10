@@ -22,7 +22,7 @@ jobs:
         with:
           source-directory: 'output'
           destination-github-username: 529539
-          destination-repository-name: CLIENT
+          destination-repository-name: CLIENT_DEPLOY
           user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
