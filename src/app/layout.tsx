@@ -8,7 +8,7 @@ import Header from "@components/Header";
 import "@styles/globals.scss";
 import "@styles/reset.scss";
 
-export const Pretendard = localFont({
+const Pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
 });
 
