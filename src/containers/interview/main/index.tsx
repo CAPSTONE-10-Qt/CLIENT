@@ -1,6 +1,20 @@
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+
 import WebCam from "./WebCam";
 
-const InterviewMainContainer = () => {
+export const getStaticProps: GetStaticProps = async context => {
+  const response = await fetch("service/api/function");
+  const data = await response.json();
+  return {
+    props: {
+      data,
+    },
+  };
+};
+
+const InterviewMainContainer = ({
+  data,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <WebCam />

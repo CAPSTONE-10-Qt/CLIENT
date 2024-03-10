@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
+import { useRecord } from "../useRecord";
 
 const videoConstraints = {
   width: 1280,
@@ -20,18 +21,22 @@ const WebCam = () => {
     }
   }, [webcamRef]);
 
+  const [onRec, setOnRec] = useState<boolean>(true);
+  const { onRecord, offRecord, onSubmitAudioFile } = useRecord(onRec, setOnRec);
+
   return (
     <>
-      <header>
-        <h1>camera app</h1>
-      </header>
+      <button onClick={onRec ? onRecord : offRecord}>
+        {onRec ? "녹음 시작" : "녹음 끝"}
+      </button>
+      <button onClick={onSubmitAudioFile}>결과 확인</button>
       {isCaptureEnable || (
-        <button onClick={() => setCaptureEnable(true)}>start</button>
+        <button onClick={() => setCaptureEnable(true)}>camera start</button>
       )}
       {isCaptureEnable && (
         <>
           <div>
-            <button onClick={() => setCaptureEnable(false)}>end </button>
+            <button onClick={() => setCaptureEnable(false)}>camera end</button>
           </div>
           <div>
             <Webcam
