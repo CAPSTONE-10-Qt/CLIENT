@@ -2,19 +2,63 @@
   @return var(--color-#{$color-name}-#{$color-level});
 }
 
-@mixin text-type($type: "p") {
-  @if ($type == "title") {
-    font-size: 30px;
-    font-weight: 600;
-    color: color(blue);
-    line-height: normal;
+@mixin text-type($type: "p_md") {
+  @if ($type == "landing") {
+    font-size: 60px;
+    line-height: 65px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     word-break: keep-all;
   }
-  @if ($type == "p") {
-    font-size: 1rem;
+  @if ($type == "title_lg") {
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+  }
+  @if ($type == "title_md") {
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+  }
+  @if ($type == "title_sm") {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+  }
+  @if ($type == "p_lg_semibold") {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+    word-break: break-all;
+  }
+  @if ($type == "p_lg") {
+    font-size: 20px;
+    line-height: 28px;
     font-weight: 400;
-    color: black;
-    line-height: 120%;
+    word-break: break-all;
+  }
+  @if ($type == "p_md_semibold") {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    word-break: break-all;
+  }
+  @if ($type == "p_md") {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    word-break: break-all;
+  }
+  @if ($type == "p_sm") {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400;
     word-break: break-all;
   }
 }
@@ -23,11 +67,7 @@
   padding: 12px 30px;
   border-radius: 40px;
   text-align: center;
-  font: {
-    size: 16px;
-    style: normal;
-    weight: 400;
-  }
+  line-height: 100% !important;
 }
 
 @mixin Desktop {
