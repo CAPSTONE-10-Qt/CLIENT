@@ -9,7 +9,9 @@ const MyContainer = () => {
   return (
     <div>
       {["pink", "blue"].map(i => (
-        <button onClick={() => setTheme(i)}>{i}</button>
+        <button key={i} onClick={() => setTheme(i)}>
+          {i}
+        </button>
       ))}
     </div>
   );
