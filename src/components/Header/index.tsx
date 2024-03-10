@@ -1,33 +1,115 @@
 "use client";
 
-import { useRecoilValue } from "recoil";
-import { isLoginState } from "@store/auth";
+import { useState, useEffect } from "react";
 
-import { LogoText } from "../../../public/svgs";
+import { constSelector, useRecoilValue } from "recoil";
+import { isLoginState } from "@store/auth";
+import useDetectScroll from "./useDetectScroll";
+import useModal from "@utils/hooks/useModal";
+
+import { LogoText, Menu } from "../../../public/svgs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import UserInfo from "@components/UserInfo";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
+const pathList: { id: number; path: string; text: string }[] = [
+  {
+    id: 0,
+    path: "/interview/setup",
+    text: "모의 면접",
+  },
+  {
+    id: 1,
+    path: "/interview/list",
+    text: "면접 기록",
+  },
+  {
+    id: 2,
+    path: "/question/list",
+    text: "학습 노트",
+  },
+];
+
 const Header = () => {
   const isLogin = useRecoilValue(isLoginState);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const { visible, position } = useDetectScroll();
+  const { buttonRef, modalRef } = useModal(isMobileMenuOpen, setMobileMenuOpen);
+
+  const router = useRouter();
+  useEffect(() => {
+    const originalPush = router.push;
+    const newPush = (
+      href: string,
+      options?: NavigateOptions | undefined,
+    ): void => {
+      setMobileMenuOpen(false);
+      originalPush(href, options);
+    };
+    router.push = newPush;
+    return () => {
+      router.push = originalPush;
+    };
+  }, [router]);
+
   return (
-    <div className={cx("container")}>
-      <LogoText width='140' />
-      <div className={cx("inner")}>
-        <Link href='/interview/setup'>모의 면접</Link>
-        <Link href='/interview/list'>면접 기록</Link>
-        <Link href='/question/list'>학습 노트</Link>
-        {isLogin ? (
-          <div></div>
-        ) : (
-          <Link href='/login' className={cx("btn")}>
-            로그인
-          </Link>
-        )}
+    <>
+      <div
+        className={
+          cx("container") +
+          `${
+            visible === false && position > 50
+              ? " fade-out"
+              : visible === true
+                ? " fade-in"
+                : ""
+          }`
+        }
+      >
+        <LogoText />
+        <div className={cx("inner")}>
+          {pathList.map(el => (
+            <Link href={el.path} key={el.id}>
+              {el.text}
+            </Link>
+          ))}
+          {isLogin ? (
+            <UserInfo isNav={true} />
+          ) : (
+            <Link href='/login' className={cx("btn")}>
+              로그인
+            </Link>
+          )}
+          <div ref={buttonRef}>
+            <Menu
+              cursor='pointer'
+              className='header-menu-icon'
+              onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+      {isMobileMenuOpen && (
+        <div className={cx("menu-container")} ref={modalRef}>
+          {pathList.map(el => (
+            <div
+              className={cx(
+                "menu-rect",
+                window.location.pathname === el.path ? "active" : null,
+              )}
+              key={el.id}
+            >
+              <Link href={el.path}>{el.text}</Link>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

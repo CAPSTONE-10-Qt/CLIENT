@@ -6,20 +6,97 @@
   @include Tablet {
     padding: 8px 20px;
   }
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+
+  &:global(.fade-in) {
+    animation: show 0.8s;
+    @keyframes show {
+      from {
+        opacity: 0;
+        margin-top: -56px;
+      }
+      to {
+        opacity: 1;
+        margin-top: 0px;
+      }
+    }
+  }
+
+  &:global(.fade-out) {
+    margin-top: -56px;
+    animation: disappear 0.5s;
+    @keyframes disappear {
+      from {
+        opacity: 1;
+        margin-top: 0px;
+      }
+      to {
+        opacity: 0;
+        margin-top: -56px;
+      }
+    }
+  }
+}
+
+.container a {
+  @include text-type(p_md);
+  @include Mobile {
+    display: none;
+  }
 }
 
 .inner {
   display: flex;
   align-items: center;
   gap: 48px;
+  @include Mobile {
+    gap: 20px;
+  }
+
+  :global(.header-menu-icon) {
+    display: none;
+    @include Mobile {
+      display: block;
+    }
+  }
 }
 
 .btn {
   @include Button;
+  @include text-type(p_md);
   background-color: color(black, 0);
   color: color(black, 100);
+}
+
+.menu-container {
+  position: fixed;
+  top: 56px;
+  z-index: 999;
+  width: 100%;
+  background-color: color(black, 90);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 0 0 5px 5px;
+}
+
+.menu-rect {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+  border-radius: 5px;
+  &.active {
+    background-color: color(black, 70);
+  }
+}
+
+.menu-container a {
+  @include text-type(p_md);
 }

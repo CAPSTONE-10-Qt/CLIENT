@@ -1,5 +1,3 @@
-@import "_mixins";
-
 /* global color variables */
 $common-colors: (
   black-0: #ffffff,
@@ -51,11 +49,17 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: #333333;
-  color: #ffffff;
+  background-color: color(black, 100);
+  color: color(black, 0);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+div,
+p,
+span {
+  cursor: default;
 }
