@@ -1,0 +1,14 @@
+{
+  "material-icon-theme.folders.associations": {
+    "api": "Api",
+    "components": "Components",
+    "containers": "Container",
+    "constants": "Constant",
+    "hooks": "Hook",
+    "service": "Server",
+    "store": "Context",
+    "styles": "Sass",
+    "types": "Typescript",
+    "utils": "Utils"
+  }
+}

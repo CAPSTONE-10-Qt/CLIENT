@@ -1,0 +1,52 @@
+@function color($color-name, $color-level) {
+  @return var(--color-#{$color-name}-#{$color-level});
+}
+
+@mixin text-type($type: "p") {
+  @if ($type == "title") {
+    font-size: 30px;
+    font-weight: 600;
+    color: color(blue);
+    line-height: normal;
+    word-break: keep-all;
+  }
+  @if ($type == "p") {
+    font-size: 1rem;
+    font-weight: 400;
+    color: black;
+    line-height: 120%;
+    word-break: break-all;
+  }
+}
+
+@mixin Button {
+  padding: 12px 30px;
+  border-radius: 40px;
+  text-align: center;
+  font: {
+    size: 16px;
+    style: normal;
+    weight: 400;
+  }
+}
+
+@mixin Desktop {
+  @media screen and (max-width: 1920px) {
+    @content;
+  }
+}
+@mixin Laptop {
+  @media screen and (max-width: 1280px) {
+    @content;
+  }
+}
+@mixin Tablet {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin Mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
