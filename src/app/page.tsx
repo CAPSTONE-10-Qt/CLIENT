@@ -1,5 +1,5 @@
-import HomeContainer from "@containers/home";
+// import HomeContainer from "@containers/home";
 
 export default function Home() {
-  return <HomeContainer />;
+  // return <HomeContainer />;
 }
