@@ -1,3 +1,7 @@
+@function color($color-name, $color-level) {
+  @return var(--color-#{$color-name}-#{$color-level});
+}
+
 @mixin text-type($type: "p") {
   @if ($type == "title") {
     font-size: 30px;
@@ -15,6 +19,17 @@
   }
 }
 
+@mixin Button {
+  padding: 12px 30px;
+  border-radius: 40px;
+  text-align: center;
+  font: {
+    size: 16px;
+    style: normal;
+    weight: 400;
+  }
+}
+
 @mixin Desktop {
   @media screen and (max-width: 1920px) {
     @content;
@@ -25,7 +40,7 @@
     @content;
   }
 }
-@mixin LaptopSmall {
+@mixin Tablet {
   @media screen and (max-width: 1024px) {
     @content;
   }

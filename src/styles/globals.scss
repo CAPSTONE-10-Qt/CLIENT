@@ -1,3 +1,5 @@
+@import "_mixins";
+
 /* global color variables */
 $common-colors: (
   black-0: #ffffff,
@@ -49,6 +51,8 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 a {

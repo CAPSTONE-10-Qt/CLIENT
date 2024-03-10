@@ -7,16 +7,13 @@ import Header from "@components/Header";
 
 import "@styles/globals.scss";
 import "@styles/reset.scss";
-import styles from "@styles/page.module.scss";
-import cs from "classnames/bind";
 
-const cx = cs.bind(styles);
 export const Pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
 });
 
 export const metadata: Metadata = {
-  title: "잇터뷰",
+  title: "iterview",
   description: "IT 취준생을 위한 CS 기술 구두 면접 대비 & 학습 플랫폼",
 };
 export const viewport: Viewport = {
@@ -30,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={cx(Pretendard.className)}>
+      <body className={Pretendard.className}>
         <RecoilRootWrapper>
           <ThemeProvier>
             <Header />

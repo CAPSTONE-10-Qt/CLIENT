@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  height: 56px;
+  border-bottom: 0.5px solid color(black, 70);
+  padding: 8px 10%;
+  @include Tablet {
+    padding: 8px 20px;
+  }
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.btn {
+  @include Button;
+  background-color: color(black, 0);
+  color: color(black, 100);
+}
