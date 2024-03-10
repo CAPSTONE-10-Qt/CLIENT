@@ -5,6 +5,7 @@ const HomeContainer = () => {
   return (
     <>
       <Introduction />
+
       <Tutorial />
     </>
   );

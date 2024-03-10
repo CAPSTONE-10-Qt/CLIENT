@@ -1,5 +1,5 @@
 const Tutorial = () => {
-  return <div></div>;
+  return <></>;
 };
 
 export default Tutorial;
