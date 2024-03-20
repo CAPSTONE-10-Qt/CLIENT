@@ -15,6 +15,7 @@
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "next": "14.0.3",
+    "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
     "react-query": "^3.39.3",
