@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { constSelector, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { isLoginState } from "@store/auth";
 import useDetectScroll from "./useDetectScroll";
 import useModal from "@utils/hooks/useModal";

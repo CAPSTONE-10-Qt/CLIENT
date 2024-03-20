@@ -17,6 +17,10 @@ const InterviewMainContainer = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
+      <br />
+      <br />
+      <br />
+      <br />
       <WebCam />
     </>
   );
