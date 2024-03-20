@@ -30,13 +30,19 @@ $theme-colors: (
   --border-radius: 12px;
 }
 
-@each $theme-name in (pink, blue) {
-  .theme-#{$theme-name} {
-    @each $type in (light, main, bright) {
-      $color-value: map-get($theme-colors, #{$theme-name}-#{$type});
-      --color-theme-#{$type}: #{$color-value};
-    }
+@mixin set-theme($name) {
+  @each $type in (light, main, bright) {
+    $color-value: map-get($theme-colors, #{$name}-#{$type});
+    --color-theme-#{$type}: #{$color-value};
   }
+}
+
+body {
+  @include set-theme(pink);
+}
+
+[data-theme="blue"] body {
+  @include set-theme(blue);
 }
 
 * {

@@ -1,11 +1,10 @@
 "use client";
 
 import React from "react";
-import { useRecoilState } from "recoil";
-import { themeState } from "@store/theme";
+import { useTheme } from "next-themes";
 
 const MyContainer = () => {
-  const [theme, setTheme] = useRecoilState(themeState);
+  const { setTheme } = useTheme();
   return (
     <div>
       <br />

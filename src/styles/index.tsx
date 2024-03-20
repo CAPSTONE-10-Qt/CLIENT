@@ -1,14 +1,18 @@
 "use client";
-
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { themeState } from "@store/theme";
+import React, { useState, useEffect } from "react";
+import { ThemeProvider } from "next-themes";
 
 interface ThemeProvierProps {
   children: React.ReactNode;
 }
 
 export default function ThemeProvier({ children }: ThemeProvierProps) {
-  const themeName = useRecoilValue(themeState);
-  return <div className={`theme-${themeName}`}>{children}</div>;
+  const [isMount, setMount] = useState(false);
+  useEffect(() => {
+    setMount(true);
+  }, []);
+  if (!isMount) {
+    return null;
+  }
+  return <ThemeProvider>{children}</ThemeProvider>;
 }
