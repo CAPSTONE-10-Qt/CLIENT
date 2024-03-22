@@ -22,14 +22,15 @@ const WebCam = () => {
   }, [webcamRef]);
 
   const [onRec, setOnRec] = useState<boolean>(true);
-  const { onRecord, offRecord, onSubmitAudioFile } = useRecord(onRec, setOnRec);
+  const { onRecord, offRecord, seconds } = useRecord(onRec, setOnRec);
 
   return (
     <>
       <button onClick={onRec ? onRecord : offRecord}>
         {onRec ? "녹음 시작" : "녹음 끝"}
       </button>
-      <button onClick={onSubmitAudioFile}>결과 확인</button>
+      <span>{seconds}</span>
+      <br />
       {isCaptureEnable || (
         <button onClick={() => setCaptureEnable(true)}>camera start</button>
       )}
