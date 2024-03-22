@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  padding: 10px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid color(black, 0);
+
+  &.stroke {
+    background-color: transparent;
+    color: color(black, 0);
+  }
+  &.fill {
+    background-color: color(black, 0);
+    color: color(black, 100);
+  }
+  &.clickable {
+    &,
+    * {
+      cursor: pointer;
+    }
+  }
+  &.gap {
+    margin-bottom: 10px;
+  }
+
+  p {
+    @include text-type("p_lg");
+  }
+}
+
+.lgSubtext {
+  @include text-type("p_md");
+}
+.smSubtext {
+  @include text-type("p_sm");
+}
