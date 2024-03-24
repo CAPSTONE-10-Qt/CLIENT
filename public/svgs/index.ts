@@ -13,6 +13,10 @@ import CircleCheck from "./circle_check.svg";
 import TriangleWarning from "./triangle_warning.svg";
 import OctagonWrong from "./octagon_wrong.svg";
 
+import CheckTrue from "./check_true.svg";
+import CheckFalse from "./check_false.svg";
+import Arrow from "./arrow.svg";
+
 export {
   LogoText,
   DefaultProfile,
@@ -26,4 +30,7 @@ export {
   CircleCheck,
   TriangleWarning,
   OctagonWrong,
+  CheckTrue,
+  CheckFalse,
+  Arrow,
 };
