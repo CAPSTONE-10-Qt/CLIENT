@@ -16,9 +16,11 @@ $theme-colors: (
   pink-light: #fef3f7,
   pink-main: #f88dad,
   pink-bright: #ef4482,
+  pink-transparent: rgba(248, 141, 173, 0.4),
   blue-light: #f1f6fc,
   blue-main: #79aae3,
   blue-bright: #196fd2,
+  blue-transparent: rgba(121, 170, 227, 0.4),
 );
 
 :root {
@@ -31,7 +33,7 @@ $theme-colors: (
 }
 
 @mixin set-theme($name) {
-  @each $type in (light, main, bright) {
+  @each $type in (light, main, bright, transparent) {
     $color-value: map-get($theme-colors, #{$name}-#{$type});
     --color-theme-#{$type}: #{$color-value};
   }
@@ -68,4 +70,38 @@ div,
 p,
 span {
   cursor: default;
+}
+
+// sweetalert custom
+
+.swal2-container {
+  padding: 32px !important;
+}
+
+.swal2-title {
+  word-break: keep-all !important;
+  line-height: 120% !important;
+}
+
+.swal2-html-container {
+  word-break: keep-all !important;
+}
+
+.swal2-default-outline:focus {
+  box-shadow: 0 0 0 3px color(theme, transparent) !important;
+}
+
+.swal2-loader {
+  border-color: color(theme, main) rgba(0, 0, 0, 0) color(theme, main)
+    rgba(0, 0, 0, 0);
+}
+
+.swal2-timer-progress-bar {
+  background: color(theme, transparent);
+}
+
+.swal2-emphasis {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: color(theme, main);
 }
