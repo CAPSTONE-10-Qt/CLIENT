@@ -1,5 +1,4 @@
 .container {
-  width: 91px;
   height: 36px;
   display: flex;
   align-items: center;
@@ -32,4 +31,24 @@
 }
 .name :nth-child(1) {
   font-weight: 500;
+}
+
+.interviewer,
+.user {
+  .name {
+    padding: 3px 10px;
+    border-radius: 5px;
+    background-color: color(theme, transparent);
+    color: color(black, 100);
+  }
+  .name :nth-child(1) {
+    font-weight: 400;
+  }
+}
+
+.user {
+  .name {
+    background-color: rgba(51, 51, 51, 0.5);
+    color: color(black, 0);
+  }
 }

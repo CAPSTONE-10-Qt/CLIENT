@@ -12,8 +12,9 @@ const cx = cs.bind(styles);
 
 type Props = {
   isNav?: boolean;
+  profile?: "interviewer" | "user";
 };
-const UserInfo = ({ isNav }: Props) => {
+const UserInfo = ({ isNav, profile }: Props) => {
   const router = useRouter();
 
   // 로그인 시 recoil로 이름과 프로필 사진 url 저장
@@ -21,7 +22,11 @@ const UserInfo = ({ isNav }: Props) => {
 
   return (
     <div
-      className={cx("container", isNav ? "clickable" : null)}
+      className={cx(
+        "container",
+        isNav ? "clickable" : null,
+        profile ? profile : "",
+      )}
       onClick={() => (isNav ? router.push("/my") : undefined)}
     >
       <div className={cx("image-circle")}>
@@ -32,8 +37,14 @@ const UserInfo = ({ isNav }: Props) => {
         )}
       </div>
       <span className={cx("name")}>
-        <span>{username}</span>
-        <span>{" 님"}</span>
+        {profile ? (
+          <span>{profile === "interviewer" ? "면접관" : username}</span>
+        ) : (
+          <>
+            <span>{username}</span>
+            <span>{" 님"}</span>
+          </>
+        )}
       </span>
     </div>
   );

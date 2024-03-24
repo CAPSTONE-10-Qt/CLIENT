@@ -1,0 +1,76 @@
+.container {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+
+  .profile {
+    width: 100%;
+    display: flex;
+  }
+
+  &.question {
+    background-color: color(theme, light);
+    border-radius: 0px 20px 20px 20px;
+    p {
+      color: color(black, 100);
+    }
+  }
+  &.answer {
+    background-color: color(black, 10);
+    border-radius: 20px 0px 20px 20px;
+    p {
+      color: color(black, 100);
+    }
+    .profile {
+      justify-content: flex-end;
+    }
+  }
+  &.solution {
+    background-color: color(black, 90);
+    border-radius: 20px;
+  }
+  &.answering {
+    background-color: color(black, 90);
+    border-radius: 0px 20px 20px 20px;
+    p {
+      color: color(black, 0);
+    }
+  }
+}
+
+.paragraph-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    @include text-type("p_lg");
+    color: color(black, 0);
+  }
+}
+
+.number {
+  width: 100%;
+  @include text-type("p_md");
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 10px;
+  background-color: color(theme, main);
+  margin-top: 6px;
+  & > p {
+    @include text-type("title_sm");
+    color: color(theme, light) !important;
+  }
+}
