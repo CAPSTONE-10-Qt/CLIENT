@@ -64,7 +64,7 @@ const Header = () => {
         className={
           cx("container") +
           `${
-            visible === false && position > 60
+            visible === false && position > 70
               ? " fade-out"
               : visible === true
                 ? " fade-in"
