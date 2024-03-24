@@ -13,7 +13,7 @@ export const useRecord = (
   const [analyser, setAnalyser] = useState<ScriptProcessorNode>();
   const [audio, setAudio] = useState<Blob>();
 
-  const timeConstraint = 5;
+  const timeConstraint = 60;
   const [seconds, setSeconds] = useState<number>(timeConstraint);
 
   const [trigger, setTrigger] = useState<boolean>(false);

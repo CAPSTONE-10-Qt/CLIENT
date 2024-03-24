@@ -1,6 +1,6 @@
 import TitleBar from "./TitleBar";
 import WebCam from "./WebCam";
-import InfoSection from "./InfoSection";
+import ControlSection from "./ControlSection";
 import Question from "./Question";
 
 import styles from "./index.module.scss";
@@ -12,7 +12,7 @@ const InterviewMainContainer = () => {
     <div className={cx("container")}>
       <TitleBar />
       <div className={cx("inner")}>
-        <InfoSection />
+        <ControlSection />
         <WebCam />
       </div>
       <Question />
