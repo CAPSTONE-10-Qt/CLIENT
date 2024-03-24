@@ -3,5 +3,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 192px;
+  padding: 192px 0;
+  gap: 90px;
+
+  h1 {
+    @include text-type("title_lg");
+    text-align: center;
+    @include Mobile {
+      padding: 0 30px;
+    }
+  }
 }

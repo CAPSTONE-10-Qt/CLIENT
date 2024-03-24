@@ -18,3 +18,12 @@ export const CSSubjectList: {
     smallSubtext: "Software Engineering",
   },
 ];
+
+export const QuestionList: {
+  text: QuestionType;
+  smallSubtext: string;
+}[] = [
+  { text: 5, smallSubtext: "10분 이내 소요" },
+  { text: 10, smallSubtext: "15분 이내 소요" },
+  { text: 20, smallSubtext: "25분 이내 소요" },
+];
