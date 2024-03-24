@@ -35,6 +35,7 @@ const SetupForm = () => {
       <div className={cx("button-container")}>
         {CSSubjectList.map(item => (
           <RoundButton
+            key={item.text}
             text={item.text}
             largeSubtext={item.largeSubtext}
             smallSubtext={item.smallSubtext}
@@ -49,6 +50,7 @@ const SetupForm = () => {
       <div className={cx("button-container", "three")}>
         {QuestionList.map(item => (
           <RoundButton
+            key={item.text}
             text={`${item.text}개`}
             smallSubtext={item.smallSubtext}
             state={form.questionNum === item.text}
