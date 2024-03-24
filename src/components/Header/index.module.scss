@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   height: 56px;
+  background-color: color(black, 100);
   border-bottom: 0.5px solid color(black, 70);
   padding: 8px 10%;
   @include Tablet {
