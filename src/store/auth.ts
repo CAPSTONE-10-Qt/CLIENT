@@ -5,7 +5,7 @@ const localStorage =
   typeof window !== "undefined" ? window.localStorage : undefined;
 
 const { persistAtom } = recoilPersist({
-  key: "recoilPersist",
+  key: "recoilPersistLocal",
   storage: localStorage,
 });
 

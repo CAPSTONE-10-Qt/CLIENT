@@ -6,3 +6,14 @@ interface InterviewSetupFormType {
   questionNum: QuestionType | 0;
   onlyVoice: boolean;
 }
+
+interface InterviewType {
+  id: number;
+  subjectText: CSSubjectType;
+  questionNum: QuestionType;
+  startDateTime: string;
+  questionList: {
+    id: number;
+    questionText: string;
+  }[];
+}
