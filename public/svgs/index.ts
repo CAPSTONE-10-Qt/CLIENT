@@ -17,6 +17,18 @@ import CheckTrue from "./check_true.svg";
 import CheckFalse from "./check_false.svg";
 import Arrow from "./arrow.svg";
 
+import CamFalse from "./interview/cam_false.svg";
+import CamTrue from "./interview/cam_true.svg";
+import MicFalse from "./interview/mic_false.svg";
+import MicTrue from "./interview/mic_true.svg";
+import VolumeOffFalse from "./interview/volume_off_false.svg";
+import VolumeOffTrue from "./interview/volume_off_true.svg";
+import VolumeOnFalse from "./interview/volume_on_false.svg";
+import VolumeOnTrue from "./interview/volume_on_true.svg";
+import Play from "./interview/play.svg";
+import Stop from "./interview/stop.svg";
+import StopCircle from "./interview/stop_circle.svg";
+
 export {
   LogoText,
   DefaultProfile,
@@ -33,4 +45,15 @@ export {
   CheckTrue,
   CheckFalse,
   Arrow,
+  CamFalse,
+  CamTrue,
+  MicFalse,
+  MicTrue,
+  VolumeOffFalse,
+  VolumeOffTrue,
+  VolumeOnFalse,
+  VolumeOnTrue,
+  Play,
+  Stop,
+  StopCircle,
 };
