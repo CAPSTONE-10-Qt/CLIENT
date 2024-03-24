@@ -22,7 +22,8 @@
     "react-responsive": "^9.0.2",
     "react-webcam": "^7.2.0",
     "recoil": "^0.7.7",
-    "recoil-persist": "^5.1.0"
+    "recoil-persist": "^5.1.0",
+    "sweetalert2": "^11.10.7"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
