@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .button {
@@ -29,15 +34,23 @@
   &.gap {
     margin-bottom: 10px;
   }
+  &.static {
+    padding: 10px 0;
+  }
 
   p {
     @include text-type("p_lg");
+    text-align: center;
   }
 }
 
 .lgSubtext {
   @include text-type("p_md");
+  text-align: center;
+  word-break: keep-all;
 }
 .smSubtext {
   @include text-type("p_sm");
+  text-align: center;
+  word-break: keep-all;
 }
