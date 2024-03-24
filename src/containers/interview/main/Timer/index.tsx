@@ -25,7 +25,9 @@ const Timer = () => {
     if (isRunning) setTime(time + 1000);
   }, 1000);
   useEffect(() => {
-    autoStartInterview(() => setIsRunning(true));
+    autoStartInterview(() => {
+      setIsRunning(true);
+    });
   }, []);
   return (
     <div className={cx("container")}>

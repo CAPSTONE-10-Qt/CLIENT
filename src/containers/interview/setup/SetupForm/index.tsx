@@ -24,7 +24,12 @@ const SetupForm = () => {
   });
   const [interview, setInterview] = useRecoilState(interviewDataState);
   const onSubmit = () => {
-    setInterview(data);
+    setInterview({
+      ...data,
+      currentIndex: 0,
+      isMicOn: false,
+      isSpeakerOn: true,
+    });
     router.push(`/interview/${1}`);
   };
   return (
@@ -77,10 +82,11 @@ const SetupForm = () => {
 
 export default SetupForm;
 
-const data: InterviewType = {
+const data: any = {
   id: 1,
   subjectText: "OS",
   questionNum: 5,
+  onlyVoice: false,
   startDateTime: "",
   questionList: [
     {

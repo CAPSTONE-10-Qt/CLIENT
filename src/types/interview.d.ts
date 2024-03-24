@@ -7,13 +7,17 @@ interface InterviewSetupFormType {
   onlyVoice: boolean;
 }
 
-interface InterviewType {
+interface InterviewDataType {
   id: number;
   subjectText: CSSubjectType;
   questionNum: QuestionType;
+  onlyVoice: boolean;
   startDateTime: string;
   questionList: {
     id: number;
     questionText: string;
   }[];
+  currentIndex: number;
+  isMicOn: boolean;
+  isSpeakerOn: boolean;
 }

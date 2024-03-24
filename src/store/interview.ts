@@ -9,18 +9,13 @@ const { persistAtom } = recoilPersist({
   storage: sessionStorage,
 });
 
-export const interviewQuestionState = atom<number>({
-  key: "interviewQuestionState",
-  default: 0,
-  effects_UNSTABLE: [persistAtom],
-});
-
-export const interviewDataState = atom<InterviewType>({
+export const interviewDataState = atom<InterviewDataType>({
   key: "interviewDataState",
   default: {
     id: 0,
     subjectText: "OS",
     questionNum: 5,
+    onlyVoice: false,
     startDateTime: "",
     questionList: [
       {
@@ -28,6 +23,9 @@ export const interviewDataState = atom<InterviewType>({
         questionText: "",
       },
     ],
+    currentIndex: 0,
+    isMicOn: false,
+    isSpeakerOn: true,
   },
   effects_UNSTABLE: [persistAtom],
 });
