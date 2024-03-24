@@ -63,13 +63,6 @@
   }
 }
 
-@mixin Button {
-  padding: 12px 30px;
-  border-radius: 40px;
-  text-align: center;
-  line-height: 100% !important;
-}
-
 @mixin Desktop {
   @media screen and (max-width: 1920px) {
     @content;

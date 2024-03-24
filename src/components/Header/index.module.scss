@@ -68,10 +68,12 @@
 }
 
 .btn {
-  @include Button;
   @include text-type(p_md);
   background-color: color(black, 0);
   color: color(black, 100);
+  padding: 12px 30px;
+  border-radius: 50px;
+  line-height: 100% !important;
 }
 
 .menu-container {
