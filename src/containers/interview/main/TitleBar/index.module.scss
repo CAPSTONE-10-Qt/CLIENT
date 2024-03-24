@@ -1,0 +1,30 @@
+.titlebar-container {
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid color(black, 0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include Mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+
+  h1 {
+    @include text-type("title_md");
+  }
+
+  @include Mobile {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
