@@ -9,6 +9,8 @@ type Props = {
   largeSubtext?: string;
   smallSubtext?: string;
   staticWidth?: number;
+  initLineHeight?: boolean;
+  className?: string;
 };
 const RoundButton = ({
   text,
@@ -17,9 +19,11 @@ const RoundButton = ({
   largeSubtext,
   smallSubtext,
   staticWidth,
+  initLineHeight,
+  className,
 }: Props) => {
   return (
-    <div className={cx("container")}>
+    <div className={cx("container", className ? className : "")}>
       <div
         className={cx(
           "button",
@@ -27,6 +31,7 @@ const RoundButton = ({
           onClick ? "clickable" : "",
           largeSubtext || smallSubtext ? "gap" : "",
           staticWidth ? "static" : "",
+          initLineHeight ? "line-height" : "",
         )}
         style={{ width: staticWidth ? `${staticWidth}px` : "auto" }}
         onClick={onClick ? onClick : () => null}

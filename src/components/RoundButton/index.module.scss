@@ -37,6 +37,11 @@
   &.static {
     padding: 10px 0;
   }
+  &.line-height {
+    p {
+      line-height: 100% !important;
+    }
+  }
 
   p {
     @include text-type("p_lg");

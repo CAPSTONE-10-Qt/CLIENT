@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import UserInfo from "@components/UserInfo";
+import RoundButton from "@components/RoundButton";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
@@ -63,7 +64,7 @@ const Header = () => {
         className={
           cx("container") +
           `${
-            visible === false && position > 50
+            visible === false && position > 60
               ? " fade-out"
               : visible === true
                 ? " fade-in"
@@ -71,7 +72,7 @@ const Header = () => {
           }`
         }
       >
-        <LogoText />
+        <LogoText onClick={() => router.push("/")} />
         <div className={cx("inner")}>
           {pathList.map(el => (
             <Link href={el.path} key={el.id}>
@@ -81,9 +82,12 @@ const Header = () => {
           {isLogin ? (
             <UserInfo isNav={true} />
           ) : (
-            <Link href='/login' className={cx("btn")}>
-              로그인
-            </Link>
+            <RoundButton
+              text='로그인'
+              state={true}
+              onClick={() => router.push("/login")}
+              className='btn'
+            />
           )}
           <div ref={buttonRef}>
             <Menu
@@ -103,8 +107,9 @@ const Header = () => {
                 window.location.pathname === el.path ? "active" : null,
               )}
               key={el.id}
+              onClick={() => router.push(el.path)}
             >
-              <Link href={el.path}>{el.text}</Link>
+              <p>{el.text}</p>
             </div>
           ))}
         </div>
