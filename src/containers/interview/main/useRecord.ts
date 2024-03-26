@@ -1,12 +1,18 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
+import { useState, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { interviewDataState, interviewAllowState } from "@store/interview";
+import { saveInterview } from "@utils/alerts/interview";
 
-export const useRecord = (
+const useRecord = (
   onRec: boolean,
   setOnRec: (value: boolean) => void,
+  pk: number,
 ) => {
+  const router = useRouter();
   const [stream, setStream] = useState<MediaStream>();
   const [media, setMedia] = useState<MediaRecorder>();
   const [source, setSource] = useState<MediaStreamAudioSourceNode>();
@@ -17,6 +23,16 @@ export const useRecord = (
   const [seconds, setSeconds] = useState<number>(timeConstraint);
 
   const [trigger, setTrigger] = useState<boolean>(false);
+  const [interview, setInterview] = useRecoilState(interviewDataState);
+  const {
+    questionNum,
+    questionList,
+    currentIndex,
+    onlyVoice,
+    isMicOn,
+    isSpeakerOn,
+  } = interview;
+  const [allow, setAllow] = useRecoilState(interviewAllowState);
 
   const onRecord = () => {
     const audioCtx = new window.AudioContext();
@@ -77,7 +93,7 @@ export const useRecord = (
     }
   };
 
-  const onSubmitAudioFile = useCallback(() => {
+  const onSubmitAudioFile = new Promise(function (resolve, reject) {
     if (audio) {
       console.log(URL.createObjectURL(audio));
       const sound = new File([audio], "soundBlob", {
@@ -87,20 +103,36 @@ export const useRecord = (
 
       const formData = new FormData();
       formData.append("file", sound);
-      formData.append("pk", "51");
-      axios
-        .post("http://127.0.0.1:5000/predict", formData)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      formData.append("pk", `${pk}`);
+
+      resolve(true);
+
+      // axios
+      //   .post("http://127.0.0.1:5000/predict", formData)
+      //   .then(res => {
+      //     console.log(res);
+      //     // 다음 아이디로
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
-  }, [audio]);
+  });
   useEffect(() => {
-    if (trigger) onSubmitAudioFile();
+    if (trigger)
+      onSubmitAudioFile.then(res => {
+        console.log("here");
+        if (currentIndex + 1 === questionNum) {
+          setAllow({ ...allow, done: true });
+          saveInterview(
+            () => {},
+            () => router.push(`/interview/detail/${1}`),
+          );
+        } else setInterview({ ...interview, currentIndex: currentIndex + 1 });
+      });
   }, [audio]);
 
   return { onRecord, offRecord, seconds };
 };
+
+export default useRecord;

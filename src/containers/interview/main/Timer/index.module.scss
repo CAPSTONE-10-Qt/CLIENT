@@ -10,6 +10,14 @@
     flex-shrink: 0;
     background-color: color(theme, bright);
   }
+  @keyframes blink-effect {
+    50% {
+      opacity: 0.4;
+    }
+  }
+  .blink {
+    animation: blink-effect 1s step-start infinite;
+  }
   & > p {
     @include text-type("p_lg");
     font-variant-numeric: tabular-nums;
