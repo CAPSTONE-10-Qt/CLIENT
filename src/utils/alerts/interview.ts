@@ -70,7 +70,7 @@ export const blockQuitInterview = (onConfirm: () => void) =>
     if (res.isConfirmed) onConfirm();
   });
 
-export const saveInterview = (didOpen: () => void, onConfirm: () => void) =>
+export const saveInterview = (onConfirm: () => void) =>
   Swal.fire({
     title: InterviewSaveMessage.title,
     html: InterviewSaveMessage.html,
@@ -80,9 +80,6 @@ export const saveInterview = (didOpen: () => void, onConfirm: () => void) =>
     iconColor: "var(--color-theme-main)",
     confirmButtonColor: "var(--color-theme-main)",
     confirmButtonText: "확인",
-    didOpen: () => {
-      didOpen();
-    },
   }).then(res => {
     if (res.isConfirmed) onConfirm();
   });

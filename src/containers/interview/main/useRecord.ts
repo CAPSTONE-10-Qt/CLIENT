@@ -95,39 +95,32 @@ const useRecord = (
 
   const onSubmitAudioFile = new Promise(function (resolve, reject) {
     if (audio) {
-      console.log(URL.createObjectURL(audio));
       const sound = new File([audio], "soundBlob", {
         lastModified: new Date().getTime(),
       });
-      console.log(sound, audio);
-
       const formData = new FormData();
       formData.append("file", sound);
       formData.append("pk", `${pk}`);
-
-      resolve(true);
 
       // axios
       //   .post("http://127.0.0.1:5000/predict", formData)
       //   .then(res => {
       //     console.log(res);
-      //     // 다음 아이디로
+      //     // 아래 then문 여기서 실행
       //   })
       //   .catch(err => {
       //     console.log(err);
       //   });
+
+      resolve(true);
     }
   });
   useEffect(() => {
     if (trigger)
       onSubmitAudioFile.then(res => {
-        console.log("here");
         if (currentIndex + 1 === questionNum) {
           setAllow({ ...allow, done: true });
-          saveInterview(
-            () => {},
-            () => router.push(`/interview/detail/${1}`),
-          );
+          saveInterview(() => router.push(`/interview/detail/${1}`));
         } else setInterview({ ...interview, currentIndex: currentIndex + 1 });
       });
   }, [audio]);
