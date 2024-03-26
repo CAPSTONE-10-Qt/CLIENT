@@ -5,11 +5,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 
+  @include Tablet {
+    width: 28%;
+    min-width: 230px;
+  }
   @include Mobile {
     width: 100%;
-    justify-content: flex-end;
-    margin-left: -4px;
+    gap: 30px;
+    padding-bottom: 0;
   }
 }
 
@@ -18,9 +24,26 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   p {
     @include text-type("p_md");
+  }
+
+  @include Mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    :nth-child(3) {
+      grid-column: 1 / 3;
+    }
+  }
+}
+
+.bottom-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @include Mobile {
+    flex-direction: column-reverse;
   }
 }
 
@@ -40,11 +63,17 @@
 }
 
 .icon-flex {
+  height: 30px;
   display: flex;
   align-items: center;
   gap: 10px;
   svg {
     cursor: pointer;
+  }
+  &.non-clickable {
+    svg {
+      cursor: default;
+    }
   }
 }
 
@@ -62,12 +91,10 @@
 }
 
 .time-text {
-  height: 100px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 6px;
-  margin: 6px 0;
   span {
     @include text-type("p_md");
     font-variant-numeric: tabular-nums;
@@ -85,7 +112,6 @@
   }
 
   @include Mobile {
-    height: 50px;
   }
 }
 
@@ -101,6 +127,10 @@
   * {
     cursor: pointer;
   }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   p {
     @include text-type("title_sm");

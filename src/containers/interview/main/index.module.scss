@@ -16,5 +16,15 @@
 .inner {
   width: 100%;
   display: flex;
-  gap: 30px;
+  align-items: stretch;
+  gap: 20px;
+
+  @include Mobile {
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+}
+
+.video-wrapper {
+  padding: 10px;
 }
