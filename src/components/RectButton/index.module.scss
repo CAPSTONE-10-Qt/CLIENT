@@ -10,6 +10,10 @@
   * {
     cursor: pointer;
   }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   p {
     @include text-type("title_md");
