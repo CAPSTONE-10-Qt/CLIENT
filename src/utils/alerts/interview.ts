@@ -2,10 +2,12 @@ import Swal from "sweetalert2";
 import {
   InterviewStartMessage,
   InterviewQuitMessage,
-} from "@utils/constants/errorMessage";
+  InterviewBlockMessage,
+  InterviewSaveMessage,
+} from "@utils/constants/alertMessage";
 
 let timerInterval: number;
-export const autoStartInterview = (onClose: () => void) =>
+export const autoStartInterview = (onRun: () => void) =>
   Swal.fire({
     title: InterviewStartMessage.title,
     html: InterviewStartMessage.html,
@@ -17,6 +19,9 @@ export const autoStartInterview = (onClose: () => void) =>
     timer: 5000,
     timerProgressBar: true,
     didOpen: () => {
+      window.setTimeout(() => {
+        onRun();
+      }, 5000);
       const timer = Swal.getPopup()!.querySelector("b");
       timerInterval = window.setInterval(() => {
         if (timer)
@@ -27,7 +32,7 @@ export const autoStartInterview = (onClose: () => void) =>
     },
     willClose: () => clearInterval(timerInterval),
   }).then(result => {
-    if (result.dismiss === Swal.DismissReason.timer) onClose();
+    if (result.dismiss === Swal.DismissReason.timer) onRun();
   });
 
 export const confirmQuitInterview = (
@@ -50,4 +55,34 @@ export const confirmQuitInterview = (
   }).then(res => {
     if (res.isConfirmed) onConfirm();
     else onCancel();
+  });
+
+export const blockQuitInterview = (onConfirm: () => void) =>
+  Swal.fire({
+    html: InterviewBlockMessage,
+    icon: "error",
+    color: "var(--color-black-0)",
+    background: "var(--color-black-90)",
+    iconColor: "var(--color-theme-main)",
+    confirmButtonColor: "var(--color-theme-main)",
+    confirmButtonText: "확인",
+  }).then(res => {
+    if (res.isConfirmed) onConfirm();
+  });
+
+export const saveInterview = (didOpen: () => void, onConfirm: () => void) =>
+  Swal.fire({
+    title: InterviewSaveMessage.title,
+    html: InterviewSaveMessage.html,
+    icon: "success",
+    color: "var(--color-black-0)",
+    background: "var(--color-black-90)",
+    iconColor: "var(--color-theme-main)",
+    confirmButtonColor: "var(--color-theme-main)",
+    confirmButtonText: "확인",
+    didOpen: () => {
+      didOpen();
+    },
+  }).then(res => {
+    if (res.isConfirmed) onConfirm();
   });
