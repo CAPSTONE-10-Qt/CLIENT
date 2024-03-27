@@ -26,6 +26,7 @@
   gap: 20px;
   p {
     @include text-type("p_md");
+    flex-shrink: 0;
   }
 
   @include Mobile {
@@ -48,6 +49,7 @@
 }
 
 .text-flex {
+  height: 26px;
   display: flex;
   &.between {
     justify-content: space-between;
@@ -58,7 +60,10 @@
   span {
     @include text-type("p_sm");
     font-size: 10px;
-    margin-bottom: 2px;
+    line-height: 12px;
+    margin-bottom: 4px;
+    word-break: keep-all;
+    color: color(black, 30);
   }
 }
 
@@ -69,6 +74,8 @@
   gap: 10px;
   svg {
     cursor: pointer;
+    width: 24px;
+    height: 24px;
   }
   &.non-clickable {
     svg {

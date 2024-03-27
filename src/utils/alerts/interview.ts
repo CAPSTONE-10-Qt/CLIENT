@@ -70,10 +70,12 @@ export const blockQuitInterview = (onConfirm: () => void) =>
     if (res.isConfirmed) onConfirm();
   });
 
-export const saveInterview = (onConfirm: () => void) =>
+export const saveInterview = (onConfirm: () => void, isReanswer?: boolean) =>
   Swal.fire({
-    title: InterviewSaveMessage.title,
-    html: InterviewSaveMessage.html,
+    title: isReanswer
+      ? InterviewSaveMessage.retitle
+      : InterviewSaveMessage.title,
+    html: isReanswer ? InterviewSaveMessage.rehtml : InterviewSaveMessage.html,
     icon: "success",
     color: "var(--color-black-0)",
     background: "var(--color-black-90)",

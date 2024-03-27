@@ -118,10 +118,15 @@ const useRecord = (
   useEffect(() => {
     if (trigger)
       onSubmitAudioFile.then(res => {
-        if (currentIndex + 1 === questionNum) {
+        if (location.href.includes("question")) {
           setAllow({ ...allow, done: true });
-          saveInterview(() => router.push(`/interview/detail/${1}`));
-        } else setInterview({ ...interview, currentIndex: currentIndex + 1 });
+          saveInterview(() => router.push(`/question/detail/${pk}`), true);
+        } else {
+          if (currentIndex + 1 === questionNum) {
+            setAllow({ ...allow, done: true });
+            saveInterview(() => router.push(`/interview/detail/${pk}`));
+          } else setInterview({ ...interview, currentIndex: currentIndex + 1 });
+        }
       });
   }, [audio]);
 

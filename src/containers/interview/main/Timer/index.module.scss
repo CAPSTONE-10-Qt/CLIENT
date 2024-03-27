@@ -3,7 +3,7 @@
   align-items: center;
   flex-shrink: 0;
 
-  & > :nth-child(1) {
+  .circle {
     width: 12px;
     height: 12px;
     border-radius: 50%;

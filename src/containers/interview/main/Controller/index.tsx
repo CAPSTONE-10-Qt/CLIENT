@@ -47,17 +47,32 @@ const Controller = () => {
     setInterview({ ...interview, isMicOn: !isNotRec });
   }, [isNotRec]);
 
+  const [isRestart, setRestart] = useState<boolean>(false);
+  useEffect(() => {
+    if (location.href.includes("question")) setRestart(true);
+  }, []);
+
   return (
     <div className={cx("container")}>
       <div className={cx("top-info")}>
         <div>
           <div className={cx("text-flex")}>
             <p>면접자</p>
-            <span>면접 중 변경 불가</span>
+            <span>
+              {location.href.includes("question")
+                ? "질문에 대한 재답변 시 음성으로만 진행"
+                : "면접 중 변경 불가"}
+            </span>
           </div>
           <div className={cx("icon-flex", "non-clickable")}>
             {isMicOn ? <MicTrue /> : <MicFalse />}
-            {onlyVoice ? <CamFalse /> : <CamTrue />}
+            {location.href.includes("question") ? (
+              <CamFalse />
+            ) : onlyVoice ? (
+              <CamFalse />
+            ) : (
+              <CamTrue />
+            )}
           </div>
         </div>
         <div>
@@ -78,23 +93,25 @@ const Controller = () => {
             )}
           </div>
         </div>
-        <div>
-          <div className={cx("text-flex", "between")}>
-            <p>면접 진행도</p>
-            <p>{`${
-              done ? 100 : Math.floor((currentIndex / questionNum) * 100)
-            }% (${done ? questionNum : currentIndex} of ${questionNum})`}</p>
+        {!location.href.includes("question") && (
+          <div>
+            <div className={cx("text-flex", "between")}>
+              <p>면접 진행도</p>
+              <p>{`${
+                done ? 100 : Math.floor((currentIndex / questionNum) * 100)
+              }% (${done ? questionNum : currentIndex} of ${questionNum})`}</p>
+            </div>
+            <div className={cx("progress-bar")}>
+              <div
+                style={{
+                  width: `${
+                    done ? 100 : Math.floor((currentIndex / questionNum) * 100)
+                  }%`,
+                }}
+              />
+            </div>
           </div>
-          <div className={cx("progress-bar")}>
-            <div
-              style={{
-                width: `${
-                  done ? 100 : Math.floor((currentIndex / questionNum) * 100)
-                }%`,
-              }}
-            />
-          </div>
-        </div>
+        )}
       </div>
       <div className={cx("bottom-section")}>
         <div className={cx("time-text", isNotRec ? "off" : "on")}>

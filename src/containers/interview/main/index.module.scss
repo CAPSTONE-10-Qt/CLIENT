@@ -26,5 +26,19 @@
 }
 
 .video-wrapper {
+  width: 100%;
   padding: 10px;
+}
+
+.cam-off {
+  width: 100%;
+  aspect-ratio: 1280 / 720;
+  background-color: color(black, 70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: 52px;
+    height: 52px;
+  }
 }

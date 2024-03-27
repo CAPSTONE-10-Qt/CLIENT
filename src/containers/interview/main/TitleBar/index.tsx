@@ -14,7 +14,10 @@ const TitleBar = () => {
   return (
     <div className={cx("titlebar-container")}>
       <div className={cx("inner")}>
-        <h1>2024. 03. 01. 모의 면접 1</h1>
+        <h1>
+          {"2024. 03. 01. 모의 면접 1" +
+            (location.href.includes("question") ? " #2" : "")}
+        </h1>
         <RoundButton text={subjectText} state={false} initLineHeight={true} />
       </div>
       <Timer />

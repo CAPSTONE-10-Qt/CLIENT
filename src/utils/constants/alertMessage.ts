@@ -10,4 +10,6 @@ export const InterviewBlockMessage = `면접에서 나가려면 우측 상단 �
 export const InterviewSaveMessage = {
   title: `면접이 종료되었습니다.`,
   html: `잠시 후 결과 페이지로 이동합니다.`,
+  retitle: `답변이 종료되었습니다.`,
+  rehtml: `질문 재답변 결과 페이지로 이동합니다.`,
 };

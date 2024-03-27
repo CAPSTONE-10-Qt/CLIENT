@@ -57,12 +57,16 @@ const Timer = () => {
 
   return (
     <div className={cx("container")}>
-      <div className={cx(isRunning ? "blink" : "")} />
-      <p>
-        {`0${Math.floor((time / 3600000) % 60)}`.slice(-2)} :{" "}
-        {`0${Math.floor((time / 60000) % 60)}`.slice(-2)} :{" "}
-        {`0${Math.floor((time / 1000) % 60)}`.slice(-2)}
-      </p>
+      {location.href.includes("question") ? null : (
+        <>
+          <div className={cx("circle", isRunning ? "blink" : "")} />
+          <p>
+            {`0${Math.floor((time / 3600000) % 60)}`.slice(-2)} :{" "}
+            {`0${Math.floor((time / 60000) % 60)}`.slice(-2)} :{" "}
+            {`0${Math.floor((time / 1000) % 60)}`.slice(-2)}
+          </p>
+        </>
+      )}
       <div className={cx("stop-button")} onClick={onQuit}>
         <StopCircle />
         <p>종료</p>
