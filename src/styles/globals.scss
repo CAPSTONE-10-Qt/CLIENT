@@ -2,6 +2,7 @@
 $common-colors: (
   black-0: #ffffff,
   black-10: #f4f2f2,
+  black-30: #d7d1d1,
   black-50: #9f9999,
   black-70: #716c6c,
   black-90: #444444,
@@ -76,6 +77,10 @@ span {
 
 .swal2-container {
   padding: 32px !important;
+}
+
+.swal2-modal {
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.3);
 }
 
 .swal2-title {
