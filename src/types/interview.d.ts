@@ -21,3 +21,14 @@ interface InterviewDataType {
   isMicOn: boolean;
   isSpeakerOn: boolean;
 }
+
+interface InterviewPreviewType {
+  subjectText: CSSubjectType;
+  startDateTime: string;
+  endDateTime: string;
+  time: number;
+  title: string;
+  score: number;
+  questionNum: number;
+  id: number;
+}

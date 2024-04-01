@@ -35,3 +35,8 @@ export const interviewAllowState = atom<{ quit: boolean; done: boolean }>({
   default: { quit: false, done: false },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const interviewSortState = atom<number>({
+  key: "interviewSortState",
+  default: 1,
+});
