@@ -22,6 +22,14 @@ $theme-colors: (
   blue-main: #79aae3,
   blue-bright: #196fd2,
   blue-transparent: rgba(121, 170, 227, 0.4),
+  green-light: #f5fbf1,
+  green-main: #9cc37d,
+  green-bright: #5a852f,
+  green-transparent: rgba(156, 195, 125, 0.4),
+  beige-light: #fff1e1,
+  beige-main: #e4be92,
+  beige-bright: #c18d3d,
+  beige-transparent: rgba(228, 190, 146, 0.4),
 );
 
 :root {
@@ -43,9 +51,14 @@ $theme-colors: (
 body {
   @include set-theme(pink);
 }
-
 [data-theme="blue"] body {
   @include set-theme(blue);
+}
+[data-theme="green"] body {
+  @include set-theme(green);
+}
+[data-theme="beige"] body {
+  @include set-theme(beige);
 }
 
 * {

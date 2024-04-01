@@ -12,7 +12,7 @@ const MyContainer = () => {
       <br />
       <br />
       <br />
-      {["pink", "blue"].map(i => (
+      {["pink", "blue", "green", "beige"].map(i => (
         <button key={i} onClick={() => setTheme(i)}>
           {i}
         </button>
