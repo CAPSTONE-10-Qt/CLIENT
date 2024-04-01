@@ -83,3 +83,15 @@
     @content;
   }
 }
+
+@mixin Container {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include Laptop {
+    width: calc(100% - 64px);
+    margin: 0 32px;
+  }
+}
