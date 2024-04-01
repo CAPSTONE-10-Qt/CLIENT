@@ -40,3 +40,8 @@ export const interviewSortState = atom<number>({
   key: "interviewSortState",
   default: 1,
 });
+
+export const questionSortState = atom<number>({
+  key: "questionSortState",
+  default: 1,
+});
