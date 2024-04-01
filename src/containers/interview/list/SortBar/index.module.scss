@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 3px;
+}
+
+.text {
+  @include text-type("p_md");
+  text-align: center;
+  cursor: pointer;
+  width: 43px;
+  color: color(black, 10);
+}
+
+.wide {
+  width: 75px;
+}
+
+.clicked {
+  @include text-type("p_md_semibold");
+  color: color(black, 0);
+}
+
+.border {
+  width: 0;
+  height: 16px;
+  border-right: 1px solid color(black, 0);
+}

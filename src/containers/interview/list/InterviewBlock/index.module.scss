@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: color(black, 90);
+
+  & > h1 {
+    @include text-type("title_md");
+  }
+
+  & > p {
+    @include text-type("p_lg");
+    margin-top: 8px;
+  }
+}
+
+.flex {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > span {
+    @include text-type("title_md");
+    color: color(theme, main);
+  }
+}
