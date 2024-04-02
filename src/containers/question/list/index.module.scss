@@ -19,6 +19,7 @@
     gap: 30px;
     & > div {
       width: 100%;
+      display: flex;
       justify-content: flex-end;
     }
   }
@@ -33,12 +34,20 @@
   & > p {
     @include text-type("p_lg");
   }
-  div {
+  & > div {
     display: flex;
     align-items: center;
     gap: 10px;
     span {
       @include text-type("p_md");
+    }
+  }
+  @include Mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    & > div {
+      flex-direction: row-reverse;
     }
   }
 }
