@@ -1,0 +1,31 @@
+$theme-colors: (
+  pink-light: #fef3f7,
+  pink-main: #f88dad,
+  pink-bright: #ef4482,
+  pink-transparent: rgba(248, 141, 173, 0.4),
+  blue-light: #f1f6fc,
+  blue-main: #79aae3,
+  blue-bright: #196fd2,
+  blue-transparent: rgba(121, 170, 227, 0.4),
+  green-light: #f5fbf1,
+  green-main: #9cc37d,
+  green-bright: #5a852f,
+  green-transparent: rgba(156, 195, 125, 0.4),
+  beige-light: #fff1e1,
+  beige-main: #e4be92,
+  beige-bright: #c18d3d,
+  beige-transparent: rgba(228, 190, 146, 0.4),
+);
+
+@function get-color($color, $type) {
+  @return map-get($theme-colors, #{$color}-#{$type});
+}
+
+@mixin get-gradient($color) {
+  background: linear-gradient(
+    135deg,
+    map-get($theme-colors, #{$color}-light) 13.33%,
+    map-get($theme-colors, #{$color}-main) 50%,
+    map-get($theme-colors, #{$color}-bright) 86.67%
+  );
+}
