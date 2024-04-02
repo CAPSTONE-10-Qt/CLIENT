@@ -11,6 +11,11 @@ $common-colors: (
   result-half: #f1d079,
   result-none: #f44c55,
 );
+:root {
+  @each $name, $color in $common-colors {
+    --color-#{$name}: #{$color};
+  }
+}
 
 /* theme color variables */
 $theme-colors: (
@@ -31,23 +36,12 @@ $theme-colors: (
   beige-bright: #c18d3d,
   beige-transparent: rgba(228, 190, 146, 0.4),
 );
-
-:root {
-  @each $name, $color in $common-colors {
-    --color-#{$name}: #{$color};
-  }
-
-  --max-width: 1920px;
-  --border-radius: 12px;
-}
-
 @mixin set-theme($name) {
   @each $type in (light, main, bright, transparent) {
     $color-value: map-get($theme-colors, #{$name}-#{$type});
     --color-theme-#{$type}: #{$color-value};
   }
 }
-
 body {
   @include set-theme(pink);
 }
@@ -61,12 +55,12 @@ body {
   @include set-theme(beige);
 }
 
+/* reset */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-
 html,
 body {
   max-width: 100vw;
@@ -74,50 +68,40 @@ body {
   background-color: color(black, 100);
   color: color(black, 0);
 }
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
 div,
 p,
 span {
   cursor: default;
 }
 
-// sweetalert custom
-
+/* sweetalert custom */
 .swal2-container {
   padding: 32px !important;
 }
-
 .swal2-modal {
   box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.3);
 }
-
 .swal2-title {
   word-break: keep-all !important;
   line-height: 120% !important;
 }
-
 .swal2-html-container {
   word-break: keep-all !important;
 }
-
 .swal2-default-outline:focus {
   box-shadow: 0 0 0 3px color(theme, transparent) !important;
 }
-
 .swal2-loader {
   border-color: color(theme, main) rgba(0, 0, 0, 0) color(theme, main)
     rgba(0, 0, 0, 0);
 }
-
 .swal2-timer-progress-bar {
   background: color(theme, transparent);
 }
-
 .swal2-emphasis {
   font-weight: 500;
   font-variant-numeric: tabular-nums;
