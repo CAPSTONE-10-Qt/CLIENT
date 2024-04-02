@@ -1,22 +1,19 @@
 "use client";
 
-import React from "react";
-import { useTheme } from "next-themes";
+import { useState } from "react";
+import Menu from "./Menu";
+import SettingTab from "./SettingTab";
+
+import styles from "./index.module.scss";
+import cs from "classnames/bind";
+const cx = cs.bind(styles);
 
 const MyContainer = () => {
-  const { setTheme } = useTheme();
+  const [tab, setTab] = useState<number>(0);
   return (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      {["pink", "blue", "green", "beige"].map(i => (
-        <button key={i} onClick={() => setTheme(i)}>
-          {i}
-        </button>
-      ))}
+    <div className={cx("container")}>
+      <Menu tab={tab} setTab={setTab} />
+      {tab === 0 ? <SettingTab /> : null}
     </div>
   );
 };
