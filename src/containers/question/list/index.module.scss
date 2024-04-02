@@ -1,0 +1,52 @@
+.container {
+  @include Container;
+  padding: 150px 0 60px 0;
+  gap: 40px;
+}
+
+.header {
+  width: 100%;
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  h1 {
+    @include text-type("title_lg");
+  }
+  @include Mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    & > div {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.top-info {
+  width: 100%;
+  padding: 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > p {
+    @include text-type("p_lg");
+  }
+  div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    span {
+      @include text-type("p_md");
+    }
+  }
+}
+
+.block-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
