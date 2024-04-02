@@ -31,6 +31,11 @@ import Play from "./interview/play.svg";
 import Stop from "./interview/stop.svg";
 import StopCircle from "./interview/stop_circle.svg";
 
+import ColorPink from "./color_pink.svg";
+import ColorBlue from "./color_blue.svg";
+import ColorGreen from "./color_green.svg";
+import ColorBeige from "./color_beige.svg";
+
 export {
   LogoText,
   DefaultProfile,
@@ -60,4 +65,8 @@ export {
   Play,
   Stop,
   StopCircle,
+  ColorPink,
+  ColorBlue,
+  ColorGreen,
+  ColorBeige,
 };
