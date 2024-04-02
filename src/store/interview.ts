@@ -41,7 +41,11 @@ export const interviewSortState = atom<number>({
   default: 1,
 });
 
-export const questionSortState = atom<number>({
-  key: "questionSortState",
-  default: 1,
+export const questionFilterState = atom<{
+  sort: number;
+  subjectText: CSSubjectType | "ALL";
+  onlyWrong: boolean;
+}>({
+  key: "questionFilterState",
+  default: { sort: 1, subjectText: "ALL", onlyWrong: false },
 });

@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid color(black, 70);
+}
+
+.rect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 8px;
+  padding: 10px 0;
+  p {
+    cursor: pointer;
+    @include text-type("title_sm");
+  }
+}
+
+.clicked {
+  background-color: color(black, 90);
+}
