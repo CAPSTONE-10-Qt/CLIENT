@@ -1,3 +1,9 @@
+import {
+  CircleCheck,
+  TriangleWarning,
+  OctagonWrong,
+} from "../../../public/svgs";
+
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
@@ -11,6 +17,7 @@ type Props = {
   staticWidth?: number;
   initLineHeight?: boolean;
   className?: string;
+  score?: number;
 };
 const RoundButton = ({
   text,
@@ -21,6 +28,7 @@ const RoundButton = ({
   staticWidth,
   initLineHeight,
   className,
+  score,
 }: Props) => {
   return (
     <div className={cx("container", className ? className : "")}>
@@ -32,11 +40,27 @@ const RoundButton = ({
           largeSubtext || smallSubtext ? "gap" : "",
           staticWidth ? "static" : "",
           initLineHeight ? "line-height" : "",
+          score !== undefined ? "score" : "",
         )}
         style={{ width: staticWidth ? `${staticWidth}px` : "auto" }}
         onClick={onClick ? onClick : () => null}
       >
-        <p>{text}</p>
+        {score === 1 ? (
+          <CircleCheck />
+        ) : score === 0.5 ? (
+          <TriangleWarning />
+        ) : score === 0 ? (
+          <OctagonWrong />
+        ) : null}
+        <p>
+          {score === 1
+            ? "정답"
+            : score === 0.5
+              ? "부분정답"
+              : score === 0
+                ? "오답"
+                : text}
+        </p>
       </div>
       {largeSubtext && <p className={cx("lgSubtext")}>{largeSubtext}</p>}
       {smallSubtext && <p className={cx("smSubtext")}>{smallSubtext}</p>}
