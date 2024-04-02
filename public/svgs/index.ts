@@ -12,10 +12,12 @@ import GoogleLogo from "./google_logo.svg";
 import CircleCheck from "./circle_check.svg";
 import TriangleWarning from "./triangle_warning.svg";
 import OctagonWrong from "./octagon_wrong.svg";
+import Star from "./star.svg";
 
 import CheckTrue from "./check_true.svg";
 import CheckFalse from "./check_false.svg";
 import Arrow from "./arrow.svg";
+import ArrowDown from "./arrow_down.svg";
 
 import CamFalse from "./interview/cam_false.svg";
 import CamTrue from "./interview/cam_true.svg";
@@ -42,9 +44,11 @@ export {
   CircleCheck,
   TriangleWarning,
   OctagonWrong,
+  Star,
   CheckTrue,
   CheckFalse,
   Arrow,
+  ArrowDown,
   CamFalse,
   CamTrue,
   MicFalse,
