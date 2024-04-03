@@ -9,11 +9,18 @@ const cx = cs.bind(styles);
 type Props = {
   type: "question" | "answer" | "solution";
   text: string;
+  solution?: string;
   questionNumber?: number;
   questionId?: number;
 };
 
-const TextBox = ({ type, text, questionNumber, questionId }: Props) => {
+const TextBox = ({
+  type,
+  text,
+  solution,
+  questionNumber,
+  questionId,
+}: Props) => {
   return (
     <div
       className={cx(
@@ -31,7 +38,8 @@ const TextBox = ({ type, text, questionNumber, questionId }: Props) => {
         </div>
       )}
       <div className={cx("paragraph-container")}>
-        {text.split("\n") ? (
+        {type === "solution" && <b>[예시 답안]</b>}
+        {text.includes("\n") ? (
           text.split("\n").map((line: string, idx: number) => (
             <p key={idx}>
               {line}
@@ -41,6 +49,18 @@ const TextBox = ({ type, text, questionNumber, questionId }: Props) => {
         ) : (
           <p>{text}</p>
         )}
+        {type === "solution" && <b className={cx("b-2")}>[첨삭]</b>}
+        {solution &&
+          (solution.includes("\n") ? (
+            solution.split("\n").map((line: string, idx: number) => (
+              <p key={idx}>
+                {line}
+                <br />
+              </p>
+            ))
+          ) : (
+            <p>{solution}</p>
+          ))}
       </div>
       {questionId !== undefined && (
         <Link href={`/question/${questionId}`} className={cx("button")}>

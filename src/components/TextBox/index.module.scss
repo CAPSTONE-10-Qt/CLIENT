@@ -47,10 +47,15 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-
+  color: color(black, 0);
   p {
     @include text-type("p_lg");
-    color: color(black, 0);
+  }
+  b {
+    @include text-type("p_lg_semibold");
+  }
+  .b-2 {
+    padding-top: 20px;
   }
 }
 
