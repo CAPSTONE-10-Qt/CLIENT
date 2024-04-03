@@ -15,6 +15,8 @@ interface QuestionFirstDetailType {
   text: string;
   feedbackText: string;
   time: number;
+  id: number;
+  pin: boolean;
 }
 
 interface QuestionDetailType extends QuestionFirstDetailType {

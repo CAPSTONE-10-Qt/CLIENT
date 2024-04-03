@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 70px;
+  h1 {
+    @include text-type("title_lg");
+  }
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question-header {
+  &,
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  justify-content: space-between;
+  & > div > p {
+    @include text-type("title_md");
+  }
+}
