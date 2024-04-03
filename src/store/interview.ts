@@ -17,6 +17,7 @@ export const interviewDataState = atom<InterviewDataType>({
     questionNum: 5,
     onlyVoice: false,
     startDateTime: "",
+    title: "2024. 01. 01. 모의 면접 1",
     questionList: [
       {
         id: 0,

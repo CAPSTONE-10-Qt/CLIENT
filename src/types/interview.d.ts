@@ -13,6 +13,7 @@ interface InterviewDataType {
   questionNum: QuestionType;
   onlyVoice: boolean;
   startDateTime: string;
+  title: string;
   questionList: {
     id: number;
     questionText: string;
@@ -31,4 +32,18 @@ interface InterviewPreviewType {
   score: number;
   questionNum: number;
   id: number;
+}
+
+interface InterviewDetailType {
+  subjectText: CSSubjectType;
+  startDateTime: string;
+  endDateTime: string;
+  time: number;
+  title: string;
+  score: number;
+  questionNum: number;
+  onlyVoice: boolean;
+  id: number;
+  otherFeedback: string;
+  questionList: QuestionFirstDetailType[];
 }
