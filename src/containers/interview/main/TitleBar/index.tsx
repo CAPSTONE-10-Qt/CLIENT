@@ -5,22 +5,30 @@ import { interviewDataState } from "@store/interview";
 import RoundButton from "@components/RoundButton";
 import Timer from "../Timer";
 
+import { MicTrue, CamFalse, CamTrue } from "../../../../../public/svgs";
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
-const TitleBar = () => {
-  const { subjectText } = useRecoilValue(interviewDataState);
+const TitleBar = ({ item }: { item?: InterviewDetailType }) => {
+  const { title, subjectText } = useRecoilValue(interviewDataState);
   return (
     <div className={cx("titlebar-container")}>
       <div className={cx("inner")}>
-        <h1>
-          {"2024. 03. 01. 모의 면접 1" +
-            (location.href.includes("question") ? " #2" : "")}
-        </h1>
-        <RoundButton text={subjectText} state={false} initLineHeight={true} />
+        <h1>{item ? item.title : title}</h1>
+        <RoundButton
+          text={item ? item.subjectText : subjectText}
+          state={false}
+          initLineHeight={true}
+        />
+        {item && (
+          <div className={cx("icon-flex")}>
+            <MicTrue />
+            {item.onlyVoice ? <CamFalse /> : <CamTrue />}
+          </div>
+        )}
       </div>
-      <Timer />
+      {!item && <Timer />}
     </div>
   );
 };
