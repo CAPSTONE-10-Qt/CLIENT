@@ -26,7 +26,7 @@ const InterviewBlock = ({
       <h1>{title}</h1>
       <p>{`${startDateTime.split(" ")[1]}~${
         endDateTime.split(" ")[1]
-      } (${Math.round(time / 60)}m ${time % 60}s)`}</p>
+      } (${Math.floor(time / 60)}m ${time % 60}s)`}</p>
       <div className={cx("flex")}>
         <RoundButton text={subjectText} state={false} />
         <span>{score + "점"}</span>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useRecoilState, useResetRecoilState } from "recoil";
-import { interviewAllowState } from "@store/interview";
+import { interviewDataState, interviewAllowState } from "@store/interview";
 
 import useInterval from "@utils/hooks/useInterval";
 import useBlockLeave from "@utils/hooks/useBlockLeave";
@@ -34,6 +34,7 @@ const Timer = () => {
     );
 
   const [allow, setAllow] = useRecoilState(interviewAllowState);
+  const resetData = useResetRecoilState(interviewDataState);
   const resetAllow = useResetRecoilState(interviewAllowState);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const Timer = () => {
     confirmQuitInterview(goBack, () => {
       setAllow({ ...allow, quit: false });
       setIsRunning(true);
+      resetData();
     });
   };
   useEffect(() => {

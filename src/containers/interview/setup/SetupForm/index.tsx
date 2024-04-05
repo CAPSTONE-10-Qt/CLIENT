@@ -25,7 +25,7 @@ const SetupForm = () => {
   const [interview, setInterview] = useRecoilState(interviewDataState);
   const onSubmit = () => {
     setInterview({
-      ...data,
+      ...interview,
       currentIndex: 0,
       isMicOn: false,
       isSpeakerOn: true,
@@ -81,37 +81,3 @@ const SetupForm = () => {
 };
 
 export default SetupForm;
-
-const data: any = {
-  id: 1,
-  subjectText: "OS",
-  questionNum: 5,
-  onlyVoice: false,
-  startDateTime: "",
-  questionList: [
-    {
-      id: 0,
-      questionText:
-        "운영체제란 무엇이며 핵심 기능에는 어떤 것이 있는지 설명하시오.",
-    },
-    {
-      id: 1,
-      questionText: "세마포어와 뮤텍스란 무엇이며 그 차이점에 대해 설명하시오.",
-    },
-    {
-      id: 2,
-      questionText:
-        "Starvation 상태를 설명하는 식사하는 철학자 문제에 대해 설명해보세요.",
-    },
-    {
-      id: 3,
-      questionText:
-        "사용자 수준 스레드와 커널 수준 스레드에 대한 각각의 장단점과 차이점에 대해 설명하시오.",
-    },
-    {
-      id: 4,
-      questionText:
-        "데이터 모델에 따라 NoSQL을 분류한다면 어떻게 분류할 수 있을지 설명하시오.",
-    },
-  ],
-};
