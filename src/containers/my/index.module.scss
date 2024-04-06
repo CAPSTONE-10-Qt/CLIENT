@@ -1,0 +1,13 @@
+.container {
+  @include Container;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 150px 0 60px 0;
+  gap: 60px;
+
+  @include Tablet {
+    flex-direction: column;
+  }
+}

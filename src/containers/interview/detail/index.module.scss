@@ -1,0 +1,9 @@
+.container {
+  @include Container;
+  padding: 150px 0 190px 0;
+  gap: 40px;
+  h1 {
+    width: 100%;
+    @include text-type("title_lg");
+  }
+}

@@ -2,31 +2,64 @@
   @return var(--color-#{$color-name}-#{$color-level});
 }
 
-@mixin text-type($type: "p") {
-  @if ($type == "title") {
-    font-size: 30px;
-    font-weight: 600;
-    color: color(blue);
-    line-height: normal;
+@mixin text-type($type: "p_md") {
+  @if ($type == "landing") {
+    font-size: 60px;
+    line-height: 65px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     word-break: keep-all;
   }
-  @if ($type == "p") {
-    font-size: 1rem;
-    font-weight: 400;
-    color: black;
-    line-height: 120%;
+  @if ($type == "title_lg") {
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+  }
+  @if ($type == "title_md") {
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+  }
+  @if ($type == "title_sm") {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+  }
+  @if ($type == "p_lg_semibold") {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
     word-break: break-all;
   }
-}
-
-@mixin Button {
-  padding: 12px 30px;
-  border-radius: 40px;
-  text-align: center;
-  font: {
-    size: 16px;
-    style: normal;
-    weight: 400;
+  @if ($type == "p_lg") {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    word-break: break-all;
+  }
+  @if ($type == "p_md_semibold") {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    word-break: break-all;
+  }
+  @if ($type == "p_md") {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    word-break: break-all;
+  }
+  @if ($type == "p_sm") {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400;
+    word-break: break-all;
   }
 }
 
@@ -48,5 +81,17 @@
 @mixin Mobile {
   @media screen and (max-width: 768px) {
     @content;
+  }
+}
+
+@mixin Container {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include Laptop {
+    width: calc(100% - 64px);
+    margin: 0 32px;
   }
 }

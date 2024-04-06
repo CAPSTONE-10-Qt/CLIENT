@@ -9,6 +9,9 @@
     "store": "Context",
     "styles": "Sass",
     "types": "Typescript",
-    "utils": "Utils"
+    "utils": "Utils",
+    "alerts": "Messages",
+    "home": "",
+    "Controller": ""
   }
 }

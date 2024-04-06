@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: color(black, 90);
+
+  h1 {
+    @include text-type("title_md");
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    max-height: 76px;
+  }
+  @include Mobile {
+    h1 {
+      @include text-type("title_sm");
+      -webkit-line-clamp: 3;
+      max-height: 96px;
+    }
+  }
+
+  p {
+    @include text-type("p_lg");
+  }
+}
+
+.flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  & > div {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-bottom: 110px;
+}
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & > :nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h5 {
+      @include text-type("title_md");
+    }
+    p {
+      @include text-type("p_lg");
+      font-variant-numeric: tabular-nums;
+    }
+    @include Mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.container {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    @include text-type("title_sm");
+    padding-left: 5px;
+  }
+  @include Tablet {
+    width: 100%;
+    padding-top: 0;
+    h1 {
+      @include text-type("title_lg");
+      padding-left: 0;
+    }
+  }
+}
+
+.box {
+  display: flex;
+  width: 200px;
+  padding: 10px;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px;
+  background-color: color(black, 90);
+
+  div {
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    flex-shrink: 0;
+    border-radius: 10px;
+    @include text-type("p_lg");
+    cursor: pointer;
+  }
+  .clicked {
+    background-color: color(black, 70);
+  }
+
+  @include Tablet {
+    width: 100%;
+  }
+}

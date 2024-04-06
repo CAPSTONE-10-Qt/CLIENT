@@ -1,25 +1,118 @@
 .container {
   width: 100%;
-  height: 56px;
+  height: 64px;
+  background-color: color(black, 100);
   border-bottom: 0.5px solid color(black, 70);
   padding: 8px 10%;
   @include Tablet {
     padding: 8px 20px;
   }
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+
+  &:global(.fade-in) {
+    animation: show 0.8s;
+    @keyframes show {
+      from {
+        opacity: 0;
+        margin-top: -64px;
+      }
+      to {
+        opacity: 1;
+        margin-top: 0px;
+      }
+    }
+  }
+
+  &:global(.fade-out) {
+    margin-top: -64px;
+    animation: disappear 0.5s;
+    @keyframes disappear {
+      from {
+        opacity: 1;
+        margin-top: 0px;
+      }
+      to {
+        opacity: 0;
+        margin-top: -64px;
+      }
+    }
+  }
+
+  & > svg {
+    cursor: pointer;
+  }
+}
+
+.container a {
+  @include text-type(p_md);
+  @include Mobile {
+    display: none;
+  }
 }
 
 .inner {
   display: flex;
   align-items: center;
   gap: 48px;
+  @include Mobile {
+    gap: 20px;
+  }
+
+  :global(.header-menu-icon) {
+    display: none;
+    @include Mobile {
+      display: block;
+    }
+  }
+
+  :global(.btn) {
+    & > div:active {
+      background-color: color(black, 10);
+    }
+    p {
+      @include text-type("p_md");
+    }
+  }
 }
 
-.btn {
-  @include Button;
-  background-color: color(black, 0);
-  color: color(black, 100);
+.menu-container {
+  position: fixed;
+  top: 64px;
+  z-index: 999;
+  width: 100%;
+  background-color: color(black, 90);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 0 0 5px 5px;
+  gap: 5px;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+.menu-rect {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+  &:active {
+    background-color: color(black, 70);
+  }
+  &.active {
+    background-color: color(black, 70);
+  }
+}
+
+.menu-container p {
+  @include text-type(p_md);
 }

@@ -1,0 +1,46 @@
+.container {
+  width: calc(100% - 260px);
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  h1 {
+    @include text-type("title_lg");
+  }
+
+  @include Tablet {
+    width: 100%;
+    h1 {
+      display: none;
+    }
+  }
+}
+
+.sub-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 30px;
+  h3 {
+    @include text-type("title_md");
+  }
+  p {
+    @include text-type("p_md");
+    word-break: keep-all;
+  }
+  @include Tablet {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.block-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  @include Tablet {
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+  }
+}

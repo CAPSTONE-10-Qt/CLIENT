@@ -1,0 +1,35 @@
+.container {
+  @include Container;
+  padding: 90px 0 50px 0;
+  gap: 30px;
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+
+  @include Mobile {
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+}
+
+.video-wrapper {
+  width: 100%;
+  padding: 10px;
+}
+
+.cam-off {
+  width: 100%;
+  aspect-ratio: 1280 / 720;
+  background-color: color(black, 70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: 52px;
+    height: 52px;
+  }
+}

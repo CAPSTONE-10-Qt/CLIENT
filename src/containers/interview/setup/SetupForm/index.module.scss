@@ -1,0 +1,56 @@
+.container {
+  width: 950px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include Tablet {
+    width: calc(100% - 64px);
+    margin: 0 32px;
+  }
+}
+
+.title {
+  @include text-type("title_md");
+  text-align: center;
+  margin: 90px 0 50px 0;
+  @include Mobile {
+    padding: 0 30px;
+  }
+
+  &.top {
+    margin-top: 0;
+  }
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  @include Tablet {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 30px;
+  }
+  @include Mobile {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &.three {
+    justify-content: center;
+    gap: 100px;
+    @include Tablet {
+      gap: 0px;
+      row-gap: 30px;
+    }
+    @include Mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 90px 0 30px 0;
+}

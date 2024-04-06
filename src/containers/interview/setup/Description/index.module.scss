@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: color(black, 90);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.paragraph {
+  display: flex;
+  gap: 10px;
+  p {
+    @include text-type("p_lg");
+    color: color(black, 0);
+    margin-bottom: 6px;
+    word-break: keep-all;
+  }
+}
