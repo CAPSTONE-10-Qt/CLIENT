@@ -22,6 +22,9 @@ const TitleBar = ({ item }: { item?: InterviewDetailType }) => {
             state={false}
             initLineHeight={true}
           />
+          {location.href.includes("question") && (
+            <RoundButton text='재답변' state={true} initLineHeight={true} />
+          )}
           {item && (
             <div className={cx("icon-flex")}>
               <MicTrue />
