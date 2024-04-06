@@ -1,5 +1,5 @@
 interface QuestionPreviewType {
-  subjectText: string;
+  subjectText: CSSubjectType;
   title: string;
   id: number;
   again: number;
@@ -16,11 +16,13 @@ interface QuestionFirstDetailType {
   feedbackText: string;
   time: number;
   id: number;
-  pin: boolean;
+  pin: number;
 }
 
 interface QuestionDetailType extends QuestionFirstDetailType {
-  subjectText: string;
+  title: string;
+  questionNum: number;
+  subjectText: CSSubjectType;
   startDateTime: string;
   again: number;
   againList: {
