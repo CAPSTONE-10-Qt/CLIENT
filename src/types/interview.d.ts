@@ -41,6 +41,13 @@ interface InterviewDetailType {
   totalTime: number;
   title: string;
   score: number;
+  textScore: number;
+  otherScore: number;
+  mumblePercent: number;
+  silentPercent: number;
+  facePositive: number;
+  faceNeutral: number;
+  faceNegative: number;
   questionNum: number;
   onlyVoice: boolean;
   id: number;
