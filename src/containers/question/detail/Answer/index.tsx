@@ -55,7 +55,7 @@ const Answer = ({
       </div>
       <RectButton
         text='학습 노트로 돌아가기'
-        onClick={() => router.back()}
+        onClick={() => router.push("/question/list")}
         isBack={true}
       />
     </>
