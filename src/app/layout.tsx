@@ -14,7 +14,7 @@ const Pretendard = localFont({
 
 export const metadata: Metadata = {
   title: "iterview",
-  description: "IT 취준생을 위한 CS 기술 구두 면접 대비 & 학습 플랫폼",
+  description: "잇터뷰 : IT 취준생을 위한 CS 기술 구두 면접 대비 & 학습 플랫폼",
 };
 export const viewport: Viewport = {
   themeColor: "#333333",
