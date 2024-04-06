@@ -7,6 +7,12 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  &:global(.small-button) {
+    & > div {
+      padding: 8px 25px !important;
+    }
+  }
 }
 
 .button {

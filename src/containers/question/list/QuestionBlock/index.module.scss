@@ -41,10 +41,4 @@
     gap: 12px;
     flex-wrap: wrap;
   }
-
-  :global(.small-button) {
-    & > div {
-      padding: 8px 25px !important;
-    }
-  }
 }
