@@ -1,5 +1,5 @@
 const Tutorial = () => {
-  return <div></div>;
+  return <div style={{ height: "200vh" }}></div>;
 };
 
 export default Tutorial;

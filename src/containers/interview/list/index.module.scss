@@ -1,0 +1,35 @@
+.container {
+  @include Container;
+  padding: 150px 0 60px 0;
+  gap: 40px;
+}
+
+.header {
+  width: 100%;
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  h1 {
+    @include text-type("title_lg");
+  }
+  @include Mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    & > div {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.block-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  @include Mobile {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,76 @@
+.container {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.select-box {
+  width: 136px;
+  height: 48px;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid color(black, 0);
+  border-radius: 48px;
+  &,
+  * {
+    cursor: pointer;
+  }
+  p {
+    @include text-type("p_lg");
+    color: color(black, 0);
+  }
+  svg {
+    stroke: color(black, 0);
+  }
+
+  &.open {
+    background-color: color(black, 0);
+    p {
+      color: color(black, 100);
+    }
+    svg {
+      stroke: color(black, 100);
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.drop-down {
+  position: absolute;
+  z-index: 10;
+  margin-top: 10px;
+
+  display: flex;
+  width: 136px;
+  padding: 5px;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  background-color: color(black, 10);
+
+  div {
+    display: flex;
+    height: 45px;
+    padding: 0 25px;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 5px;
+    background-color: transparent;
+    @include text-type("p_lg");
+    color: color(black, 100);
+    cursor: pointer;
+  }
+  div:hover {
+    background-color: color(black, 30);
+  }
+  div:active,
+  .selected {
+    background-color: color(black, 70) !important;
+    color: color(black, 0);
+  }
+}

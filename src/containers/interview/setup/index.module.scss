@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 192px 0;
+  gap: 90px;
+
+  h1 {
+    @include text-type("title_lg");
+    text-align: center;
+    @include Mobile {
+      padding: 0 30px;
+    }
+  }
+}
