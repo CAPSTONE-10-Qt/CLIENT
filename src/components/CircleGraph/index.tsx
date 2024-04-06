@@ -31,19 +31,23 @@ const CircleGraph = ({
             background:
               typeof percent === "number"
                 ? `conic-gradient(
+                    var(--color-theme-bright),
                     var(--color-theme-main) ${(percent / 100) * 360}deg,
-                    var(--color-theme-light) ${(percent / 100) * 360}deg
+                    var(--color-theme-light) ${(percent / 100) * 360}deg,
+                    var(--color-theme-main)
                   )`
                 : `conic-gradient(
-    var(--color-theme-main) ${(percent[0] / 100) * 360}deg,
-    var(--color-theme-light) ${(percent[0] / 100) * 360}deg,
-    var(--color-theme-light) ${Math.round(
-      ((percent[0] + percent[1]) / 100) * 360,
-    )}deg,
-    var(--color-theme-bright) ${Math.round(
-      ((percent[0] + percent[1]) / 100) * 360,
-    )}deg
-  )`,
+                    var(--color-theme-light),
+                    var(--color-theme-main) ${(percent[0] / 100) * 360}deg,
+                    var(--color-theme-light) ${(percent[0] / 100) * 360}deg,
+                    var(--color-theme-light) ${Math.round(
+                      ((percent[0] + percent[1]) / 100) * 360,
+                    )}deg,
+                    var(--color-theme-bright) ${Math.round(
+                      ((percent[0] + percent[1]) / 100) * 360,
+                    )}deg,
+                    var(--color-theme-main)
+                    )`,
           }}
         />
       </div>
