@@ -13,9 +13,19 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @include Mobile {
+    align-items: flex-end;
+  }
+  & > :nth-child(2) {
+    display: none;
+    @include Mobile {
+      display: flex;
+    }
+  }
 }
 
 .question-header {
+  width: 100%;
   &,
   & > div {
     display: flex;
@@ -25,5 +35,10 @@
   justify-content: space-between;
   & > div > p {
     @include text-type("title_md");
+  }
+  @include Mobile {
+    & > div > p ~ div {
+      display: none;
+    }
   }
 }

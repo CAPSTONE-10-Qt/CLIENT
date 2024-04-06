@@ -9,12 +9,8 @@
   thead {
     background-color: rgba(0, 0, 0, 0.05);
   }
-  thead th {
-    @include text-type("p_md_semibold");
-    color: color(theme, light);
-  }
   tbody {
-    background-color: rgba(255, 255, 255, 0.01);
+    background-color: rgba(255, 255, 255, 0.03);
   }
   th {
     height: 36px;
@@ -23,6 +19,41 @@
   }
 }
 
+.thead-th {
+  @include text-type("p_md_semibold");
+  color: color(theme, light);
+  & > :nth-child(1) {
+    display: block;
+  }
+  & > :nth-child(2) {
+    display: none;
+  }
+  @include Mobile {
+    & > :nth-child(1) {
+      display: none;
+    }
+    & > :nth-child(2) {
+      display: block;
+    }
+  }
+}
+
+.graph-tr {
+  @include Mobile {
+    display: none;
+  }
+  &.mobile {
+    display: none;
+    @include Mobile {
+      display: table-row;
+    }
+  }
+  &.title {
+    background-color: rgba(0, 0, 0, 0.13);
+  }
+}
+
 .graph-th {
   vertical-align: top !important;
+  border-bottom: 0 !important;
 }

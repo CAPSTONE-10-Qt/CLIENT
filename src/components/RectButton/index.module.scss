@@ -21,9 +21,12 @@
     color: color(black, 100);
   }
 
+  svg {
+    flex-shrink: 0;
+  }
+
   &.back {
     flex-direction: row-reverse;
-
     svg {
       transform: rotate(180deg);
     }

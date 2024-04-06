@@ -23,9 +23,23 @@
     @include text-type("title_md");
   }
 
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
   @include Mobile {
     width: 100%;
     justify-content: space-between;
+  }
+
+  &.result {
+    @include Mobile {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: 12px;
+    }
   }
 }
 

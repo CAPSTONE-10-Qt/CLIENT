@@ -12,6 +12,19 @@ const CircleGraph = ({
   return (
     <div className={cx("container")}>
       <div className={cx("chart")}>
+        <div className={cx("donut")}>
+          <p
+            className={cx(
+              typeof percent !== "number"
+                ? `idx${percent.indexOf(Math.max(...percent))}`
+                : "",
+            )}
+          >
+            {typeof percent === "number"
+              ? percent + "%"
+              : Math.max(...percent) + "%"}
+          </p>
+        </div>
         <div
           className={cx("chart-bar")}
           style={{

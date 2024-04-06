@@ -34,19 +34,14 @@ const Summary = ({
           {` ${startDateTime.split(" ")[1]} - `}
           <b>종료</b>
           {` ${endDateTime.split(" ")[1]}`}
+          {` (${Math.floor(totalTime / 60)}m ${totalTime % 60}s)`}
         </span>
       </div>
-      <Table
-        type='time'
-        array={[totalTime, ...questionList.map(el => el.time)]}
-      />
+      <Table type='time' array={questionList.map(el => el.time)} />
       <div className={cx("sub-title")}>
         <p>질문별 채점표</p>
       </div>
-      <Table
-        type='score'
-        array={[questionNum, ...questionList.map(el => el.score)]}
-      />
+      <Table type='score' array={questionList.map(el => el.score)} />
       <div className={cx("sub-title")}>
         <p>비언어적 표현 평가</p>
       </div>

@@ -14,19 +14,21 @@ const TitleBar = ({ item }: { item?: InterviewDetailType }) => {
   const { title, subjectText } = useRecoilValue(interviewDataState);
   return (
     <div className={cx("titlebar-container")}>
-      <div className={cx("inner")}>
+      <div className={cx("inner", item ? "result" : "")}>
         <h1>{item ? item.title : title}</h1>
-        <RoundButton
-          text={item ? item.subjectText : subjectText}
-          state={false}
-          initLineHeight={true}
-        />
-        {item && (
-          <div className={cx("icon-flex")}>
-            <MicTrue />
-            {item.onlyVoice ? <CamFalse /> : <CamTrue />}
-          </div>
-        )}
+        <div>
+          <RoundButton
+            text={item ? item.subjectText : subjectText}
+            state={false}
+            initLineHeight={true}
+          />
+          {item && (
+            <div className={cx("icon-flex")}>
+              <MicTrue />
+              {item.onlyVoice ? <CamFalse /> : <CamTrue />}
+            </div>
+          )}
+        </div>
       </div>
       {!item && <Timer />}
     </div>

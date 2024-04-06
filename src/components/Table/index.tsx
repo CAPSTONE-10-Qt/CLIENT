@@ -1,3 +1,4 @@
+import React from "react";
 import {
   CircleCheck,
   TriangleWarning,
@@ -16,56 +17,81 @@ const Table = ({
   type: "time" | "score" | "graph";
   array: any[];
 }) => {
+  const title = ["지연 시간", "침묵 시간", "얼굴 표정"];
   return (
     <table className={cx("container")}>
-      <thead>
-        <tr>
-          {type === "graph"
-            ? ["발화 지연 시간", "침묵 시간", "얼굴 표정"].map(el => (
-                <th>{el}</th>
-              ))
-            : array.map((el, idx) => (
-                <th>
-                  {type === "time"
-                    ? idx === 0
-                      ? "면접 소요 시간"
-                      : `#${idx} 답변 시간`
-                    : idx === 0
-                      ? "면접 질문 개수"
-                      : `#${idx} 답변 결과`}
-                </th>
-              ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {type === "graph"
-            ? ["late", "silent", "face"].map((el, idx) => (
-                <th className={cx("graph-th")}>
-                  <CircleGraph type={el} percent={array[idx]} />
-                </th>
-              ))
-            : array.map((el, idx) => (
-                <th>
-                  {type === "time" ? (
-                    idx === 0 ? (
-                      `총 ${Math.floor(el / 60)}분 ${el % 60}초`
-                    ) : (
+      {(array.length === 5
+        ? [array]
+        : array.length === 10
+          ? [array.slice(0, 5), array.slice(5, 10)]
+          : [array.slice(0, 5), array.slice(5, 10), array.slice(10, 15)]
+      ).map((list, index) => (
+        <React.Fragment key={index}>
+          <thead>
+            {type === "graph" && index === 0 ? (
+              <tr className={cx("graph-tr")}>
+                {title.map(el => (
+                  <th key={el}>{el}</th>
+                ))}
+              </tr>
+            ) : (
+              <tr>
+                {list.map((el, idx) => (
+                  <th className={cx("thead-th")} key={idx}>
+                    <p>
+                      {type === "time"
+                        ? `#${index * 5 + idx + 1} 답변 시간`
+                        : `#${index * 5 + idx + 1} 답변 결과`}
+                    </p>
+                    <p>#{index * 5 + idx + 1}</p>
+                  </th>
+                ))}
+              </tr>
+            )}
+          </thead>
+          <tbody>
+            {type === "graph" && index === 0 ? (
+              <>
+                <tr className={cx("graph-tr")}>
+                  {["late", "silent", "face"].map((el, idx) => (
+                    <th className={cx("graph-th")} key={idx}>
+                      <CircleGraph type={el} percent={array[idx]} />
+                    </th>
+                  ))}
+                </tr>
+                {["late", "silent", "face"].map((el, idx) => (
+                  <React.Fragment key={idx}>
+                    <tr className={cx("graph-tr", "mobile", "title")}>
+                      <th colSpan={3}>{title[idx]}</th>
+                    </tr>
+                    <tr className={cx("graph-tr", "mobile")}>
+                      <th className={cx("graph-th")} colSpan={3}>
+                        <CircleGraph type={el} percent={array[idx]} />
+                      </th>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </>
+            ) : (
+              <tr>
+                {list.map((el, idx) => (
+                  <th key={idx}>
+                    {type === "time" ? (
                       `${el}초`
-                    )
-                  ) : idx === 0 ? (
-                    `총 ${el}개`
-                  ) : el === 1 ? (
-                    <CircleCheck />
-                  ) : el === 0.5 ? (
-                    <TriangleWarning />
-                  ) : (
-                    <OctagonWrong />
-                  )}
-                </th>
-              ))}
-        </tr>
-      </tbody>
+                    ) : el === 1 ? (
+                      <CircleCheck />
+                    ) : el === 0.5 ? (
+                      <TriangleWarning />
+                    ) : (
+                      <OctagonWrong />
+                    )}
+                  </th>
+                ))}
+              </tr>
+            )}
+          </tbody>
+        </React.Fragment>
+      ))}
     </table>
   );
 };

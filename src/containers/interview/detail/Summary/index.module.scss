@@ -12,6 +12,10 @@
     color: color(theme, main);
     text-align: center;
   }
+
+  @include Mobile {
+    padding: 40px 20px;
+  }
 }
 
 .sub-title {
@@ -28,9 +32,17 @@
   }
   span {
     @include text-type("p_lg");
+    word-break: keep-all;
     b {
       @include text-type("p_lg_semibold");
     }
+  }
+
+  @include Mobile {
+    flex-direction: column;
+    justify-content: initial;
+    align-items: flex-start;
+    gap: 10px;
   }
 }
 
