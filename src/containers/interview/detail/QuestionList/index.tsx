@@ -23,7 +23,7 @@ const QuestionList = ({ questionList }: InterviewDetailType) => {
                 <p>{`❔Question ${idx + 1}`}</p>
                 <RoundButton text='' state={false} score={item.score} />
               </div>
-              <Pin id={item.id} isTrue={item.pin} />
+              <Pin id={item.id} isTrue={!!item.pin} />
             </div>
             <RoundButton text='' state={false} score={item.score} />
             <TextBox type='question' text={item.questionText} />
