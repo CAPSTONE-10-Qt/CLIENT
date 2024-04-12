@@ -1,0 +1,76 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  & > svg {
+    width: 500px;
+    height: 500px;
+  }
+  @include Tablet {
+    flex-direction: column-reverse;
+    height: auto;
+    padding-top: 50px;
+  }
+  @include Mobile {
+    & > svg {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+  }
+}
+
+.box {
+  max-width: 600px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  h3 {
+    @include text-type("title_md");
+    margin: 0 0 10px 5px;
+  }
+  h1 {
+    @include text-type("landing");
+  }
+  & > svg {
+    width: 282px;
+    height: 60.5px;
+  }
+  & > div > p {
+    @include text-type("p_lg");
+    word-break: keep-all;
+  }
+  .first {
+    @include text-type("p_lg_semibold");
+    color: color(theme, light);
+    margin-bottom: 12px;
+  }
+
+  @include Tablet {
+    width: 100%;
+    max-width: max-content;
+  }
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+  a,
+  div {
+    cursor: pointer;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 1px solid color(black, 0);
+    @include text-type("p_md");
+  }
+  a {
+    background-color: color(black, 0);
+    color: color(black, 100);
+  }
+}
