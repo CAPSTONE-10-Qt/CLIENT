@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useRef, useState, useCallback, useEffect } from "react";
+import { useParams } from "next/navigation";
+import Webcam from "react-webcam";
 import useInterval from "@utils/hooks/useInterval";
 import { useRecoilValue } from "recoil";
 import { interviewDataState } from "@store/interview";
-import Webcam from "react-webcam";
+import { usePostFace } from "@service/hooks/interviewDuring";
 
 import { CamFalse } from "../../../../../public/svgs";
 import styles from "../index.module.scss";
@@ -18,6 +20,7 @@ const videoConstraints = {
 };
 
 const WebCam = () => {
+  const { id } = useParams();
   const { onlyVoice } = useRecoilValue(interviewDataState);
   const webcamRef = useRef<Webcam>(null);
   const [url, setUrl] = useState<string | null>(null);
@@ -27,10 +30,8 @@ const WebCam = () => {
       setUrl(imageSrc);
     }
   }, [webcamRef]);
-  // useInterval(capture, 3000);
-  useEffect(() => {
-    // console.log(url);
-  }, [url]);
+  useInterval(capture, 3000);
+  usePostFace(url, id as string);
   return (
     <div className={cx("video-wrapper")}>
       {onlyVoice || location.href.includes("question") ? (

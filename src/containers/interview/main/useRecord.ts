@@ -1,11 +1,11 @@
 "use client";
 
-import axios from "axios";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { interviewDataState, interviewAllowState } from "@store/interview";
 import { saveInterview } from "@utils/alerts/interview";
+import { usePostAnswer } from "@service/hooks/interviewDuring";
 
 const useRecord = (
   onRec: boolean,
@@ -33,6 +33,8 @@ const useRecord = (
     isSpeakerOn,
   } = interview;
   const [allow, setAllow] = useRecoilState(interviewAllowState);
+
+  const { onSubmitAudioFile } = usePostAnswer(audio as Blob, String(pk));
 
   const onRecord = () => {
     const audioCtx = new window.AudioContext();
@@ -93,28 +95,6 @@ const useRecord = (
     }
   };
 
-  const onSubmitAudioFile = new Promise(function (resolve, reject) {
-    if (audio) {
-      const sound = new File([audio], "soundBlob", {
-        lastModified: new Date().getTime(),
-      });
-      const formData = new FormData();
-      formData.append("file", sound);
-      formData.append("pk", `${pk}`);
-
-      // axios
-      //   .post("http://127.0.0.1:5000/predict", formData)
-      //   .then(res => {
-      //     console.log(res);
-      //     // 아래 then문 여기서 실행
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-
-      resolve(true);
-    }
-  });
   useEffect(() => {
     if (trigger)
       onSubmitAudioFile.then(res => {
