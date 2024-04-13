@@ -55,21 +55,21 @@ const CircleGraph = ({
         {typeof percent === "number"
           ? ["시간", "발화 시간"].map((el, idx) => (
               <div key={el}>
-                <p className={cx("bold")}>
+                <div className={cx("bold")}>
                   <div className={cx("dot", `index${idx}`)} />
                   {`${
                     idx === 0 ? (type === "late" ? "지연" : "침묵") : ""
                   } ${el}`}
-                </p>
+                </div>
                 <p>{idx === 0 ? `${percent}%` : `${100 - percent}%`}</p>
               </div>
             ))
           : ["긍정", "중립", "부정"].map((el, idx) => (
               <div key={el}>
-                <p className={cx("bold")}>
+                <div className={cx("bold")}>
                   <div className={cx("dot", `index${idx}`)} />
                   {el}
-                </p>
+                </div>
                 <p>{percent[idx] + "%"}</p>
               </div>
             ))}

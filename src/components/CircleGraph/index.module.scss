@@ -70,14 +70,12 @@
     gap: 30px;
   }
   p {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     font-variant-numeric: tabular-nums;
     @include text-type("p_md");
   }
   .bold {
     @include text-type("p_md_semibold");
+    gap: 6px;
   }
   .dot {
     width: 10px;
