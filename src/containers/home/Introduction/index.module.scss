@@ -87,7 +87,7 @@
     }
     50% {
       opacity: 0.98;
-      filter: drop-shadow(0px 0px 20px color(theme, transparent))
+      filter: drop-shadow(0px 0px 15px color(theme, transparent))
         brightness(1.2);
       transform: translateY(5px) scale(101%);
     }
@@ -100,7 +100,8 @@
   @keyframes glow-small {
     0% {
       opacity: 0.98;
-      filter: drop-shadow(0px 0px 8px color(theme, transparent)) brightness(1.2);
+      filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.15))
+        brightness(1.2);
       transform: translateY(3px) scale(101%);
     }
     50% {
@@ -110,7 +111,8 @@
     }
     100% {
       opacity: 0.98;
-      filter: drop-shadow(0px 0px 8px color(theme, transparent)) brightness(1.2);
+      filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.15))
+        brightness(1.2);
       transform: translateY(3px) scale(101%);
     }
   }
