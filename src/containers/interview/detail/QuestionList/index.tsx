@@ -17,7 +17,7 @@ const QuestionList = ({ questionList }: InterviewDetailType) => {
       <div className={cx("container")}>
         <h1>질문별 채점 및 첨삭</h1>
         {questionList.map((item, idx) => (
-          <div className={cx("flex")}>
+          <div className={cx("flex")} key={idx}>
             <div className={cx("question-header")}>
               <div>
                 <p>{`❔Question ${idx + 1}`}</p>

@@ -30,7 +30,7 @@ const Introduction = () => {
             onClick={() =>
               window.scroll({
                 left: 0,
-                top: introRef.current!.offsetHeight + 120,
+                top: introRef.current!.offsetHeight + 180,
                 behavior: "smooth",
               })
             }

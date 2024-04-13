@@ -43,6 +43,7 @@ const Dropdown = () => {
             <div
               className={cx(filter.subjectText === el ? "selected" : "")}
               onClick={() => onClick(el)}
+              key={el}
             >
               {el}
             </div>

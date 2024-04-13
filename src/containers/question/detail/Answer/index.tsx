@@ -25,7 +25,7 @@ const Answer = ({
       <div className={cx("container")}>
         {[{ score, time, startDateTime, feedbackText, text }, ...againList].map(
           (item, idx) => (
-            <div className={cx("section")}>
+            <div className={cx("section")} key={idx}>
               <div>
                 <h5>{idx === 0 ? "최초 답변" : `재답변 ${idx}`}</h5>
                 <p>{`${item.startDateTime} (${item.time}s)`}</p>
