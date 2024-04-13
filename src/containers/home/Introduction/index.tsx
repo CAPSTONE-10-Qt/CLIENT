@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { introText } from "@utils/constants/introTutorialText";
-import { LogoText, LogoImage } from "../../../../public/svgs";
+import { LogoText, LogoBig, LoogSmall } from "../../../../public/svgs";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
@@ -39,7 +39,10 @@ const Introduction = () => {
           </div>
         </div>
       </div>
-      <LogoImage fill='var(--color-theme-main)' />
+      <div className={cx("logo")}>
+        <LogoBig />
+        <LoogSmall />
+      </div>
     </div>
   );
 };
