@@ -1,7 +1,12 @@
 import axios from "axios";
 
-export const modelClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_MODEL_SERVER_URL || "/",
+export const sttClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_STT_SERVER_URL || "/",
+  withCredentials: true,
+});
+
+export const ferttsClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_FERTTS_SERVER_URL || "/",
   withCredentials: true,
 });
 
