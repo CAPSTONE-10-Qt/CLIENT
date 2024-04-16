@@ -31,7 +31,7 @@ const WebCam = () => {
     }
   }, [webcamRef]);
   useInterval(capture, 3000);
-  usePostFace(url, id as string);
+  //usePostFace(url, id as string);
   return (
     <div className={cx("video-wrapper")}>
       {onlyVoice || location.href.includes("question") ? (

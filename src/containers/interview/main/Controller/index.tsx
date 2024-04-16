@@ -2,7 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { interviewDataState, interviewAllowState } from "@store/interview";
+import {
+  interviewDataState,
+  interviewState,
+  interviewTTSState,
+} from "@store/interview";
 import useRecord from "../useRecord";
 
 import {
@@ -32,8 +36,7 @@ const Controller = () => {
     isMicOn,
     isSpeakerOn,
   } = interview;
-  const { done } = useRecoilValue(interviewAllowState);
-
+  const { isRunning, done, quit } = useRecoilValue(interviewState);
   const toggleSpeaker = () =>
     setInterview({ ...interview, isSpeakerOn: !interview.isSpeakerOn });
 
@@ -51,6 +54,30 @@ const Controller = () => {
   useEffect(() => {
     if (location.href.includes("question")) setRestart(true);
   }, []);
+
+  const ttsFiles = useRecoilValue(interviewTTSState);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  useEffect(() => {
+    if (ttsFiles[currentIndex]) {
+      setAudio(
+        new Audio(
+          `data:audio/mp3;base64,${ttsFiles[currentIndex].audio_content}`,
+        ),
+      );
+    }
+  }, [currentIndex]);
+  useEffect(() => {
+    if (audio)
+      setTimeout(
+        () => audio.play().finally(() => setAudio(null)),
+        currentIndex === 0 ? 5000 : 500,
+      );
+    console.log(isRunning, currentIndex);
+    if (isRunning === false && audio) {
+      audio.pause();
+      setAudio(null);
+    }
+  }, [audio, isRunning]);
 
   return (
     <div className={cx("container")}>

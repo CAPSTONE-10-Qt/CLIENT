@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { interviewDataState } from "@store/interview";
+import { interviewDataState, interviewTTSState } from "@store/interview";
 
 import Description from "../Description";
 import RoundButton from "@components/RoundButton";
@@ -14,6 +14,7 @@ import { CSSubjectList, QuestionList } from "./data";
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 import { modelTTS } from "@service/api/model";
+import { postInterview } from "@service/api/interviewDuring";
 const cx = cs.bind(styles);
 
 const SetupForm = () => {
@@ -24,45 +25,40 @@ const SetupForm = () => {
     onlyVoice: false,
   });
   const [interview, setInterview] = useRecoilState(interviewDataState);
+  const [ttsFiles, setTtsFiles] = useRecoilState(interviewTTSState);
   const onSubmit = () => {
-    // 서버에 post한 리스폰스를 받아와서 recoil로 저장
-    setInterview({
-      ...interview,
-      questionList: [
-        {
-          id: 0,
-          questionText:
-            "운영체제란 무엇이며 핵심 기능에는 어떤 것이 있는지 설명하시오.",
-        },
-        {
-          id: 1,
-          questionText:
-            "세마포어와 뮤텍스란 무엇이며 그 차이점에 대해 설명하시오.",
-        },
-        {
-          id: 2,
-          questionText:
-            "Starvation 상태를 설명하는 식사하는 철학자 문제에 대해 설명해보세요.",
-        },
-        {
-          id: 3,
-          questionText:
-            "사용자 수준 스레드와 커널 수준 스레드에 대한 각각의 장단점과 차이점에 대해 설명하시오.",
-        },
-        {
-          id: 4,
-          questionText: "Banker's Algorithm에 대해 설명하시오.",
-        },
-      ],
-      currentIndex: 0,
-      isMicOn: false,
-      isSpeakerOn: true,
-    });
-    // 체이닝으로 바로 tts 음성 데이터도 받아와 저장
-    modelTTS({ questionList: interview.questionList })
-      .then(res => console.log(res))
+    postInterview({
+      subjectText: "OS",
+      questionNum: 5,
+      onlyVoice: false,
+      startDateTime: new Date().toLocaleString("ko-KR", {
+        hour12: false,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
+      refreshToken: "1234",
+    })
+      .then(res => {
+        console.log(res);
+        setInterview({
+          ...res.data.data,
+          currentIndex: 0,
+          isMicOn: false,
+          isSpeakerOn: true,
+        });
+        router.push(`/interview/${res.data.data.id}`);
+        modelTTS({ questionList: res.data.data.questionList })
+          .then(res => {
+            console.log(res);
+            setTtsFiles(res.data.voiceList);
+          })
+          .catch(err => console.log(err));
+      })
       .catch(err => console.log(err));
-    router.push(`/interview/${1}`);
   };
   return (
     <div className={cx("container")}>

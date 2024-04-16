@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { interviewDataState, interviewAllowState } from "@store/interview";
+import { interviewDataState, interviewState } from "@store/interview";
 import { saveInterview } from "@utils/alerts/interview";
-import { usePostAnswer } from "@service/hooks/interviewDuring";
+import { modelSTT } from "@service/api/model";
+import { postAnswer } from "@service/api/interviewDuring";
 
 const useRecord = (
   onRec: boolean,
@@ -32,9 +33,7 @@ const useRecord = (
     isMicOn,
     isSpeakerOn,
   } = interview;
-  const [allow, setAllow] = useRecoilState(interviewAllowState);
-
-  const { onSubmitAudioFile } = usePostAnswer(audio as Blob, String(pk));
+  const [state, setState] = useRecoilState(interviewState);
 
   const onRecord = () => {
     const audioCtx = new window.AudioContext();
@@ -95,20 +94,48 @@ const useRecord = (
     }
   };
 
+  const onSubmitAudioFile = new Promise(function (resolve, reject) {
+    if (audio) {
+      const sound = new File([audio], "soundBlob", {
+        lastModified: new Date().getTime(),
+      });
+      const formData = new FormData();
+      formData.append("file", sound);
+      formData.append("pk", `${pk}`);
+      modelSTT(formData)
+        .then(res => {
+          console.log(res);
+          const { interviewQuestionId, mumble, silent, talk, time, text } =
+            res.data;
+          postAnswer(interviewQuestionId, {
+            mumble,
+            silent,
+            talk,
+            time,
+            text,
+          })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+      resolve(true);
+    }
+  });
+
   useEffect(() => {
     if (trigger)
       onSubmitAudioFile.then(res => {
         if (location.href.includes("question")) {
-          setAllow({ ...allow, done: true });
+          setState({ ...state, done: true });
           saveInterview(() => router.push(`/question/detail/${pk}`), true);
         } else {
           if (currentIndex + 1 === questionNum) {
-            setAllow({ ...allow, done: true });
+            setState({ ...state, done: true });
             saveInterview(() => router.push(`/interview/detail/${pk}`));
           } else setInterview({ ...interview, currentIndex: currentIndex + 1 });
         }
       });
-  }, [audio]);
+  }, [onRec]);
 
   return { onRecord, offRecord, seconds };
 };
