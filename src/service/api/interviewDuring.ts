@@ -6,6 +6,7 @@ type PostInterviewBodyType = {
   questionNum: number;
   onlyVoice: boolean;
   startDateTime: string;
+  refreshToken?: string;
 };
 export const postInterview = async (body: PostInterviewBodyType) => {
   const url = `/interview`;
@@ -52,6 +53,12 @@ export const patchInterview = async (
 ) => {
   const url = `/interview/${interviewId}`;
   return backendClient.patch(url, body);
+};
+
+// 면접 삭제 (저장하지 않고 종료)
+export const deleteInterview = async (interviewId: number) => {
+  const url = `/interview/${interviewId}`;
+  return backendClient.delete(url);
 };
 
 // 질문 재답변 시작

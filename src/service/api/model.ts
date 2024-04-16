@@ -1,13 +1,13 @@
-import { modelClient } from ".";
+import { sttClient, ferttsClient } from ".";
 
 export const modelSTT = async (body: FormData) => {
   const url = `/model/stt`;
-  return modelClient.post(url, body);
+  return sttClient.post(url, body);
 };
 
 export const modelFER = async (body: FormData) => {
   const url = `/model/fer`;
-  return modelClient.post(url, body);
+  return ferttsClient.post(url, body);
 };
 
 type TTSBodyType = {
@@ -15,5 +15,5 @@ type TTSBodyType = {
 };
 export const modelTTS = async (body: TTSBodyType) => {
   const url = `/model/tts`;
-  return modelClient.post(url, body);
+  return ferttsClient.post(url, body);
 };
