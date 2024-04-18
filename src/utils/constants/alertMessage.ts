@@ -18,3 +18,8 @@ export const InterviewSaveMessage = {
   retitle: `답변이 종료되었습니다.`,
   rehtml: `질문 재답변 결과 페이지로 이동합니다.`,
 };
+
+export const InterviewLastProcessingMessage = {
+  title: `답변을 저장 중입니다.`,
+  html: `<b class="swal2-emphasis">면접을 분석하여 채점</b>하고 있습니다.<br>잠시만 기다려주세요!`,
+};

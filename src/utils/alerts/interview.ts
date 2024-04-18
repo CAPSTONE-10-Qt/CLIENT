@@ -5,6 +5,7 @@ import {
   InterviewQuitMessage,
   InterviewBlockMessage,
   InterviewSaveMessage,
+  InterviewLastProcessingMessage,
 } from "@utils/constants/alertMessage";
 
 export const fillSetupFormInterview = () =>
@@ -24,6 +25,7 @@ export const autoStartInterview = (onRun: () => void) =>
   Swal.fire({
     title: InterviewStartMessage.title,
     html: InterviewStartMessage.html,
+    allowEscapeKey: false,
     allowOutsideClick: false,
     color: "var(--color-black-0)",
     background: "var(--color-black-90)",
@@ -89,6 +91,8 @@ export const saveInterview = (onConfirm: () => void, isReanswer?: boolean) =>
       ? InterviewSaveMessage.retitle
       : InterviewSaveMessage.title,
     html: isReanswer ? InterviewSaveMessage.rehtml : InterviewSaveMessage.html,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
     icon: "success",
     color: "var(--color-black-0)",
     background: "var(--color-black-90)",
@@ -98,3 +102,20 @@ export const saveInterview = (onConfirm: () => void, isReanswer?: boolean) =>
   }).then(res => {
     if (res.isConfirmed) onConfirm();
   });
+
+export const processingLastQuestion = {
+  title: InterviewLastProcessingMessage.title,
+  html: InterviewLastProcessingMessage.html,
+  allowEscapeKey: false,
+  allowOutsideClick: false,
+  color: "var(--color-black-0)",
+  background: "var(--color-black-90)",
+  padding: "32px 32px 50px 32px",
+  showConfirmButton: false,
+  didOpen: () => {
+    Swal.showLoading();
+  },
+  willClose: () => {
+    Swal.hideLoading();
+  },
+};
