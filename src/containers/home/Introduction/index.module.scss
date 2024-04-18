@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   height: calc(100vh - 64px);
+  min-height: 850px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -38,6 +39,7 @@
     @include text-type("p_lg_semibold");
     color: color(theme, light);
     margin-bottom: 12px;
+    word-break: keep-all;
   }
 
   @include Tablet {
