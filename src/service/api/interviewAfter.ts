@@ -1,12 +1,19 @@
 import { backendClient } from ".";
 
-// 면접 상세 조회
-export const getInterview = async (interviewId: string) => {
+// 면접 상세 조회 - Server Fetch
+export async function getInterview(id: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/interview/result/${interviewId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/interview/result/${id}`,
+    {
+      cache: "no-store",
+    },
   );
-  return await res.json();
-};
+  if (!res.ok) {
+    throw new Error("면접 상세 조회 fetch 실패");
+  }
+  const { data } = await res.json();
+  return data as InterviewDetailType;
+}
 
 // 면접 리스트 조회
 export const getInterviewList = async (sort: number) => {
