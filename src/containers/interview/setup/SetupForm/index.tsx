@@ -2,8 +2,12 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
-import { interviewDataState, interviewTTSState } from "@store/interview";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import {
+  interviewDataState,
+  interviewTTSState,
+  interviewState,
+} from "@store/interview";
 
 import { fillSetupFormInterview } from "@utils/alerts/interview";
 import { CSSubjectList, QuestionList } from "./data";
@@ -26,6 +30,7 @@ const SetupForm = () => {
     questionNum: 0,
     onlyVoice: false,
   });
+  const resetState = useResetRecoilState(interviewState);
   const [interview, setInterview] = useRecoilState(interviewDataState);
   const [ttsFiles, setTtsFiles] = useRecoilState(interviewTTSState);
   const onSubmit = () => {
@@ -49,6 +54,7 @@ const SetupForm = () => {
       })
         .then(res => {
           console.log(res.data.data);
+          resetState();
           setInterview({
             ...res.data.data,
             currentIndex: 0,
