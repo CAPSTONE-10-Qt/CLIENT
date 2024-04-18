@@ -62,7 +62,11 @@ const Summary = ({
         <b>{textScore + "점"}</b>&nbsp;(70점 만점) + 비언어적 표현 평가&nbsp;
         <b>{otherScore + "점"}</b>&nbsp;(30점 만점)
       </div>
-      <p className={cx("feedback")}>{otherFeedback}</p>
+      <p className={cx("feedback")}>
+        {otherFeedback.endsWith("[object Promise]")
+          ? otherFeedback.slice(0, -16)
+          : otherFeedback}
+      </p>
     </div>
   );
 };

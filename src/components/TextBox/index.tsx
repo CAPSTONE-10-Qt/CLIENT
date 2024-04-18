@@ -80,12 +80,19 @@ const TextBox = ({
         {solution && <b className={cx("b-2")}>[첨삭]</b>}
         {solution &&
           (solution.includes("\n") ? (
-            solution.split("\n").map((line: string, idx: number) => (
-              <p key={idx}>
-                {line}
-                <br />
-              </p>
-            ))
+            (solution.startsWith("\n\n")
+              ? solution.slice(2)
+              : solution.startsWith("\n")
+                ? solution.slice(1)
+                : solution
+            )
+              .split("\n")
+              .map((line: string, idx: number) => (
+                <p key={idx}>
+                  {line}
+                  <br />
+                </p>
+              ))
           ) : (
             <p>{solution}</p>
           ))}
