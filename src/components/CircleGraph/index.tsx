@@ -66,7 +66,7 @@ const CircleGraph = ({
                 <p>
                   {idx === 0
                     ? `${Math.round(percent * 100) / 100}%`
-                    : `${100 - Math.round(percent * 100) / 100}%`}
+                    : `${Math.round((100 - percent) * 100) / 100}%`}
                 </p>
               </div>
             ))
