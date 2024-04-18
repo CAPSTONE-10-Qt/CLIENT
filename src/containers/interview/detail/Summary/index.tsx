@@ -10,6 +10,7 @@ const Summary = ({
   startDateTime,
   endDateTime,
   totalTime,
+  onlyVoice,
   score,
   textScore,
   otherScore,
@@ -31,9 +32,9 @@ const Summary = ({
         <p>소요시간</p>
         <span>
           <b>시작</b>
-          {` ${startDateTime.split(" ")[1]} - `}
+          {` ${startDateTime.slice(14)} - `}
           <b>종료</b>
-          {` ${endDateTime.split(" ")[1]}`}
+          {` ${endDateTime.slice(14)}`}
           {` (${Math.floor(totalTime / 60)}m ${totalTime % 60}s)`}
         </span>
       </div>

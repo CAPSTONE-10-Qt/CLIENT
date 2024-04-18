@@ -18,6 +18,9 @@ const Table = ({
   array: any[];
 }) => {
   const title = ["지연 시간", "침묵 시간", "얼굴 표정"];
+  const table = ["late", "silent", "face"];
+  const isOnlyVoice =
+    array[2] && array[2].reduce((p: number, c: number) => p + c, 0) === 0;
   return (
     <table className={cx("container")}>
       {(array.length === 5
@@ -30,7 +33,7 @@ const Table = ({
           <thead>
             {type === "graph" && index === 0 ? (
               <tr className={cx("graph-tr")}>
-                {title.map(el => (
+                {(isOnlyVoice ? title.slice(0, 2) : title).map(el => (
                   <th key={el}>{el}</th>
                 ))}
               </tr>
@@ -53,13 +56,13 @@ const Table = ({
             {type === "graph" && index === 0 ? (
               <>
                 <tr className={cx("graph-tr")}>
-                  {["late", "silent", "face"].map((el, idx) => (
+                  {(isOnlyVoice ? table.slice(0, 2) : table).map((el, idx) => (
                     <th className={cx("graph-th")} key={idx}>
                       <CircleGraph type={el} percent={array[idx]} />
                     </th>
                   ))}
                 </tr>
-                {["late", "silent", "face"].map((el, idx) => (
+                {(isOnlyVoice ? table.slice(0, 2) : table).map((el, idx) => (
                   <React.Fragment key={idx}>
                     <tr className={cx("graph-tr", "mobile", "title")}>
                       <th colSpan={3}>{title[idx]}</th>
