@@ -2,17 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+
 import { useRecoilState } from "recoil";
 import { interviewDataState, interviewState } from "@store/interview";
-import { saveInterview } from "@utils/alerts/interview";
-import { modelSTT } from "@service/api/model";
-import { postAnswer } from "@service/api/interviewDuring";
+import Swal from "sweetalert2";
+import { saveInterview, processingLastQuestion } from "@utils/alerts/interview";
 
-const useRecord = (
-  onRec: boolean,
-  setOnRec: (value: boolean) => void,
-  pk: number,
-) => {
+import { modelSTT } from "@service/api/model";
+import { postAnswer, patchInterview } from "@service/api/interviewDuring";
+
+const useRecord = (pk: number) => {
   const router = useRouter();
   const [stream, setStream] = useState<MediaStream>();
   const [media, setMedia] = useState<MediaRecorder>();
@@ -32,6 +31,7 @@ const useRecord = (
     onlyVoice,
     isMicOn,
     isSpeakerOn,
+    id,
   } = interview;
   const [state, setState] = useRecoilState(interviewState);
 
@@ -62,7 +62,7 @@ const useRecord = (
           if (e.playbackTime > timeConstraint) {
             mediaRecorder.ondataavailable = function (e) {
               setAudio(e.data);
-              setOnRec(true);
+              setInterview({ ...interview, isMicOn: false });
             };
             stream.getAudioTracks().forEach(function (track) {
               track.stop();
@@ -72,7 +72,7 @@ const useRecord = (
             audioCtx.createMediaStreamSource(stream).disconnect();
             setTrigger(true);
           } else {
-            setOnRec(false);
+            setInterview({ ...interview, isMicOn: true });
           }
         };
       });
@@ -82,7 +82,7 @@ const useRecord = (
     if (media && stream && analyser && source) {
       media.ondataavailable = function (e) {
         setAudio(e.data);
-        setOnRec(true);
+        setInterview({ ...interview, isMicOn: false });
       };
       stream.getAudioTracks().forEach(function (track) {
         track.stop();
@@ -94,7 +94,7 @@ const useRecord = (
     }
   };
 
-  const onSubmitAudioFile = new Promise(function (resolve, reject) {
+  const onSubmitAudioFile = () => {
     if (audio) {
       const sound = new File([audio], "soundBlob", {
         lastModified: new Date().getTime(),
@@ -102,40 +102,98 @@ const useRecord = (
       const formData = new FormData();
       formData.append("file", sound);
       formData.append("pk", `${pk}`);
-      modelSTT(formData)
-        .then(res => {
-          console.log(res);
-          const { interviewQuestionId, mumble, silent, talk, time, text } =
-            res.data;
-          postAnswer(interviewQuestionId, {
-            mumble,
-            silent,
-            talk,
-            time,
-            text,
+      if (
+        currentIndex + 1 === questionNum ||
+        location.href.includes("question")
+      ) {
+        setState({ ...state, done: true });
+        Swal.fire(
+          processingLastQuestion(() =>
+            modelSTT(formData)
+              .then(res => {
+                console.log(res);
+                const {
+                  interviewQuestionId,
+                  mumble,
+                  silent,
+                  talk,
+                  time,
+                  text,
+                } = res.data;
+                postAnswer(interviewQuestionId, {
+                  mumble,
+                  silent,
+                  talk,
+                  time,
+                  text,
+                })
+                  .then(res => {
+                    Swal.close();
+                    console.log(res);
+                    if (location.href.includes("question"))
+                      saveInterview(() => {
+                        // 재답변 종료 patch, 성공 시 then 내부에 아래 라우팅
+                        router.push(`/question/detail/${pk}`);
+                      }, true);
+                    else
+                      saveInterview(() =>
+                        patchInterview(id, {
+                          endDateTime: new Date().toLocaleString("ko-KR", {
+                            hour12: false,
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                          }),
+                        })
+                          .then(res => {
+                            console.log(res);
+                            router.push(`/interview/detail/${id}`);
+                          })
+                          .catch(err => console.log(err)),
+                      );
+                  })
+                  .catch(err => console.log(err));
+              })
+              .catch(err => console.log(err)),
+          ),
+        );
+      } else {
+        setInterview({
+          ...interview,
+          currentIndex: currentIndex + 1,
+        });
+        modelSTT(formData)
+          .then(res => {
+            console.log(res);
+            const { interviewQuestionId, mumble, silent, talk, time, text } =
+              res.data;
+            postAnswer(interviewQuestionId, {
+              mumble,
+              silent,
+              talk,
+              time,
+              text,
+            })
+              .then(res => {
+                console.log(res);
+                // 바로 다음 질문 넘길지 아니면 stt 성공해야 넘길지?
+                // 응답 오는 속도가 아주 빠른 편은 아니라서 지금은 마지막 질문이 아니라면 기다리지 않음
+                // 다만 중간에 알 수 없는 오류로 ML 서버에서 처리 실패하면 다시 녹음하게 할건지 모르겠음
+                // 만약 확실히 저장된거 보고 넘길거면 setInterview는 여기로 옮기고 loader alert 추가해야함
+              })
+              .catch(err => console.log(err));
           })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-        })
-        .catch(err => console.log(err));
-      resolve(true);
+          .catch(err => console.log(err));
+      }
     }
-  });
+  };
 
   useEffect(() => {
-    if (trigger)
-      onSubmitAudioFile.then(res => {
-        if (location.href.includes("question")) {
-          setState({ ...state, done: true });
-          saveInterview(() => router.push(`/question/detail/${pk}`), true);
-        } else {
-          if (currentIndex + 1 === questionNum) {
-            setState({ ...state, done: true });
-            saveInterview(() => router.push(`/interview/detail/${pk}`));
-          } else setInterview({ ...interview, currentIndex: currentIndex + 1 });
-        }
-      });
-  }, [onRec]);
+    if (trigger) onSubmitAudioFile();
+  }, [isMicOn]);
 
   return { onRecord, offRecord, seconds };
 };
