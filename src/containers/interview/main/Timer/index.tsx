@@ -24,7 +24,7 @@ const Timer = () => {
   const [state, setState] = useRecoilState(interviewState);
   const { isRunning, quit, done } = state;
   const resetData = useResetRecoilState(interviewDataState);
-  const resetAllow = useResetRecoilState(interviewState);
+  const resetState = useResetRecoilState(interviewState);
 
   const [time, setTime] = useState<number>(0);
   useInterval(() => {
@@ -43,9 +43,9 @@ const Timer = () => {
       })
       .catch(err => console.log(err));
   useEffect(() => {
-    resetAllow();
+    resetState();
     autoStartInterview(() => {
-      setState({ ...state, isRunning: true });
+      setState({ ...state, isRunning: true, isFirst5: false });
     });
   }, []);
   useBlockLeave(goBack);
