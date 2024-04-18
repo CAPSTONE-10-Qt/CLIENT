@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+
+  @include Tablet {
+    width: calc(100% - 80px);
+    margin: 0 40px;
+  }
+
+  h1 {
+    @include text-type("title_md");
+    word-break: keep-all;
+  }
+
+  div {
+    width: 50px;
+    border-bottom: 0.5px solid color(black, 0);
+  }
+
+  p {
+    @include text-type("p_lg");
+    word-break: keep-all;
+  }
+}
