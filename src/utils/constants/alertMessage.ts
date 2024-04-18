@@ -1,3 +1,8 @@
+export const InterviewSetupFormMessage = {
+  title: `선택하지 않은 면접 옵션이 있습니다.`,
+  html: `모의 면접을 진행할 CS 과목, 질문 개수를 모두 선택했는지 확인해주세요.`,
+};
+
 export const InterviewStartMessage = {
   title: `곧 모의 면접이 시작되니 준비해주세요.`,
   html: `면접이 <b class="swal2-emphasis">5</b>초 후 자동으로 시작됩니다.`,

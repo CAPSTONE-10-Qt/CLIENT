@@ -5,16 +5,18 @@ import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { interviewDataState, interviewTTSState } from "@store/interview";
 
+import { fillSetupFormInterview } from "@utils/alerts/interview";
+import { CSSubjectList, QuestionList } from "./data";
+import { modelTTS } from "@service/api/model";
+import { postInterview } from "@service/api/interviewDuring";
+
 import Description from "../Description";
 import RoundButton from "@components/RoundButton";
 import RectButton from "@components/RectButton";
 import CheckBox from "@components/CheckBox";
-import { CSSubjectList, QuestionList } from "./data";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
-import { modelTTS } from "@service/api/model";
-import { postInterview } from "@service/api/interviewDuring";
 const cx = cs.bind(styles);
 
 const SetupForm = () => {
@@ -27,38 +29,41 @@ const SetupForm = () => {
   const [interview, setInterview] = useRecoilState(interviewDataState);
   const [ttsFiles, setTtsFiles] = useRecoilState(interviewTTSState);
   const onSubmit = () => {
-    postInterview({
-      subjectText: "OS",
-      questionNum: 5,
-      onlyVoice: false,
-      startDateTime: new Date().toLocaleString("ko-KR", {
-        hour12: false,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
-      refreshToken: "1234",
-    })
-      .then(res => {
-        console.log(res);
-        setInterview({
-          ...res.data.data,
-          currentIndex: 0,
-          isMicOn: false,
-          isSpeakerOn: true,
-        });
-        router.push(`/interview/${res.data.data.id}`);
-        modelTTS({ questionList: res.data.data.questionList })
-          .then(res => {
-            console.log(res);
-            setTtsFiles(res.data.voiceList);
-          })
-          .catch(err => console.log(err));
+    if (form.subjectText == "" || form.questionNum === 0) {
+      fillSetupFormInterview();
+    } else
+      postInterview({
+        subjectText: form.subjectText,
+        questionNum: form.questionNum,
+        onlyVoice: form.onlyVoice,
+        startDateTime: new Date().toLocaleString("ko-KR", {
+          hour12: false,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        }),
+        refreshToken: "1234",
       })
-      .catch(err => console.log(err));
+        .then(res => {
+          console.log(res.data.data);
+          setInterview({
+            ...res.data.data,
+            currentIndex: 0,
+            isMicOn: false,
+            isSpeakerOn: true,
+          });
+          router.push(`/interview/${res.data.data.id}`);
+          modelTTS({ questionList: res.data.data.questionList })
+            .then(res => {
+              console.log(res.data);
+              setTtsFiles(res.data.voiceList);
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
   };
   return (
     <div className={cx("container")}>
