@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import {
@@ -32,7 +32,12 @@ const SetupForm = () => {
   });
   const resetState = useResetRecoilState(interviewState);
   const [interview, setInterview] = useRecoilState(interviewDataState);
-  const [ttsFiles, setTtsFiles] = useRecoilState(interviewTTSState);
+  const [tts, setTTS] = useRecoilState(interviewTTSState);
+  const resetTTS = useResetRecoilState(interviewTTSState);
+  useEffect(() => {
+    resetTTS();
+    resetState();
+  }, []);
   const onSubmit = () => {
     if (form.subjectText == "" || form.questionNum === 0) {
       fillSetupFormInterview();
@@ -54,7 +59,6 @@ const SetupForm = () => {
       })
         .then(res => {
           console.log(res.data.data);
-          resetState();
           setInterview({
             ...res.data.data,
             currentIndex: 0,
@@ -65,7 +69,7 @@ const SetupForm = () => {
           modelTTS({ questionList: res.data.data.questionList })
             .then(res => {
               console.log(res.data);
-              setTtsFiles(res.data.voiceList);
+              setTTS({ ...tts, files: res.data.voiceList });
             })
             .catch(err => console.log(err));
         })
@@ -112,7 +116,9 @@ const SetupForm = () => {
           state={form.onlyVoice}
           onClick={() => setForm({ ...form, onlyVoice: !form.onlyVoice })}
         />
-        <p>음성으로만 면접을 진행하고 싶어요.</p>
+        <p onClick={() => setForm({ ...form, onlyVoice: !form.onlyVoice })}>
+          음성으로만 면접을 진행하고 싶어요.
+        </p>
       </div>
       <RectButton text='면접 시작' onClick={onSubmit} />
     </div>
