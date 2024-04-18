@@ -1,9 +1,11 @@
 import { backendClient } from ".";
 
 // 면접 상세 조회
-export const getInterview = async (interviewId: number) => {
-  const url = `/interview/result/${interviewId}`;
-  return backendClient.get(url);
+export const getInterview = async (interviewId: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/interview/result/${interviewId}`,
+  );
+  return await res.json();
 };
 
 // 면접 리스트 조회
@@ -20,8 +22,10 @@ export const patchQuestion = async (questionId: number) => {
 
 // 질문 상세 조회
 export const getQuestion = async (questionId: number) => {
-  const url = `/studynote/${questionId}`;
-  return backendClient.get(url);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/studynote/${questionId}`,
+  );
+  return await res.json();
 };
 
 // 질문 리스트 조회
