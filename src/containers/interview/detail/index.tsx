@@ -2,25 +2,11 @@ import TitleBar from "../main/TitleBar";
 import Summary from "./Summary";
 import QuestionList from "./QuestionList";
 
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
-export const getStaticProps: GetStaticProps = async context => {
-  const response = await fetch("service/api/function");
-  const data = await response.json();
-  return {
-    props: {
-      data,
-    },
-  };
-};
-
-const InterviewDetailContainer = ({}: InferGetStaticPropsType<
-  typeof getStaticProps
->) => {
+const InterviewDetailContainer = ({ data }: { data: InterviewDetailType }) => {
   return (
     <div className={cx("container")}>
       <h1>모의 면접 결과</h1>
@@ -33,7 +19,7 @@ const InterviewDetailContainer = ({}: InferGetStaticPropsType<
 
 export default InterviewDetailContainer;
 
-const data: InterviewDetailType = {
+const mock_data: InterviewDetailType = {
   id: 1,
   subjectText: "OS",
   startDateTime: "2024-3-10 16:34",
