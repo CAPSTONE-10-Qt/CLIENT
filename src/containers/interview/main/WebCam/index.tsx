@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Webcam from "react-webcam";
 import useInterval from "@utils/hooks/useInterval";
@@ -30,8 +30,8 @@ const WebCam = () => {
       setUrl(imageSrc);
     }
   }, [webcamRef]);
-  useInterval(capture, 3000);
-  //usePostFace(url, id as string);
+  useInterval(capture, 5000);
+  usePostFace(url, id as string);
   return (
     <div className={cx("video-wrapper")}>
       {onlyVoice || location.href.includes("question") ? (
