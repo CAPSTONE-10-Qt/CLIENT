@@ -23,3 +23,8 @@ export const InterviewLastProcessingMessage = {
   title: `답변을 저장 중입니다.`,
   html: `<b class="swal2-emphasis">면접을 분석하여 채점</b>하고 있습니다.<br>잠시만 기다려주세요!`,
 };
+
+export const QuestionLoginToPinMessage = {
+  title: `로그인이 필요합니다.`,
+  html: `질문 즐겨찾기 기능을 이용하려면 로그인이 필요합니다.<br><b class="swal2-emphasis">로그인 페이지로 이동</b>하려면 확인을 눌러주세요.`,
+};
