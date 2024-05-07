@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { isLoginState } from "@store/auth";
+import { patchQuestion } from "@service/api/interviewAfter";
+import { loginToPin } from "@utils/alerts/question";
 
 const usePin = (id: number, isTrue: boolean) => {
   const router = useRouter();
@@ -11,11 +13,8 @@ const usePin = (id: number, isTrue: boolean) => {
   const [state, setState] = useState<boolean>(isTrue);
   const [trigger, setTrigger] = useState<number>(0);
   const toggle = () => setTrigger(trigger + 1);
-  // const { getPickList } = useGetPick();
 
-  useEffect(() => {
-    // getPickList();
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     setState(isTrue);
@@ -23,25 +22,15 @@ const usePin = (id: number, isTrue: boolean) => {
 
   useEffect(() => {
     if (trigger !== 0) {
-      if (isLogin) {
-        setState(!state);
-        if (state === true) {
-          //   pickDeletePick(id)
-          //     .then(res => {
-          //       getPickList();
-          //       setState(false);
-          //     })
-          //     .catch();
-        } else {
-          //   pickPostPick(id)
-          //     .then(res => {
-          //       getPickList();
-          //       setState(true);
-          //     })
-          //     .catch();
-        }
+      if (!isLogin) {
+        patchQuestion(id)
+          .then(res => {
+            console.log(res);
+            setState(!state);
+          })
+          .catch(err => console.log(err));
       } else {
-        // alert
+        loginToPin(() => router.push("/login"));
       }
     }
   }, [trigger]);
