@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { introText } from "@utils/constants/introTutorialText";
-import { LogoText, LogoBig, LoogSmall } from "../../../../public/svgs";
+import { LogoText, LogoBig, LogoSmall } from "../../../../public/svgs";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
@@ -41,7 +41,7 @@ const Introduction = () => {
       </div>
       <div className={cx("logo")}>
         <LogoBig />
-        <LoogSmall />
+        <LogoSmall />
       </div>
     </div>
   );
