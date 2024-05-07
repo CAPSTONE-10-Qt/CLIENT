@@ -27,7 +27,7 @@ interface InterviewPreviewType {
   subjectText: CSSubjectType;
   startDateTime: string;
   endDateTime: string;
-  time: number;
+  totalTime: number;
   title: string;
   score: number;
   questionNum: number;
