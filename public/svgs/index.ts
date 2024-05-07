@@ -6,7 +6,8 @@ import Github from "./github.svg";
 import Help from "./help.svg";
 
 import LogoBig from "./logo_big.svg";
-import LoogSmall from "./logo_small.svg";
+import LogoSmall from "./logo_small.svg";
+import LogoImage from "./logo_image.svg";
 import GithubLogo from "./github_logo.svg";
 import GoogleLogo from "./google_logo.svg";
 
@@ -45,7 +46,8 @@ export {
   Github,
   Help,
   LogoBig,
-  LoogSmall,
+  LogoSmall,
+  LogoImage,
   GithubLogo,
   GoogleLogo,
   CircleCheck,
