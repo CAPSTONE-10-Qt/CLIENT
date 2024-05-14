@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  CircleCheck,
-  TriangleWarning,
-  OctagonWrong,
-} from "../../../public/svgs";
+import { CircleCheck, TriangleWarning, OctagonWrong } from "@svgs/.";
 import CircleGraph from "@components/CircleGraph";
 
 import styles from "./index.module.scss";

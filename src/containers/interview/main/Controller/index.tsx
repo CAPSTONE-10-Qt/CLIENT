@@ -20,7 +20,7 @@ import {
   VolumeOnTrue,
   Play,
   Stop,
-} from "../../../../../public/svgs";
+} from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";

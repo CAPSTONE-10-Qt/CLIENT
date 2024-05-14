@@ -13,7 +13,7 @@ import {
 } from "@utils/alerts/interview";
 import { deleteInterview } from "@service/api/interviewDuring";
 
-import { StopCircle } from "../../../../../public/svgs";
+import { StopCircle } from "@svgs/.";
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);

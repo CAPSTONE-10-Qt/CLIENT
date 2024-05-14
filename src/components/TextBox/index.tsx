@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import UserInfo from "@components/UserInfo";
 import RoundButton from "@components/RoundButton";
-import { Play } from "../../../public/svgs";
+import { Play } from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";

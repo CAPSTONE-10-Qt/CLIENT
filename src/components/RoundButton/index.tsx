@@ -1,8 +1,4 @@
-import {
-  CircleCheck,
-  TriangleWarning,
-  OctagonWrong,
-} from "../../../public/svgs";
+import { CircleCheck, TriangleWarning, OctagonWrong } from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";

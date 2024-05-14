@@ -8,7 +8,7 @@ import { useRecoilValue } from "recoil";
 import { interviewDataState } from "@store/interview";
 import { usePostFace } from "@service/hooks/interviewDuring";
 
-import { CamFalse } from "../../../../../public/svgs";
+import { CamFalse } from "@svgs/.";
 import styles from "../index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);

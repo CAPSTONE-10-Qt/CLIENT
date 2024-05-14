@@ -1,6 +1,6 @@
 "use client";
 
-import { Star } from "../../../public/svgs";
+import { Star } from "@svgs/.";
 import usePin from "./usePin";
 
 import styles from "./index.module.scss";

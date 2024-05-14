@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { GithubLogo, GoogleLogo } from "../../../../public/svgs";
+import { GithubLogo, GoogleLogo } from "@svgs/.";
 import styles from "../index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);

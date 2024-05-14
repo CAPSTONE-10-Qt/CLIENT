@@ -1,4 +1,4 @@
-import { LogoText, Mail, Github, Help } from "../../../public/svgs";
+import { LogoText, Mail, Github, Help } from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";

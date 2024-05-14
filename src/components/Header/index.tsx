@@ -7,7 +7,7 @@ import { isLoginState } from "@store/auth";
 import useDetectScroll from "./useDetectScroll";
 import useModal from "@utils/hooks/useModal";
 
-import { LogoText, Menu } from "../../../public/svgs";
+import { LogoText, Menu } from "@svgs/.";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";

@@ -1,4 +1,4 @@
-import { Arrow } from "../../../public/svgs";
+import { Arrow } from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
