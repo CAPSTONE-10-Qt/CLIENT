@@ -9,7 +9,11 @@ import Swal from "sweetalert2";
 import { saveInterview, processingLastQuestion } from "@utils/alerts/interview";
 
 import { modelSTT } from "@service/api/model";
-import { postAnswer, patchInterview } from "@service/api/interviewDuring";
+import {
+  postAnswer,
+  patchInterview,
+  patchQuestionEnd,
+} from "@service/api/interviewDuring";
 
 const useRecord = (pk: number) => {
   const router = useRouter();
@@ -32,6 +36,7 @@ const useRecord = (pk: number) => {
     isMicOn,
     isSpeakerOn,
     id,
+    reId,
   } = interview;
   const [state, setState] = useRecoilState(interviewState);
 
@@ -120,21 +125,52 @@ const useRecord = (pk: number) => {
                   time,
                   text,
                 } = res.data;
-                postAnswer(interviewQuestionId, {
-                  mumble,
-                  silent,
-                  talk,
-                  time,
-                  text,
-                })
+                postAnswer(
+                  location.href.includes("question")
+                    ? reId
+                    : interviewQuestionId,
+                  {
+                    mumble,
+                    silent,
+                    talk,
+                    time,
+                    text,
+                    endDateTime: new Date().toLocaleString("ko-KR", {
+                      hour12: false,
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    }),
+                  },
+                )
                   .then(res => {
                     Swal.close();
                     console.log(res);
                     if (location.href.includes("question"))
-                      saveInterview(() => {
-                        // 재답변 종료 patch, 성공 시 then 내부에 아래 라우팅
-                        router.push(`/question/detail/${pk}`);
-                      }, true);
+                      saveInterview(
+                        () =>
+                          patchQuestionEnd(reId as number, {
+                            endDateTime: new Date().toLocaleString("ko-KR", {
+                              hour12: false,
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit",
+                            }),
+                            time: time,
+                          })
+                            .then(res => {
+                              console.log(res);
+                              router.push(`/question/detail/${id}`);
+                            })
+                            .catch(err => console.log(err)),
+                        true,
+                      );
                     else
                       saveInterview(() =>
                         patchInterview(id, {
@@ -176,6 +212,15 @@ const useRecord = (pk: number) => {
               talk,
               time,
               text,
+              endDateTime: new Date().toLocaleString("ko-KR", {
+                hour12: false,
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              }),
             })
               .then(res => {
                 console.log(res);

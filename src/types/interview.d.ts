@@ -9,6 +9,7 @@ interface InterviewSetupFormType {
 
 interface InterviewDataType {
   id: number;
+  reId?: number;
   subjectText: CSSubjectType;
   questionNum: QuestionType;
   onlyVoice: boolean;

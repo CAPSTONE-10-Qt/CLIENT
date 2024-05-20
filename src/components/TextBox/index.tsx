@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import UserInfo from "@components/UserInfo";
 import RoundButton from "@components/RoundButton";
 import { Play } from "@svgs/.";
+import { patchQuestionStart } from "@service/api/interviewDuring";
+import { useRecoilState } from "recoil";
+import { interviewDataState } from "@store/interview";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
@@ -33,9 +36,16 @@ const TextBox = ({
   isRe,
 }: Props) => {
   const router = useRouter();
+  const [interview, setInterview] = useRecoilState(interviewDataState);
   const onClick = () => {
     beforeClick && beforeClick();
-    router.push(`/question/${questionId}`);
+    patchQuestionStart(questionId as number)
+      .then(res => {
+        console.log(res);
+        setInterview({ ...interview, reId: res.data.data.id });
+        router.push(`/question/${questionId}`);
+      })
+      .catch(err => console.log(err));
   };
   return (
     <div
@@ -68,31 +78,30 @@ const TextBox = ({
           <b>{isOnlySolution ? "[첨삭]" : "[예시 답안]"}</b>
         )}
         {text.includes("\n") ? (
-          text.split("\n").map((line: string, idx: number) => (
-            <p key={idx}>
-              {line}
-              <br />
-            </p>
-          ))
+          text.split("\n").map(
+            (line: string, idx: number) =>
+              line && (
+                <p key={idx}>
+                  {line}
+                  <br />
+                </p>
+              ),
+          )
         ) : (
           <p>{text}</p>
         )}
         {solution && <b className={cx("b-2")}>[첨삭]</b>}
         {solution &&
           (solution.includes("\n") ? (
-            (solution.startsWith("\n\n")
-              ? solution.slice(2)
-              : solution.startsWith("\n")
-                ? solution.slice(1)
-                : solution
+            solution.split("\n").map(
+              (line: string, idx: number) =>
+                line && (
+                  <p key={idx}>
+                    {line}
+                    <br />
+                  </p>
+                ),
             )
-              .split("\n")
-              .map((line: string, idx: number) => (
-                <p key={idx}>
-                  {line}
-                  <br />
-                </p>
-              ))
           ) : (
             <p>{solution}</p>
           ))}
