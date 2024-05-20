@@ -6,11 +6,10 @@ type PostInterviewBodyType = {
   questionNum: number;
   onlyVoice: boolean;
   startDateTime: string;
-  refreshToken?: string;
 };
 export const postInterview = async (body: PostInterviewBodyType) => {
   const url = `/interview`;
-  return backendClient.post(url, body);
+  return backendClient.post(url, { ...body, refreshToken: "1234" });
 };
 
 // 질문별 답변 저장 (FE -> ML -> FE -> BE)
@@ -20,6 +19,7 @@ type PostAnswerBodyType = {
   talk: number;
   time: number;
   text: string;
+  endDateTime: string;
 };
 export const postAnswer = async (
   questionId: number,
@@ -64,7 +64,18 @@ export const deleteInterview = async (interviewId: number) => {
 // 질문 재답변 시작
 export const patchQuestionStart = async (questionId: number) => {
   const url = `/studynote/${questionId}`;
-  return backendClient.patch(url);
+  return backendClient.patch(url, { refreshToken: "1234" });
 };
 
 // 질문 재답변 종료
+type PatchQuestionEndBodyType = {
+  time: number;
+  endDateTime: string;
+};
+export const patchQuestionEnd = async (
+  questionId: number,
+  body: PatchQuestionEndBodyType,
+) => {
+  const url = `/studynote/end/${questionId}`;
+  return backendClient.patch(url, body);
+};

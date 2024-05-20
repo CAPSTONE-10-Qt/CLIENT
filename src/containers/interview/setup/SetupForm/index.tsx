@@ -55,7 +55,6 @@ const SetupForm = () => {
           minute: "2-digit",
           second: "2-digit",
         }),
-        refreshToken: "1234",
       })
         .then(res => {
           console.log(res.data.data);
