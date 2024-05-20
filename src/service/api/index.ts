@@ -13,4 +13,7 @@ export const ferttsClient = axios.create({
 export const backendClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_SERVER_URL || "/",
   withCredentials: true,
+  headers: {
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_TOKEN}`,
+  },
 });
