@@ -5,7 +5,13 @@ export const metadata: Metadata = {
 };
 
 import QuestionDetailContainer from "@containers/question/detail";
+import { getQuestion } from "@service/api/interviewAfter";
 
-export default function QuestionDetail() {
-  return <QuestionDetailContainer />;
+export default async function QuestionDetail({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const data = await getQuestion(params.id);
+  return <QuestionDetailContainer data={data} />;
 }
