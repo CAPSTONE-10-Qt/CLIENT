@@ -24,15 +24,18 @@ export const getInterviewList = async (sort: number) => {
 // 질문 스크랩
 export const patchQuestion = async (questionId: number) => {
   const url = `/questions/${questionId}`;
-  return backendClient.patch(url);
+  return backendClient.patch(url, { refreshToken: "1234" });
 };
 
 // 질문 상세 조회 - Server Fetch
-export const getQuestion = async (questionId: number) => {
+export const getQuestion = async (questionId: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/studynote/${questionId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/studynote/detail/${questionId}`,
     {
       cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_TOKEN}`,
+      },
     },
   );
   if (!res.ok) {
@@ -46,8 +49,8 @@ export const getQuestion = async (questionId: number) => {
 export const getQuestionList = async (
   filter: number,
   subjectText: CSSubjectType | "ALL",
-  onlyWrong: boolean,
+  onlyWrong: number,
 ) => {
-  const url = `/studynote/sortNum=${filter}&subjectText=${subjectText}&onlyWrong=${onlyWrong}`;
+  const url = `/studynote/${filter}?subjectText=${subjectText}&onlyWrong=${onlyWrong}`;
   return backendClient.get(url);
 };
