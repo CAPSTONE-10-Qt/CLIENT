@@ -22,7 +22,7 @@ const usePin = (id: number, isTrue: boolean) => {
 
   useEffect(() => {
     if (trigger !== 0) {
-      if (!isLogin) {
+      if (isLogin) {
         patchQuestion(id)
           .then(res => {
             console.log(res);
