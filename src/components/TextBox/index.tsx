@@ -42,7 +42,17 @@ const TextBox = ({
     patchQuestionStart(questionId as number)
       .then(res => {
         console.log(res);
-        setInterview({ ...interview, reId: res.data.data.id });
+        const { id, questionNum, questionText, title, subjectText } =
+          res.data.data;
+        setInterview({
+          ...interview,
+          id: questionId as number,
+          reId: id,
+          questionNum: 1,
+          questionList: [{ id: questionNum, questionText: questionText }],
+          title: `${title} #${questionNum}`,
+          subjectText: subjectText,
+        });
         router.push(`/question/${questionId}`);
       })
       .catch(err => console.log(err));
