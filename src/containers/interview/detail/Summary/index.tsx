@@ -53,6 +53,7 @@ const Summary = ({
           silentPercent,
           [facePositive, faceNeutral, faceNegative],
         ]}
+        isOnlyVoice={onlyVoice}
       />
       <div className={cx("sub-title")}>
         <p>총평</p>

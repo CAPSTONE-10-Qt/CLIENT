@@ -9,14 +9,14 @@ const cx = cs.bind(styles);
 const Table = ({
   type,
   array,
+  isOnlyVoice,
 }: {
   type: "time" | "score" | "graph";
   array: any[];
+  isOnlyVoice?: boolean;
 }) => {
   const title = ["지연 시간", "침묵 시간", "얼굴 표정"];
   const table = ["late", "silent", "face"];
-  const isOnlyVoice =
-    array[2] && array[2].reduce((p: number, c: number) => p + c, 0) === 0;
   return (
     <table className={cx("container")}>
       {(array.length === 5
