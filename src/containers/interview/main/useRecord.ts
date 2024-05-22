@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { useRecoilState } from "recoil";
@@ -150,46 +150,52 @@ const useRecord = (pk: number) => {
                     Swal.close();
                     console.log(res);
                     if (location.href.includes("question"))
-                      saveInterview(
-                        () =>
-                          patchQuestionEnd(reId as number, {
-                            endDateTime: new Date().toLocaleString("ko-KR", {
-                              hour12: false,
-                              year: "numeric",
-                              month: "2-digit",
-                              day: "2-digit",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              second: "2-digit",
-                            }),
-                            time: time,
-                          })
-                            .then(res => {
-                              console.log(res);
-                              router.push(`/question/detail/${id}`);
-                            })
-                            .catch(err => console.log(err)),
-                        true,
-                      );
-                    else
-                      saveInterview(() =>
-                        patchInterview(id, {
-                          endDateTime: new Date().toLocaleString("ko-KR", {
-                            hour12: false,
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            second: "2-digit",
-                          }),
+                      patchQuestionEnd(reId as number, {
+                        endDateTime: new Date().toLocaleString("ko-KR", {
+                          hour12: false,
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                        }),
+                        time: time,
+                      })
+                        .then(res => {
+                          console.log(res);
+                          saveInterview(
+                            () =>
+                              startTransition(() => {
+                                router.push(`/question/detail/${id}`);
+                                router.refresh();
+                              }),
+                            true,
+                          );
                         })
-                          .then(res => {
-                            console.log(res);
-                            router.push(`/interview/detail/${id}`);
-                          })
-                          .catch(err => console.log(err)),
-                      );
+                        .catch(err => console.log(err));
+                    else
+                      patchInterview(id, {
+                        endDateTime: new Date().toLocaleString("ko-KR", {
+                          hour12: false,
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                        }),
+                      })
+                        .then(res => {
+                          console.log(res);
+                          saveInterview(() =>
+                            startTransition(() => {
+                              router.push(`/interview/detail/${id}`);
+                              router.refresh();
+                            }),
+                          );
+                        })
+                        .catch(err => console.log(err));
                   })
                   .catch(err => console.log(err));
               })
