@@ -28,3 +28,8 @@ export const QuestionLoginToPinMessage = {
   title: `로그인이 필요합니다.`,
   html: `질문 즐겨찾기 기능을 이용하려면 로그인이 필요합니다.<br><b class="swal2-emphasis">로그인 페이지로 이동</b>하려면 확인을 눌러주세요.`,
 };
+
+export const AuthNotYetOAuthMessage = {
+  title: `아직 준비 중인 기능입니다.`,
+  html: `현재 지원 중인 <b class="swal2-emphasis">GitHub 소셜 로그인</b> 기능을 사용해주세요.`,
+};
