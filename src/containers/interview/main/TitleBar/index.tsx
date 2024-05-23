@@ -5,7 +5,7 @@ import { interviewDataState } from "@store/interview";
 import RoundButton from "@components/RoundButton";
 import Timer from "../Timer";
 
-import { MicTrue, CamFalse, CamTrue } from "../../../../../public/svgs";
+import { MicTrue, CamFalse, CamTrue } from "@svgs/.";
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);

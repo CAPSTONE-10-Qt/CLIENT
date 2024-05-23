@@ -21,7 +21,7 @@ const CircleGraph = ({
             )}
           >
             {typeof percent === "number"
-              ? percent + "%"
+              ? Math.round(percent * 100) / 100 + "%"
               : Math.max(...percent) + "%"}
           </p>
         </div>
@@ -30,7 +30,9 @@ const CircleGraph = ({
           style={{
             background:
               typeof percent === "number"
-                ? `conic-gradient(
+                ? percent === 0
+                  ? "var(--color-theme-light)"
+                  : `conic-gradient(
                     var(--color-theme-bright),
                     var(--color-theme-main) ${(percent / 100) * 360}deg,
                     var(--color-theme-light) ${(percent / 100) * 360}deg,
@@ -55,22 +57,26 @@ const CircleGraph = ({
         {typeof percent === "number"
           ? ["시간", "발화 시간"].map((el, idx) => (
               <div key={el}>
-                <p className={cx("bold")}>
+                <div className={cx("bold")}>
                   <div className={cx("dot", `index${idx}`)} />
                   {`${
                     idx === 0 ? (type === "late" ? "지연" : "침묵") : ""
                   } ${el}`}
+                </div>
+                <p>
+                  {idx === 0
+                    ? `${Math.round(percent * 100) / 100}%`
+                    : `${Math.round((100 - percent) * 100) / 100}%`}
                 </p>
-                <p>{idx === 0 ? `${percent}%` : `${100 - percent}%`}</p>
               </div>
             ))
           : ["긍정", "중립", "부정"].map((el, idx) => (
               <div key={el}>
-                <p className={cx("bold")}>
+                <div className={cx("bold")}>
                   <div className={cx("dot", `index${idx}`)} />
                   {el}
-                </p>
-                <p>{percent[idx] + "%"}</p>
+                </div>
+                <p>{Math.round(percent[idx] * 100) / 100 + "%"}</p>
               </div>
             ))}
       </div>

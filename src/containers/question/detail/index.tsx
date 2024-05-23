@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
-const QuestionDetailContainer = () => {
+const QuestionDetailContainer = ({ data }: { data: QuestionDetailType }) => {
   return (
     <div className={cx("container")}>
       <h1>질문별 학습 노트</h1>
@@ -17,7 +17,7 @@ const QuestionDetailContainer = () => {
 
 export default QuestionDetailContainer;
 
-const data: QuestionDetailType = {
+const mock_data: QuestionDetailType = {
   id: 0,
   title: "2023.12.25. 모의 면접 1",
   questionNum: 1,

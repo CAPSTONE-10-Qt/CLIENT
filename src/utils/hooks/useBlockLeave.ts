@@ -4,21 +4,19 @@ import { useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { blockQuitInterview } from "@utils/alerts/interview";
-import { useRecoilValue } from "recoil";
-import { interviewAllowState } from "./../../store/interview";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { interviewState, interviewDataState } from "./../../store/interview";
 
-const useBlockLeave = (
-  goBack: () => void,
-  isRunning: boolean,
-  setIsRunning: (value: boolean) => void,
-) => {
+const useBlockLeave = (goBack: () => void) => {
   const router = useRouter();
-  const { quit, done } = useRecoilValue(interviewAllowState);
+  const [state, setState] = useRecoilState(interviewState);
+  const { isRunning, quit, done } = state;
+  const resetData = useResetRecoilState(interviewDataState);
 
   // 새로고침 감지
   const handleBeforeUnload = useCallback(
     (e: BeforeUnloadEvent) => {
-      setIsRunning(false);
+      setState({ ...state, isRunning: false });
       e.preventDefault();
       e.returnValue = true;
     },
@@ -30,8 +28,8 @@ const useBlockLeave = (
   const handlePopState = useCallback(() => {
     if (quit || done) return;
     history.pushState(null, "", location.href);
-    setIsRunning(false);
-    blockQuitInterview(() => setIsRunning(true));
+    setState({ ...state, isRunning: false });
+    blockQuitInterview(() => setState({ ...state, isRunning: true }));
   }, []);
   useEffect(() => {
     if (firstBack) {
@@ -57,8 +55,8 @@ const useBlockLeave = (
       href: string,
       options?: NavigateOptions | undefined,
     ): void => {
-      setIsRunning(false);
-      blockQuitInterview(() => setIsRunning(true));
+      setState({ ...state, isRunning: false });
+      blockQuitInterview(() => setState({ ...state, isRunning: true }));
     };
     router.push = newPush;
     return () => {

@@ -1,16 +1,31 @@
 import Swal from "sweetalert2";
 import {
+  InterviewSetupFormMessage,
   InterviewStartMessage,
   InterviewQuitMessage,
   InterviewBlockMessage,
   InterviewSaveMessage,
+  InterviewLastProcessingMessage,
 } from "@utils/constants/alertMessage";
+
+export const fillSetupFormInterview = () =>
+  Swal.fire({
+    title: InterviewSetupFormMessage.title,
+    html: InterviewSetupFormMessage.html,
+    icon: "warning",
+    color: "var(--color-black-0)",
+    background: "var(--color-black-90)",
+    iconColor: "var(--color-theme-main)",
+    confirmButtonColor: "var(--color-theme-main)",
+    confirmButtonText: "확인",
+  }).then(res => {});
 
 let timerInterval: number;
 export const autoStartInterview = (onRun: () => void) =>
   Swal.fire({
     title: InterviewStartMessage.title,
     html: InterviewStartMessage.html,
+    allowEscapeKey: false,
     allowOutsideClick: false,
     color: "var(--color-black-0)",
     background: "var(--color-black-90)",
@@ -76,6 +91,8 @@ export const saveInterview = (onConfirm: () => void, isReanswer?: boolean) =>
       ? InterviewSaveMessage.retitle
       : InterviewSaveMessage.title,
     html: isReanswer ? InterviewSaveMessage.rehtml : InterviewSaveMessage.html,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
     icon: "success",
     color: "var(--color-black-0)",
     background: "var(--color-black-90)",
@@ -85,3 +102,23 @@ export const saveInterview = (onConfirm: () => void, isReanswer?: boolean) =>
   }).then(res => {
     if (res.isConfirmed) onConfirm();
   });
+
+export const processingLastQuestion = (onRun: () => void) => {
+  return {
+    title: InterviewLastProcessingMessage.title,
+    html: InterviewLastProcessingMessage.html,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    color: "var(--color-black-0)",
+    background: "var(--color-black-90)",
+    padding: "32px 32px 50px 32px",
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+      onRun();
+    },
+    willClose: () => {
+      Swal.hideLoading();
+    },
+  };
+};

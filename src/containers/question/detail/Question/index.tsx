@@ -28,7 +28,15 @@ const Question = ({
       subjectText: subjectText,
       questionNum: 1,
       onlyVoice: true,
-      startDateTime: new Date().toISOString(),
+      startDateTime: new Date().toLocaleString("ko-KR", {
+        hour12: false,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
       title: `${title} #${questionNum}`,
       questionList: [
         ...new Array(questionNum - 1).map((el, idx) => {
@@ -64,7 +72,7 @@ const Question = ({
               />
             )}
           </div>
-          <Pin id={id} isTrue={!!pin} />
+          <Pin id={id as number} isTrue={!!pin} />
         </div>
       </div>
       <TextBox

@@ -18,6 +18,7 @@ const Menu = ({
           <div
             className={cx(tab === idx ? "clicked" : "")}
             onClick={() => setTab(idx)}
+            key={idx}
           >
             {el}
           </div>

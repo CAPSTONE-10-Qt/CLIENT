@@ -5,6 +5,8 @@ import Mail from "./mail.svg";
 import Github from "./github.svg";
 import Help from "./help.svg";
 
+import LogoBig from "./logo_big.svg";
+import LogoSmall from "./logo_small.svg";
 import LogoImage from "./logo_image.svg";
 import GithubLogo from "./github_logo.svg";
 import GoogleLogo from "./google_logo.svg";
@@ -43,6 +45,8 @@ export {
   Mail,
   Github,
   Help,
+  LogoBig,
+  LogoSmall,
   LogoImage,
   GithubLogo,
   GoogleLogo,

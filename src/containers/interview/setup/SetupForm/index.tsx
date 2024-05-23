@@ -1,15 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
-import { interviewDataState } from "@store/interview";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import {
+  interviewDataState,
+  interviewTTSState,
+  interviewState,
+} from "@store/interview";
+
+import { fillSetupFormInterview } from "@utils/alerts/interview";
+import { CSSubjectList, QuestionList } from "./data";
+import { modelTTS } from "@service/api/model";
+import { postInterview } from "@service/api/interviewDuring";
 
 import Description from "../Description";
 import RoundButton from "@components/RoundButton";
 import RectButton from "@components/RectButton";
 import CheckBox from "@components/CheckBox";
-import { CSSubjectList, QuestionList } from "./data";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
@@ -22,15 +30,49 @@ const SetupForm = () => {
     questionNum: 0,
     onlyVoice: false,
   });
+  const resetState = useResetRecoilState(interviewState);
   const [interview, setInterview] = useRecoilState(interviewDataState);
+  const [tts, setTTS] = useRecoilState(interviewTTSState);
+  const resetTTS = useResetRecoilState(interviewTTSState);
+  useEffect(() => {
+    resetTTS();
+    resetState();
+  }, []);
   const onSubmit = () => {
-    setInterview({
-      ...interview,
-      currentIndex: 0,
-      isMicOn: false,
-      isSpeakerOn: true,
-    });
-    router.push(`/interview/${1}`);
+    if (form.subjectText == "" || form.questionNum === 0) {
+      fillSetupFormInterview();
+    } else
+      postInterview({
+        subjectText: form.subjectText,
+        questionNum: form.questionNum,
+        onlyVoice: form.onlyVoice,
+        startDateTime: new Date().toLocaleString("ko-KR", {
+          hour12: false,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        }),
+      })
+        .then(res => {
+          console.log(res.data.data);
+          setInterview({
+            ...res.data.data,
+            currentIndex: 0,
+            isMicOn: false,
+            isSpeakerOn: true,
+          });
+          router.push(`/interview/${res.data.data.id}`);
+          modelTTS({ questionList: res.data.data.questionList })
+            .then(res => {
+              console.log(res.data);
+              setTTS({ ...tts, files: res.data.voiceList });
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
   };
   return (
     <div className={cx("container")}>
@@ -73,7 +115,9 @@ const SetupForm = () => {
           state={form.onlyVoice}
           onClick={() => setForm({ ...form, onlyVoice: !form.onlyVoice })}
         />
-        <p>음성으로만 면접을 진행하고 싶어요.</p>
+        <p onClick={() => setForm({ ...form, onlyVoice: !form.onlyVoice })}>
+          음성으로만 면접을 진행하고 싶어요.
+        </p>
       </div>
       <RectButton text='면접 시작' onClick={onSubmit} />
     </div>

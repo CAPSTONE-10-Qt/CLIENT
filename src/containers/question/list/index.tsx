@@ -1,13 +1,18 @@
+"use client";
+
 import Dropdown from "@components/Dropdown";
 import QuestionBlock from "./QuestionBlock";
 import FilterTab from "./FilterTab";
 import Toggle from "@components/Toggle";
+
+import { useQuestionList } from "@service/hooks/interviewAfter";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
 const QuestionListContainer = () => {
+  const { list, isLoading } = useQuestionList();
   return (
     <div className={cx("container")}>
       <div className={cx("header")}>
@@ -16,14 +21,18 @@ const QuestionListContainer = () => {
       </div>
       <FilterTab />
       <div className={cx("top-info")}>
-        <p>{`총 ${data.length}개의 질문`}</p>
+        <p>{list && `총 ${list.length}개의 질문`}</p>
         <div>
           <span>정답 질문 제외하고 보기</span>
           <Toggle type='question' />
         </div>
       </div>
       <div className={cx("block-wrapper")}>
-        {data && data.map(el => <QuestionBlock {...el} key={el.id} />)}
+        {isLoading
+          ? null
+          : list.map((el: QuestionPreviewType) => (
+              <QuestionBlock {...el} key={el.id} />
+            ))}
       </div>
     </div>
   );
@@ -31,7 +40,7 @@ const QuestionListContainer = () => {
 
 export default QuestionListContainer;
 
-const data: QuestionPreviewType[] = [
+const mock_data: QuestionPreviewType[] = [
   {
     id: 1,
     questionText:

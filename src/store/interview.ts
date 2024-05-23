@@ -31,9 +31,27 @@ export const interviewDataState = atom<InterviewDataType>({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const interviewAllowState = atom<{ quit: boolean; done: boolean }>({
-  key: "interviewAllowState",
-  default: { quit: false, done: false },
+type InterviewTTSStateType = {
+  files: { audio_content: string }[];
+  audio: HTMLAudioElement | null;
+};
+export const interviewTTSState = atom<InterviewTTSStateType>({
+  key: "interviewTTSState",
+  default: {
+    files: [],
+    audio: null,
+  },
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const interviewState = atom<{
+  isRunning: boolean;
+  isFirst5: boolean;
+  quit: boolean;
+  done: boolean;
+}>({
+  key: "interviewState",
+  default: { isRunning: false, isFirst5: true, quit: false, done: false },
   effects_UNSTABLE: [persistAtom],
 });
 

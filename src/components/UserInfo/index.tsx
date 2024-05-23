@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { profileInfoState } from "@store/auth";
 import { useRouter } from "next/navigation";
 
-import { DefaultProfile } from "../../../public/svgs";
+import { DefaultProfile } from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";

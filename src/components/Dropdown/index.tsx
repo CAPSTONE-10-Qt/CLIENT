@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { questionFilterState } from "@store/interview";
 import useModal from "@utils/hooks/useModal";
 
-import { ArrowDown } from "../../../public/svgs";
+import { ArrowDown } from "@svgs/.";
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
@@ -43,6 +43,7 @@ const Dropdown = () => {
             <div
               className={cx(filter.subjectText === el ? "selected" : "")}
               onClick={() => onClick(el)}
+              key={el}
             >
               {el}
             </div>

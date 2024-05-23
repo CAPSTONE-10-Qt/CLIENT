@@ -4,6 +4,7 @@ interface QuestionPreviewType {
   id: number;
   again: number;
   questionText: string;
+  questionNum?: number;
   score: number;
   pin: number;
 }

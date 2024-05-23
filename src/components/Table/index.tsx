@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  CircleCheck,
-  TriangleWarning,
-  OctagonWrong,
-} from "../../../public/svgs";
+import { CircleCheck, TriangleWarning, OctagonWrong } from "@svgs/.";
 import CircleGraph from "@components/CircleGraph";
 
 import styles from "./index.module.scss";
@@ -13,11 +9,14 @@ const cx = cs.bind(styles);
 const Table = ({
   type,
   array,
+  isOnlyVoice,
 }: {
   type: "time" | "score" | "graph";
   array: any[];
+  isOnlyVoice?: boolean;
 }) => {
   const title = ["지연 시간", "침묵 시간", "얼굴 표정"];
+  const table = ["late", "silent", "face"];
   return (
     <table className={cx("container")}>
       {(array.length === 5
@@ -30,7 +29,7 @@ const Table = ({
           <thead>
             {type === "graph" && index === 0 ? (
               <tr className={cx("graph-tr")}>
-                {title.map(el => (
+                {(isOnlyVoice ? title.slice(0, 2) : title).map(el => (
                   <th key={el}>{el}</th>
                 ))}
               </tr>
@@ -53,13 +52,13 @@ const Table = ({
             {type === "graph" && index === 0 ? (
               <>
                 <tr className={cx("graph-tr")}>
-                  {["late", "silent", "face"].map((el, idx) => (
+                  {(isOnlyVoice ? table.slice(0, 2) : table).map((el, idx) => (
                     <th className={cx("graph-th")} key={idx}>
                       <CircleGraph type={el} percent={array[idx]} />
                     </th>
                   ))}
                 </tr>
-                {["late", "silent", "face"].map((el, idx) => (
+                {(isOnlyVoice ? table.slice(0, 2) : table).map((el, idx) => (
                   <React.Fragment key={idx}>
                     <tr className={cx("graph-tr", "mobile", "title")}>
                       <th colSpan={3}>{title[idx]}</th>

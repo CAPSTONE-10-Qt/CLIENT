@@ -1,0 +1,137 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 64px);
+  min-height: 850px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  @include Tablet {
+    flex-direction: column-reverse;
+    height: auto;
+    padding-top: 50px;
+  }
+}
+
+.box {
+  max-width: 600px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  h3 {
+    @include text-type("title_md");
+    margin: 0 0 10px 5px;
+  }
+  h1 {
+    @include text-type("landing");
+  }
+  & > svg {
+    width: 282px;
+    height: 60.5px;
+  }
+  & > div > p {
+    @include text-type("p_lg");
+    word-break: keep-all;
+  }
+  .first {
+    @include text-type("p_lg_semibold");
+    color: color(theme, light);
+    margin-bottom: 12px;
+    word-break: keep-all;
+  }
+
+  @include Tablet {
+    width: 100%;
+    max-width: max-content;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  a,
+  div {
+    flex-shrink: 0;
+    cursor: pointer;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 1px solid color(black, 0);
+    @include text-type("p_md");
+  }
+  a {
+    background-color: color(black, 0);
+    color: color(black, 100);
+  }
+}
+
+.logo {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include Mobile {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+  }
+
+  @keyframes glow-big {
+    0% {
+      opacity: 1;
+      filter: none;
+      transform: translateY(0px);
+    }
+    50% {
+      opacity: 0.98;
+      filter: drop-shadow(0px 0px 15px color(theme, transparent))
+        brightness(1.2);
+      transform: translateY(5px) scale(101%);
+    }
+    100% {
+      opacity: 1;
+      filter: none;
+      transform: translateY(0px);
+    }
+  }
+  @keyframes glow-small {
+    0% {
+      opacity: 0.98;
+      filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.15))
+        brightness(1.2);
+      transform: translateY(3px) scale(101%);
+    }
+    50% {
+      opacity: 1;
+      filter: none;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 0.98;
+      filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.15))
+        brightness(1.2);
+      transform: translateY(3px) scale(101%);
+    }
+  }
+
+  svg:nth-child(1) {
+    margin-left: 16%;
+    margin-bottom: 17%;
+    width: 390px;
+    aspect-ratio: 1 / 1;
+    animation: glow-big 2.5s ease-in-out infinite;
+  }
+  svg:nth-child(2) {
+    position: absolute;
+    margin-right: 50%;
+    margin-top: 40%;
+    width: 48%;
+    aspect-ratio: 1 / 1;
+    animation: glow-small 2.5s ease-in-out infinite;
+  }
+}

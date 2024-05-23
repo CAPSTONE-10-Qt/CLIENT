@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import ReactQueryProviders from "@service/hooks";
 import RecoilRootWrapper from "@store/.";
 import ThemeProvier from "@styles/.";
 import Header from "@components/Header";
@@ -10,6 +11,7 @@ import "@styles/reset.scss";
 
 const Pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
+  weight: "400 600",
 });
 
 export const metadata: Metadata = {
@@ -28,12 +30,14 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className={Pretendard.className}>
-        <RecoilRootWrapper>
-          <ThemeProvier>
-            <Header />
-            {children}
-          </ThemeProvier>
-        </RecoilRootWrapper>
+        <ReactQueryProviders>
+          <RecoilRootWrapper>
+            <ThemeProvier>
+              <Header />
+              {children}
+            </ThemeProvier>
+          </RecoilRootWrapper>
+        </ReactQueryProviders>
       </body>
     </html>
   );
