@@ -11,6 +11,7 @@ import "@styles/reset.scss";
 
 const Pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
+  weight: "400 600",
 });
 
 export const metadata: Metadata = {
