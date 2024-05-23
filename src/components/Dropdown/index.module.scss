@@ -43,6 +43,9 @@
   position: absolute;
   z-index: 10;
   margin-top: 10px;
+  @include Mobile {
+    margin-top: 58px;
+  }
 
   display: flex;
   width: 136px;

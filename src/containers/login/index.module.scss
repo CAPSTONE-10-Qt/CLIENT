@@ -19,9 +19,9 @@
 
   @include Mobile {
     flex-direction: column;
-    gap: 50px;
     .image-rect {
-      width: 200px;
+      width: 50%;
+      min-width: 300px;
     }
   }
 
@@ -50,6 +50,8 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  gap: 30px;
+  cursor: pointer;
 
   p {
     @include text-type("p_lg");
@@ -60,5 +62,9 @@
 
   div {
     width: 36px;
+  }
+
+  svg {
+    flex-shrink: 0;
   }
 }
