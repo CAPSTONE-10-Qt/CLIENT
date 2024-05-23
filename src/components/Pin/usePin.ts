@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { isLoginState } from "@store/auth";
 import { patchQuestion } from "@service/api/interviewAfter";
-import { loginToPin } from "@utils/alerts/question";
+import { loginToUse } from "@utils/alerts/auth";
 
 const usePin = (id: number, isTrue: boolean) => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const usePin = (id: number, isTrue: boolean) => {
           })
           .catch(err => console.log(err));
       } else {
-        loginToPin(() => router.push("/login"));
+        loginToUse(() => router.push("/login"));
       }
     }
   }, [trigger]);
