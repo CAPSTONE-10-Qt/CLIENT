@@ -46,4 +46,12 @@
 .icon-flex {
   display: flex;
   gap: 10px;
+  &,
+  * {
+    flex-shrink: 0;
+  }
+  svg {
+    width: 24px;
+    height: 24px;
+  }
 }

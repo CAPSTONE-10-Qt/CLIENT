@@ -1,9 +1,4 @@
-import {
-  ColorPink,
-  ColorBlue,
-  ColorGreen,
-  ColorBeige,
-} from "../../../../public/svgs";
+import { ColorPink, ColorBlue, ColorGreen, ColorBeige } from "@svgs/.";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";

@@ -1,11 +1,16 @@
+"use client";
+
 import InterviewBlock from "./InterviewBlock";
 import SortBar from "./SortBar";
+
+import { useInterviewList } from "@service/hooks/interviewAfter";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
 const InterviewListContainer = () => {
+  const { list, isLoading } = useInterviewList();
   return (
     <div className={cx("container")}>
       <div className={cx("header")}>
@@ -13,7 +18,11 @@ const InterviewListContainer = () => {
         <SortBar />
       </div>
       <div className={cx("block-wrapper")}>
-        {data && data.map(el => <InterviewBlock {...el} key={el.id} />)}
+        {isLoading
+          ? null
+          : list.map((el: InterviewPreviewType) => (
+              <InterviewBlock {...el} key={el.id} />
+            ))}
       </div>
     </div>
   );
@@ -21,12 +30,12 @@ const InterviewListContainer = () => {
 
 export default InterviewListContainer;
 
-const data: InterviewPreviewType[] = [
+const mock_data: InterviewPreviewType[] = [
   {
     subjectText: "OS",
     startDateTime: "2024-3-10 18:23",
     endDateTime: "2024-3-10 17:22",
-    time: 680,
+    totalTime: 680,
     title: "2024.03.29. 모의 면접 2",
     score: 1,
     id: 2,
@@ -36,7 +45,7 @@ const data: InterviewPreviewType[] = [
     subjectText: "OS",
     startDateTime: "2024-3-10 18:23",
     endDateTime: "2024-3-10 17:22",
-    time: 3880,
+    totalTime: 3880,
     title: "2024.03.29. 모의 면접 1",
     score: 100,
     id: 1,
@@ -46,7 +55,7 @@ const data: InterviewPreviewType[] = [
     subjectText: "OS",
     startDateTime: "2024-3-10 18:23",
     endDateTime: "2024-3-10 17:22",
-    time: 680,
+    totalTime: 680,
     title: "2024.03.29. 모의 면접 2",
     score: 1,
     id: 3,
@@ -56,7 +65,7 @@ const data: InterviewPreviewType[] = [
     subjectText: "OS",
     startDateTime: "2024-3-10 18:23",
     endDateTime: "2024-3-10 17:22",
-    time: 3880,
+    totalTime: 3880,
     title: "2024.03.29. 모의 면접 1",
     score: 100,
     id: 4,
@@ -66,7 +75,7 @@ const data: InterviewPreviewType[] = [
     subjectText: "OS",
     startDateTime: "2024-3-10 18:23",
     endDateTime: "2024-3-10 17:22",
-    time: 3880,
+    totalTime: 3880,
     title: "2024.03.29. 모의 면접 1",
     score: 100,
     id: 5,

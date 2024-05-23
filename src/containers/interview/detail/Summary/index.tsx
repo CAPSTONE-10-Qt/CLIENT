@@ -10,6 +10,7 @@ const Summary = ({
   startDateTime,
   endDateTime,
   totalTime,
+  onlyVoice,
   score,
   textScore,
   otherScore,
@@ -31,9 +32,9 @@ const Summary = ({
         <p>소요시간</p>
         <span>
           <b>시작</b>
-          {` ${startDateTime.split(" ")[1]} - `}
+          {` ${startDateTime.slice(14)} - `}
           <b>종료</b>
-          {` ${endDateTime.split(" ")[1]}`}
+          {` ${endDateTime.slice(14)}`}
           {` (${Math.floor(totalTime / 60)}m ${totalTime % 60}s)`}
         </span>
       </div>
@@ -52,6 +53,7 @@ const Summary = ({
           silentPercent,
           [facePositive, faceNeutral, faceNegative],
         ]}
+        isOnlyVoice={onlyVoice}
       />
       <div className={cx("sub-title")}>
         <p>총평</p>
@@ -61,7 +63,11 @@ const Summary = ({
         <b>{textScore + "점"}</b>&nbsp;(70점 만점) + 비언어적 표현 평가&nbsp;
         <b>{otherScore + "점"}</b>&nbsp;(30점 만점)
       </div>
-      <p className={cx("feedback")}>{otherFeedback}</p>
+      <p className={cx("feedback")}>
+        {otherFeedback.endsWith("[object Promise]")
+          ? otherFeedback.slice(0, -16)
+          : otherFeedback}
+      </p>
     </div>
   );
 };

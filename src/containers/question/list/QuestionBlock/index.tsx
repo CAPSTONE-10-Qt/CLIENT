@@ -12,6 +12,7 @@ const QuestionBlock = ({
   id,
   title,
   questionText,
+  questionNum,
   subjectText,
   score,
   pin,
@@ -38,7 +39,7 @@ const QuestionBlock = ({
         <Pin id={Number(id)} isTrue={!!pin} />
       </div>
       <h1>{questionText}</h1>
-      <p>{title}</p>
+      <p>{title + ` #${questionNum}`}</p>
     </div>
   );
 };

@@ -15,6 +15,7 @@ const FilterTab = () => {
         <div
           className={cx("rect", idx + 1 === filter.sort ? "clicked" : "")}
           onClick={() => setFilter({ ...filter, sort: idx + 1 })}
+          key={idx}
         >
           <p>{el}</p>
         </div>

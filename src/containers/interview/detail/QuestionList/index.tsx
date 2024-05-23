@@ -1,5 +1,6 @@
 "use client";
 
+import { startTransition } from "react";
 import { useRouter } from "next/navigation";
 import RoundButton from "@components/RoundButton";
 import Pin from "@components/Pin";
@@ -17,7 +18,7 @@ const QuestionList = ({ questionList }: InterviewDetailType) => {
       <div className={cx("container")}>
         <h1>질문별 채점 및 첨삭</h1>
         {questionList.map((item, idx) => (
-          <div className={cx("flex")}>
+          <div className={cx("flex")} key={idx}>
             <div className={cx("question-header")}>
               <div>
                 <p>{`❔Question ${idx + 1}`}</p>
@@ -38,7 +39,12 @@ const QuestionList = ({ questionList }: InterviewDetailType) => {
       </div>
       <RectButton
         text='학습 노트 바로가기'
-        onClick={() => router.push("/question/list")}
+        onClick={() =>
+          startTransition(() => {
+            router.push(`/question/list`);
+            router.refresh();
+          })
+        }
       />
     </>
   );

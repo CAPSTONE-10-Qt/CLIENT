@@ -11,7 +11,7 @@ const InterviewBlock = ({
   subjectText,
   startDateTime,
   endDateTime,
-  time,
+  totalTime,
   title,
   score,
   id,
@@ -24,9 +24,17 @@ const InterviewBlock = ({
       onClick={() => router.push(`/interview/detail/${id}`)}
     >
       <h1>{title}</h1>
-      <p>{`${startDateTime.split(" ")[1]}~${
-        endDateTime.split(" ")[1]
-      } (${Math.floor(time / 60)}m ${time % 60}s)`}</p>
+      <p>{`${new Date(startDateTime).toLocaleTimeString("ko", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })}~${new Date(endDateTime).toLocaleTimeString("ko", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })} (${Math.floor(totalTime / 60)}m ${totalTime % 60}s)`}</p>
       <div className={cx("flex")}>
         <RoundButton text={subjectText} state={false} />
         <span>{score + "점"}</span>
