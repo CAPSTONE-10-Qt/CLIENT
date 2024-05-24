@@ -1,16 +1,11 @@
 import { backendClient } from ".";
 
-export const postSignup = async () => {
-  const url = `/accounts/signup`;
-  return backendClient.post(url);
-};
-
-export const postLogin = async () => {
-  const url = `/accounts/login`;
-  return backendClient.post(url);
+export const getLogin = async (code: string) => {
+  const url = `/accounts/github/callback?code=${code}`;
+  return backendClient.get(url);
 };
 
 export const getProfile = async () => {
-  const url = `/accounts`;
+  const url = `/accounts/myPage`;
   return backendClient.get(url);
 };
