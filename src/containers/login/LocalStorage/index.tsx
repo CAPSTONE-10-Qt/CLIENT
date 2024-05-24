@@ -7,10 +7,7 @@ const LocalStorage = ({ data }: { data: any }) => {
   const router = useRouter();
   useEffect(() => {
     localStorage.setItem("accessToken", data.data.accessToken);
-    startTransition(() => {
-      router.push(`/`);
-      router.refresh();
-    });
+    window.location.href = "/";
   }, []);
   return <></>;
 };
