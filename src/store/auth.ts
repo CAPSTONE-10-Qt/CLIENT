@@ -11,7 +11,8 @@ const { persistAtom } = recoilPersist({
 
 export const isLoginState = atom<boolean>({
   key: "isLoginState",
-  default: !!localStorage!.getItem("accessToken") || false,
+  // default: !!localStorage!.getItem("accessToken") || false,
+  default: true,
 });
 
 export const profileInfoState = atom<{
