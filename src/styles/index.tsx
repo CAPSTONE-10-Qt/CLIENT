@@ -14,5 +14,9 @@ export default function ThemeProvier({ children }: ThemeProvierProps) {
   if (!isMount) {
     return null;
   }
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider themes={["pink", "blue", "green", "beige"]}>
+      {children}
+    </ThemeProvider>
+  );
 }

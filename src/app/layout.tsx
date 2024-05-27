@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import { AuthProvider } from "./api/auth/[...nextauth]";
 import ReactQueryProviders from "@service/hooks";
 import RecoilRootWrapper from "@store/.";
 import ThemeProvier from "@styles/.";
@@ -30,14 +31,16 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className={Pretendard.className}>
-        <ReactQueryProviders>
-          <RecoilRootWrapper>
-            <ThemeProvier>
-              <Header />
-              {children}
-            </ThemeProvier>
-          </RecoilRootWrapper>
-        </ReactQueryProviders>
+        <AuthProvider>
+          <ReactQueryProviders>
+            <RecoilRootWrapper>
+              <ThemeProvier>
+                <Header />
+                {children}
+              </ThemeProvier>
+            </RecoilRootWrapper>
+          </ReactQueryProviders>
+        </AuthProvider>
       </body>
     </html>
   );

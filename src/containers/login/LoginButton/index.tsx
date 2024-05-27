@@ -2,6 +2,7 @@
 
 import React from "react";
 import { notYetOAuth } from "@utils/alerts/auth";
+import { signIn } from "next-auth/react";
 
 import { GithubLogo, GoogleLogo } from "@svgs/.";
 import styles from "../index.module.scss";
@@ -13,9 +14,8 @@ type Props = {
 };
 const LoginButton = ({ type }: Props) => {
   const onLogin = () => {
-    if (type === "github") {
-      window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/accounts`;
-    } else notYetOAuth();
+    if (type === "google") notYetOAuth();
+    else signIn(type);
   };
   return (
     <div className={cx("login-button-rect")} onClick={onLogin}>

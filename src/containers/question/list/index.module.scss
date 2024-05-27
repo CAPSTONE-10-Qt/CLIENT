@@ -59,3 +59,11 @@
   align-items: center;
   gap: 20px;
 }
+
+.plain-text {
+  height: calc(100svh - 500px);
+  @include text-type("p_lg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

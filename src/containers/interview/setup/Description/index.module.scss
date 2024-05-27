@@ -16,4 +16,7 @@
     margin-bottom: 6px;
     word-break: keep-all;
   }
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+  }
 }

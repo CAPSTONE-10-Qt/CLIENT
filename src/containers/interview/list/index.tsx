@@ -10,20 +10,22 @@ import cs from "classnames/bind";
 const cx = cs.bind(styles);
 
 const InterviewListContainer = () => {
-  const { list, isLoading } = useInterviewList();
+  const { list } = useInterviewList();
   return (
     <div className={cx("container")}>
       <div className={cx("header")}>
         <h1>모의 면접 기록</h1>
         <SortBar />
       </div>
-      <div className={cx("block-wrapper")}>
-        {isLoading
-          ? null
-          : list.map((el: InterviewPreviewType) => (
-              <InterviewBlock {...el} key={el.id} />
-            ))}
-      </div>
+      {list && !list.length ? (
+        <div className={cx("block-wrapper")}>
+          {list.map((el: InterviewPreviewType) => (
+            <InterviewBlock {...el} key={el.id} />
+          ))}
+        </div>
+      ) : (
+        <p className={cx("plain-text")}>아직 모의 면접 기록이 없습니다.</p>
+      )}
     </div>
   );
 };

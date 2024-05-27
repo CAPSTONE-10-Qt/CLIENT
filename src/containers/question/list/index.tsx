@@ -27,13 +27,15 @@ const QuestionListContainer = () => {
           <Toggle type='question' />
         </div>
       </div>
-      <div className={cx("block-wrapper")}>
-        {isLoading
-          ? null
-          : list.map((el: QuestionPreviewType) => (
-              <QuestionBlock {...el} key={el.id} />
-            ))}
-      </div>
+      {list && !list.length ? (
+        <div className={cx("block-wrapper")}>
+          {list.map((el: QuestionPreviewType) => (
+            <QuestionBlock {...el} key={el.id} />
+          ))}
+        </div>
+      ) : (
+        <p className={cx("plain-text")}>아직 학습 노트에 질문이 없습니다.</p>
+      )}
     </div>
   );
 };
