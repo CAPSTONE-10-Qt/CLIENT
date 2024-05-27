@@ -9,7 +9,7 @@ type PostInterviewBodyType = {
 };
 export const postInterview = async (body: PostInterviewBodyType) => {
   const url = `/interview`;
-  return backendClient.post(url, { ...body, refreshToken: "1234" });
+  return backendClient.post(url, body);
 };
 
 // 질문별 답변 저장 (FE -> ML -> FE -> BE)
@@ -64,7 +64,7 @@ export const deleteInterview = async (interviewId: number) => {
 // 질문 재답변 시작
 export const patchQuestionStart = async (questionId: number) => {
   const url = `/studynote/${questionId}`;
-  return backendClient.patch(url, { refreshToken: "1234" });
+  return backendClient.patch(url);
 };
 
 // 질문 재답변 종료
@@ -78,4 +78,10 @@ export const patchQuestionEnd = async (
 ) => {
   const url = `/studynote/end/${questionId}`;
   return backendClient.patch(url, body);
+};
+
+// 질문 재답변 삭제 (저장하지 않고 종료)
+export const deleteQuestion = async (questionId: number) => {
+  const url = `/history/${questionId}`;
+  return backendClient.patch(url);
 };
