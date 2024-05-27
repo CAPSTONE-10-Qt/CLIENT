@@ -1,8 +1,13 @@
 import { backendClient } from ".";
 
-export const getLogin = async (code: string) => {
-  const url = `/accounts/github/callback?code=${code}`;
-  return backendClient.get(url);
+type PostLoginBodyType = {
+  id: number;
+  name: string;
+  avatar_url: string;
+};
+export const postLogin = async (body: PostLoginBodyType) => {
+  const url = `/accounts`;
+  return backendClient.post(url, body);
 };
 
 export const getProfile = async () => {
