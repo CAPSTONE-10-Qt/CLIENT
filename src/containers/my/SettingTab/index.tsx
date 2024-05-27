@@ -25,7 +25,7 @@ const SettingTab = () => {
           <ColorBlock
             {...item}
             onClick={() => setTheme(item.state)}
-            current={theme}
+            current={theme === "system" ? "pink" : theme}
             key={item.title}
           />
         ))}
