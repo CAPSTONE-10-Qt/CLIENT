@@ -6,20 +6,20 @@ const localStorage =
 
 const { persistAtom } = recoilPersist({
   key: "recoilPersistLocal",
-  storage: localStorage,
+  storage: sessionStorage,
 });
 
 export const isLoginState = atom<boolean>({
   key: "isLoginState",
-  // default: !!localStorage!.getItem("accessToken") || false,
-  default: true,
+  default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const profileInfoState = atom<{
-  username: string;
-  profileImage: string;
+  name: string;
+  image: string;
 }>({
   key: "profileInfoState",
-  default: { username: "잇터뷰", profileImage: "" },
+  default: { name: "잇터뷰", image: "" },
   effects_UNSTABLE: [persistAtom],
 });
