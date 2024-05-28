@@ -16,10 +16,7 @@ type Props = {
 };
 const UserInfo = ({ isNav, profile }: Props) => {
   const router = useRouter();
-
-  // 로그인 시 recoil로 이름과 프로필 사진 url 저장
-  const { username, profileImage } = useRecoilValue(profileInfoState);
-
+  const { name, image } = useRecoilValue(profileInfoState);
   return (
     <div
       className={cx(
@@ -30,18 +27,18 @@ const UserInfo = ({ isNav, profile }: Props) => {
       onClick={() => (isNav ? router.push("/my") : undefined)}
     >
       <div className={cx("image-circle")}>
-        {profileImage ? (
-          <img src={profileImage} alt={username + " profile image"} />
+        {image ? (
+          <img src={image} alt={name + " profile image"} />
         ) : (
           <DefaultProfile />
         )}
       </div>
       <span className={cx("name")}>
         {profile ? (
-          <span>{profile === "interviewer" ? "면접관" : username}</span>
+          <span>{profile === "interviewer" ? "면접관" : name}</span>
         ) : (
           <>
-            <span>{username}</span>
+            <span>{name}</span>
             <span>{" 님"}</span>
           </>
         )}
