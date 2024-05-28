@@ -14,23 +14,20 @@ export const ferttsClient = axios.create({
 export const backendClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_SERVER_URL || "/",
   withCredentials: true,
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_TOKEN}`,
-  },
 });
 
-export const setToken = (accessToken: string) => {
-  backendClient.interceptors.request.use(
-    async config => {
-      config.headers.common = {
-        Authorization: `Bearer ${accessToken}`,
-      };
-      // if (typeof window !== "undefined") window.location.href = "/login";
-      return config;
-    },
-    (error: any) => {
-      console.log(error);
-      return Promise.reject(error);
-    },
-  );
-};
+backendClient.interceptors.request.use(
+  async config => {
+    const session = await getSession();
+    if (session)
+      config.headers["Authorization"] = `Bearer ${session.user.accessToken}`;
+    else {
+      if (typeof window !== "undefined") window.location.href = "/login";
+    }
+    return config;
+  },
+  (error: any) => {
+    console.log(error);
+    return Promise.reject(error);
+  },
+);
