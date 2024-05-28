@@ -15,7 +15,7 @@ type Props = {
 const LoginButton = ({ type }: Props) => {
   const onLogin = () => {
     if (type === "google") notYetOAuth();
-    else signIn(type);
+    else signIn(type, { callbackUrl: "/" });
   };
   return (
     <div className={cx("login-button-rect")} onClick={onLogin}>
