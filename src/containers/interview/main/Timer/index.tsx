@@ -11,7 +11,7 @@ import {
   autoStartInterview,
   confirmQuitInterview,
 } from "@utils/alerts/interview";
-import { deleteInterview } from "@service/api/interviewDuring";
+import { deleteInterview, deleteQuestion } from "@service/api/interviewDuring";
 
 import { StopCircle } from "@svgs/.";
 import styles from "./index.module.scss";
@@ -31,17 +31,22 @@ const Timer = () => {
     if (isRunning) setTime(time + 1000);
   }, 1000);
 
-  const goBack = () =>
-    deleteInterview(Number(id))
-      .then(res => {
-        resetData();
-        router.push(
-          location.href.includes("interview")
-            ? "/interview/setup"
-            : `/question/detail/${id}`,
-        );
-      })
-      .catch(err => console.log(err));
+  const goBack = () => {
+    if (location.href.includes("interview"))
+      deleteInterview(Number(id))
+        .then(res => {
+          resetData();
+          router.push("/interview/setup");
+        })
+        .catch(err => console.log(err));
+    else
+      deleteQuestion(Number(id))
+        .then(res => {
+          resetData();
+          router.push(`/question/detail/${id}`);
+        })
+        .catch(err => console.log(err));
+  };
   useEffect(() => {
     resetState();
     autoStartInterview(() => {
