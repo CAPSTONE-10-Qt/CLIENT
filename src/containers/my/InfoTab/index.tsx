@@ -1,6 +1,8 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import RoundButton from "@components/RoundButton";
 
 import { Github, Mail } from "@svgs/index";
 import styles from "./index.module.scss";
@@ -9,13 +11,17 @@ const cx = cs.bind(styles);
 
 const InfoTab = () => {
   const { data } = useSession();
-  console.log(data);
   return (
     <div className={cx("container")}>
       <h1>내 정보</h1>
       <div className={cx("sub-title")}>
         <h3>계정 정보</h3>
-        <p>로그인한 계정 정보</p>
+        <RoundButton
+          text='로그아웃'
+          state={false}
+          className='logout-btn'
+          onClick={() => signOut({ callbackUrl: "/" })}
+        />
       </div>
       {data && (
         <div className={cx("box")}>

@@ -16,17 +16,18 @@ const SessionState = () => {
   useEffect(() => {
     getServerSession()
       .then(res => {
-        setIsLogin(true);
-        setProfileInfo({
-          name: res?.user.name as string,
-          image: res?.user.image as string,
-        });
+        if (res) {
+          setIsLogin(true);
+          setProfileInfo({
+            name: res?.user.name as string,
+            image: res?.user.image as string,
+          });
+        } else {
+          setIsLogin(false);
+          resetProfile();
+        }
       })
-      .catch(err => {
-        console.log(err);
-        setIsLogin(false);
-        resetProfile();
-      });
+      .catch(err => console.log(err));
   }, []);
   return <></>;
 };

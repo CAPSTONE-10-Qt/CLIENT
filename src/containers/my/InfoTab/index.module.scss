@@ -17,9 +17,9 @@
 
 .sub-title {
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   h3 {
     @include text-type("title_md");
   }
@@ -27,10 +27,19 @@
     @include text-type("p_md");
     word-break: keep-all;
   }
-  @include Tablet {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+  :nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 30px;
+  }
+  :global(.logout-btn) {
+    div {
+      padding: 10px 20px !important;
+    }
+    p {
+      line-height: 100%;
+    }
   }
 }
 
