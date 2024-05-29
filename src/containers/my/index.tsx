@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Menu from "./Menu";
 import SettingTab from "./SettingTab";
+import InfoTab from "./InfoTab";
 
 import styles from "./index.module.scss";
 import cs from "classnames/bind";
@@ -13,7 +14,7 @@ const MyContainer = () => {
   return (
     <div className={cx("container")}>
       <Menu tab={tab} setTab={setTab} />
-      {tab === 0 ? <SettingTab /> : null}
+      {tab === 0 ? <SettingTab /> : <InfoTab />}
     </div>
   );
 };
