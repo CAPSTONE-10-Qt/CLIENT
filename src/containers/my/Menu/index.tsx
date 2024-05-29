@@ -9,7 +9,11 @@ const Menu = ({
   tab: number;
   setTab: (value: number) => void;
 }) => {
-  const list = ["설정", "내 정보", "과목별 통계"];
+  const list = [
+    "설정",
+    "내 정보",
+    // "과목별 통계"
+  ];
   return (
     <div className={cx("container")}>
       <h1>마이페이지</h1>
