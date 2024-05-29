@@ -21,6 +21,14 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 30px;
+
+  :first-child {
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: color(black, 0);
+    }
+  }
 }
 
 .el {
