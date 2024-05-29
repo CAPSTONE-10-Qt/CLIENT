@@ -1,6 +1,5 @@
 import Introduction from "./Introduction";
 import Tutorial from "./Tutorial";
-import SessionState from "./SessionState";
 import Footer from "@components/Footer";
 
 import styles from "./index.module.scss";
@@ -16,7 +15,6 @@ const HomeContainer = () => {
         <Tutorial />
       </div>
       <Footer />
-      <SessionState />
     </>
   );
 };
