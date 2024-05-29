@@ -2,7 +2,7 @@
 
 import React from "react";
 import { notYetOAuth } from "@utils/alerts/auth";
-import { signIn } from "next-auth/react";
+import { useLogin } from "@service/hooks/auth";
 
 import { GithubLogo, GoogleLogo } from "@svgs/.";
 import styles from "../index.module.scss";
@@ -13,9 +13,10 @@ type Props = {
   type: "github" | "google";
 };
 const LoginButton = ({ type }: Props) => {
+  const login = useLogin(type);
   const onLogin = () => {
     if (type === "google") notYetOAuth();
-    else signIn(type, { callbackUrl: "/" });
+    else login();
   };
   return (
     <div className={cx("login-button-rect")} onClick={onLogin}>

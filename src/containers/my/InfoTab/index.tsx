@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
+import { useLogout } from "@service/hooks/auth";
 import RoundButton from "@components/RoundButton";
 
 import { Github, Mail } from "@svgs/index";
@@ -11,6 +11,7 @@ const cx = cs.bind(styles);
 
 const InfoTab = () => {
   const { data } = useSession();
+  const logout = useLogout();
   return (
     <div className={cx("container")}>
       <h1>내 정보</h1>
@@ -20,7 +21,7 @@ const InfoTab = () => {
           text='로그아웃'
           state={false}
           className='logout-btn'
-          onClick={() => signOut({ callbackUrl: "/" })}
+          onClick={logout}
         />
       </div>
       {data && (
