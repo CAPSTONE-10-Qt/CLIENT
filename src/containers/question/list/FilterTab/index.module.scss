@@ -25,8 +25,15 @@
   border-radius: 8px;
   padding: 10px 0;
   p {
-    cursor: pointer;
     @include text-type("title_sm");
+  }
+  &,
+  * {
+    cursor: pointer;
+  }
+  transition: 0.1s;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
   @include Mobile {
@@ -36,8 +43,8 @@
 }
 
 .clicked {
-  background-color: color(black, 90);
+  background-color: color(black, 90) !important;
   @include Mobile {
-    background-color: color(black, 70);
+    background-color: color(black, 70) !important;
   }
 }

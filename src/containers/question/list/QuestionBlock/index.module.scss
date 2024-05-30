@@ -6,6 +6,17 @@
   padding: 30px;
   border-radius: 20px;
   background-color: color(black, 90);
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.008);
+  }
+  &:active {
+    opacity: 0.9;
+  }
+  &,
+  * {
+    cursor: pointer;
+  }
 
   h1 {
     @include text-type("title_md");
