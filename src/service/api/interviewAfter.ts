@@ -1,15 +1,20 @@
 import { backendClient } from ".";
 
 // 면접 상세 조회 - Server Fetch
-export const getInterview = async (id: string) => {
+export const getInterview = async (id: string, accessToken: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/interview/result/${id}`,
     {
       cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
   );
   if (!res.ok) {
-    throw new Error("면접 상세 조회 fetch 실패");
+    throw new Error(
+      `${res.status} ${res.statusText} 면접 상세 조회 fetch 실패`,
+    );
   }
   const { data } = await res.json();
   return data as InterviewDetailType;
@@ -24,22 +29,24 @@ export const getInterviewList = async (sort: number) => {
 // 질문 스크랩
 export const patchQuestion = async (questionId: number) => {
   const url = `/questions/${questionId}`;
-  return backendClient.patch(url, { refreshToken: "1234" });
+  return backendClient.patch(url);
 };
 
 // 질문 상세 조회 - Server Fetch
-export const getQuestion = async (questionId: string) => {
+export const getQuestion = async (questionId: string, accessToken: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/studynote/detail/${questionId}`,
     {
       cache: "no-store",
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     },
   );
   if (!res.ok) {
-    throw new Error("질문 상세 조회 fetch 실패");
+    throw new Error(
+      `${res.status} ${res.statusText} 질문 상세 조회 fetch 실패`,
+    );
   }
   const { data } = await res.json();
   return data as QuestionDetailType;
