@@ -11,6 +11,11 @@
     cursor: pointer;
     transition: 0.3s ease-in-out;
   }
+  transition: 0.1s;
+  &:hover,
+  &:active {
+    transform: scale(1.05);
+  }
   div {
     position: absolute;
     width: 24px;

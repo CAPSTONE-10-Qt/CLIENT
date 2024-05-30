@@ -26,6 +26,10 @@
   svg {
     stroke: color(black, 0);
   }
+  transition: 0.1s;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 
   &.open {
     background-color: color(black, 0);
