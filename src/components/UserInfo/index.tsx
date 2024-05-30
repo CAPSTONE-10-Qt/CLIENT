@@ -27,10 +27,10 @@ const UserInfo = ({ isNav, profile }: Props) => {
       onClick={() => (isNav ? router.push("/my") : undefined)}
     >
       <div className={cx("image-circle")}>
-        {image ? (
-          <img src={image} alt={name + " profile image"} />
-        ) : (
+        {profile === "interviewer" || !image ? (
           <DefaultProfile />
+        ) : (
+          <img src={image} alt={name + " profile image"} />
         )}
       </div>
       <span className={cx("name")}>
