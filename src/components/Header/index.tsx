@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useRecoilValue } from "recoil";
 import { isLoginState } from "@store/auth";
+import { useProfile } from "@service/hooks/auth";
 import useDetectScroll from "./useDetectScroll";
 import useModal from "@utils/hooks/useModal";
 
@@ -38,6 +39,8 @@ const pathList: { id: number; path: string; text: string }[] = [
 
 const Header = () => {
   const isLogin = useRecoilValue(isLoginState);
+  useProfile();
+
   const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const { visible, position } = useDetectScroll();
   const { buttonRef, modalRef } = useModal(isMobileMenuOpen, setMobileMenuOpen);
