@@ -2,6 +2,12 @@
   @include Container;
   padding: 150px 0 60px 0;
   gap: 40px;
+
+  & > p {
+    @include text-type("p_lg");
+    width: calc(100% - 16px);
+    text-align: left;
+  }
 }
 
 .header {
