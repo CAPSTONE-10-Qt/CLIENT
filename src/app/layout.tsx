@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      "/favicon.ico",
+      // "/favicon.ico",
       {
         type: "image/png",
         media: "(prefers-color-scheme: light)",
