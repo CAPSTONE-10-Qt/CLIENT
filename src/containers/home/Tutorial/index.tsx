@@ -9,7 +9,7 @@ const Tutorial = () => {
   return (
     <div className={cx("container")}>
       {tutorialText.map((el, idx) => (
-        <div className={cx(idx === 1 ? "left" : "")}>
+        <div className={cx(idx === 1 ? "left" : "")} key={idx}>
           <h5>{el.subtitle}</h5>
           <h3>{el.title}</h3>
           <p>{el.text}</p>
