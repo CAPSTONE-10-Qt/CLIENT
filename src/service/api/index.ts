@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
+import { loginToUse } from "@utils/alerts/auth";
 
 export const sttClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_STT_SERVER_URL || "/",
@@ -22,7 +23,9 @@ backendClient.interceptors.request.use(
     if (session)
       config.headers["Authorization"] = `Bearer ${session.user.accessToken}`;
     else {
-      if (typeof window !== "undefined") window.location.href = "/login";
+      loginToUse(() => {
+        window.location.href = "/login";
+      });
     }
     return config;
   },
