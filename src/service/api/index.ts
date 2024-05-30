@@ -22,11 +22,6 @@ backendClient.interceptors.request.use(
     const session = await getSession();
     if (session)
       config.headers["Authorization"] = `Bearer ${session.user.accessToken}`;
-    else {
-      loginToUse(() => {
-        window.location.href = "/login";
-      });
-    }
     return config;
   },
   (error: any) => {
