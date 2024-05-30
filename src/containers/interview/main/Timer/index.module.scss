@@ -39,9 +39,14 @@
   border-radius: 6px;
   background-color: color(theme, light);
   flex-shrink: 0;
-  cursor: pointer;
+  &,
   * {
     cursor: pointer;
+  }
+  transition: 0.1s;
+  &:hover,
+  &:active {
+    opacity: 0.9;
   }
 
   p {
