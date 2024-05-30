@@ -8,7 +8,7 @@ import QuestionDetailContainer from "@containers/question/detail";
 import { getQuestion } from "@service/api/interviewAfter";
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "src/app/api/auth/[...nextauth]/route";
+import { authOptions } from "src/app/api/auth/[...nextauth]/option";
 
 export default async function QuestionDetail({
   params,
