@@ -48,6 +48,8 @@
     h5 {
       color: get-color($color, main);
     }
+    transition: 0.1s;
+    &:hover,
     &.clicked {
       background-color: get-color($color, main);
       box-shadow: 0px 0px 10px 1px get-color($color, main);

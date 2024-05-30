@@ -22,7 +22,7 @@
   width: 200px;
   padding: 10px;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   border-radius: 10px;
   background-color: color(black, 90);
 
@@ -37,8 +37,13 @@
     border-radius: 10px;
     @include text-type("p_lg");
     cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
   }
-  .clicked {
+  .clicked,
+  .clicked:hover {
     background-color: color(black, 70);
   }
 
