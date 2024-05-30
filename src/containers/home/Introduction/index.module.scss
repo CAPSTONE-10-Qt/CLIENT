@@ -60,6 +60,15 @@
     border-radius: 50px;
     border: 1px solid color(black, 0);
     @include text-type("p_md");
+    transition: 0.1s;
+  }
+  a:hover,
+  a:active {
+    opacity: 0.9;
+  }
+  div:hover,
+  div:active {
+    background-color: rgba(255, 255, 255, 0.05);
   }
   a {
     background-color: color(black, 0);
