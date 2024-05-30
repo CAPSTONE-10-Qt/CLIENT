@@ -24,10 +24,7 @@ const usePin = (id: number, isTrue: boolean) => {
     if (trigger !== 0) {
       if (isLogin) {
         patchQuestion(id)
-          .then(res => {
-            console.log(res);
-            setState(!state);
-          })
+          .then(res => setState(!state))
           .catch(err => console.log(err));
       } else {
         loginToUse(() => router.push("/login"));
