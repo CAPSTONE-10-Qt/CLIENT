@@ -18,6 +18,20 @@ const Pretendard = localFont({
 export const metadata: Metadata = {
   title: "iterview",
   description: "잇터뷰 : IT 취준생을 위한 CS 기술 구두 면접 대비 & 학습 플랫폼",
+  icons: {
+    icon: [
+      {
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: light)",
+        url: "/favicon_light.svg",
+      },
+      {
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+        url: "/favicon_dark.svg",
+      },
+    ],
+  },
 };
 export const viewport: Viewport = {
   themeColor: "#333333",
