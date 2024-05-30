@@ -1,7 +1,7 @@
-import LoadingContainer from "@containers/loading";
+import Loader from "@components/Loader";
 
 function Loading() {
-  return <LoadingContainer />;
+  return <Loader />;
 }
 
 export default Loading;
