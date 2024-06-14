@@ -10,10 +10,8 @@
 
 ### 💻 FE Project Start
 
-```
-npm install
-npm run dev
-```
+| 설치 | `npm install` | 실행 | `npm run dev` |
+| :---: | :---: | :---: | :---: |
 
 ### 🛠️ FE Tech Stack
 
