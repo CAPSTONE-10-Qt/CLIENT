@@ -1,14 +1,8 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
-import { loginToUse } from "@utils/alerts/auth";
 
-export const sttClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_STT_SERVER_URL || "/",
-  withCredentials: true,
-});
-
-export const ferttsClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_FERTTS_SERVER_URL || "/",
+export const modelClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_ML_SERVER_URL || "/",
   withCredentials: true,
 });
 
